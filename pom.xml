@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.github.dge1992</groupId>
-    <artifactId>quick-start</artifactId>
+    <artifactId>springboot-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>quick-start</name>
+    <name>springboot-demo</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

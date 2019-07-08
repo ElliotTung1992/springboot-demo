@@ -1,12 +1,11 @@
 package com.github.dge1992.quickstart.controller;
 
+import com.github.dge1992.quickstart.domain.MyValue;
 import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.exceptions.TemplateInputException;
 
 /**
@@ -40,5 +39,14 @@ public class HelloController {
     public Object testErrorPage2(User user){
         user.getFullName();
         return 10/0;
+    }
+
+    @Autowired
+    private MyValue myValue;
+
+    @GetMapping("/testMyValue")
+    @ResponseBody
+    public Object testMyValue(){
+        return myValue;
     }
 }

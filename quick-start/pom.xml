@@ -6,7 +6,7 @@
         <groupId>com.github.dge1992</groupId>
         <artifactId>springboot-demo</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.github.dge1992</groupId>
     <artifactId>quick-start</artifactId>

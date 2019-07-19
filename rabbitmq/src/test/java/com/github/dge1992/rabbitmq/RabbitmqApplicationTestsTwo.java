@@ -1,7 +1,8 @@
 package com.github.dge1992.rabbitmq;
 
 import com.github.dge1992.rabbitmq.fanout.FanoutSender;
-import com.github.dge1992.rabbitmq.simplest.SimplestSender;
+import com.github.dge1992.rabbitmq.routing.RoutingSender;
+import com.github.dge1992.rabbitmq.workqueue.SimplestSender;
 import com.github.dge1992.rabbitmq.topic.TopicSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,6 +24,9 @@ public class RabbitmqApplicationTestsTwo {
 
     @Autowired
     FanoutSender fanoutSender;
+
+    @Autowired
+    RoutingSender routingSender;
 
     /**
      * @author dongganen
@@ -67,6 +71,12 @@ public class RabbitmqApplicationTestsTwo {
     @Test
     public void fanoutSenderTest() {
         fanoutSender.send();
+    }
+
+    @Test
+    public void routingSenderTest() {
+        routingSender.sendOrange();
+        routingSender.sendGreen();
     }
 
 }

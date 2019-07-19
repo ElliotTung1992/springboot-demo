@@ -1,4 +1,4 @@
-package com.github.dge1992.rabbitmq.simplest;
+package com.github.dge1992.rabbitmq.workqueue;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

@@ -21,4 +21,8 @@ public class UserService {
     public List<User> selectUserList() {
         return userMapper.selectUserList();
     }
+
+    public User selectUserById(Integer id) {
+        return userMapper.selectById(id);
+    }
 }

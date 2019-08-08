@@ -1,5 +1,8 @@
 package com.github.dge1992.mybatis.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -7,9 +10,12 @@ import lombok.Data;
  * @Description
  * @Date 2019/8/7
  **/
+@TableName(value = "t_user")//对象进行CRUD是指定操作哪张表
 @Data
 public class User {
+    @TableId//对象进行CRUD是指定表的主键
     private Integer id;
+    //@TableField("user_name")//对象进行CRUD是指定表的字段,如开启驼峰映射不需要配置
     private String userName;
     private Integer age;
 }

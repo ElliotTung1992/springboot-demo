@@ -15,7 +15,11 @@
   </sql>
 
   <select id="selectUserList" resultType="com.github.dge1992.mybatis.domain.User">
-    select * from user;
+    select * from user
+  </select>
+
+  <select id="selectListUser" resultType="map">
+    select * from user
   </select>
 
 </mapper>

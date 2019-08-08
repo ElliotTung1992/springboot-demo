@@ -1,11 +1,13 @@
 package com.github.dge1992.mybatis.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author 小眼睛带鱼
@@ -24,5 +26,9 @@ public class UserService {
 
     public User selectUserById(Integer id) {
         return userMapper.selectById(id);
+    }
+
+    public Page<Map<String, Object>> selectList(Page<User> page) {
+        return userMapper.selectListUser(page);
     }
 }

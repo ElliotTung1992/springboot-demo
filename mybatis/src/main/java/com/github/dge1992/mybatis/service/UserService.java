@@ -31,4 +31,12 @@ public class UserService {
     public Page<Map<String, Object>> selectList(Page<User> page) {
         return userMapper.selectListUser(page);
     }
+
+    public void deleteById(Integer id) {
+        userMapper.deleteById(id);
+    }
+
+    public List<User> getList() {
+        return userMapper.selectList(null);
+    }
 }

@@ -38,4 +38,15 @@ public class UserController {
         return userService.selectList(page);
     }
 
+    @GetMapping("/deleteById/{id}")
+    public Object deleteById(@PathVariable Integer id){
+        userService.deleteById(id);
+        return "删除成功";
+    }
+
+    @GetMapping("/getList")
+    public List<User> getList(){
+        return userService.getList();
+    }
+
 }

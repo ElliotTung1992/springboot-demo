@@ -59,4 +59,9 @@ public class UserController {
         return userService.insertUser(user);
     }
 
+    @PostMapping("/updateAll")
+    public Object updateAll(){
+        return userService.updateAll();
+    }
+
 }

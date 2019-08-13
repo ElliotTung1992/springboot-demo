@@ -43,4 +43,9 @@ public class UserService {
     public Object insertUser(User user) {
         return userMapper.insert(user);
     }
+
+    public Object updateAll() {
+        userMapper.updateAll();
+        return "全部更新";
+    }
 }

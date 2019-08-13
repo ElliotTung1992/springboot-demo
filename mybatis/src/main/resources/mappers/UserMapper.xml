@@ -22,4 +22,10 @@
     select * from user
   </select>
 
+  <update id="updateAll">
+    UPDATE `home`.`user`
+    SET
+    `deleted` = 0
+  </update>
+
 </mapper>

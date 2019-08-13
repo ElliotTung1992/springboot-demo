@@ -15,4 +15,6 @@ public interface UserMapper extends BaseMapper<User> {
     Page<Map<String, Object>> selectListUser(@Param("page") Page<User> page);
 
     void updateAll();
+
+    Map<String, Object> getCompanyList();
 }

@@ -48,4 +48,9 @@ public class UserService {
         userMapper.updateAll();
         return "全部更新";
     }
+
+    public Object getCompanyList() {
+        userMapper.getCompanyList();
+        return "查询成功";
+    }
 }

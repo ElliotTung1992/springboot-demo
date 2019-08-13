@@ -3,9 +3,11 @@ package com.github.dge1992.mybatis.config;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.ArrayList;
@@ -20,6 +22,18 @@ import java.util.List;
 @EnableTransactionManagement(proxyTargetClass = true)//开启事务
 @MapperScan(value = "com.github.dge1992.mybatis.mapper")
 public class MybatisPlusConfigConfig {
+
+    /**
+     * SQL执行效率插件
+     */
+    @Bean
+    //@Profile({"dev","test"})
+    public PerformanceInterceptor performanceInterceptor() {
+        PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
+        performanceInterceptor.setMaxTime(100l);
+        performanceInterceptor.setFormat(true);
+        return performanceInterceptor;
+    }
 
     /**
      * @author dongganen

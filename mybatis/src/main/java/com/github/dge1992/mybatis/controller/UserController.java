@@ -64,4 +64,9 @@ public class UserController {
         return userService.updateAll();
     }
 
+    @GetMapping("/getCompanyList")
+    public Object getCompanyList(){
+        return userService.getCompanyList();
+    }
+
 }

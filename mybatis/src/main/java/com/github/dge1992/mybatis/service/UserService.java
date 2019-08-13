@@ -39,4 +39,8 @@ public class UserService {
     public List<User> getList() {
         return userMapper.selectList(null);
     }
+
+    public Object insertUser(User user) {
+        return userMapper.insert(user);
+    }
 }

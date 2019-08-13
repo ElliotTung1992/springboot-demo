@@ -69,4 +69,9 @@ public class UserController {
         return userService.getCompanyList();
     }
 
+    @PostMapping("/updateById")
+    public Object updateById(){
+        return userService.updateById();
+    }
+
 }

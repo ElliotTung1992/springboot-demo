@@ -53,4 +53,13 @@ public class UserService {
         userMapper.getCompanyList();
         return "查询成功";
     }
+
+    public Object updateById() {
+        User user = new User();
+        user.setId(1);
+        user.setUserName("aaaa");
+        user.setVersion(3);
+        userMapper.updateById(user);
+        return "更新成功";
+    }
 }

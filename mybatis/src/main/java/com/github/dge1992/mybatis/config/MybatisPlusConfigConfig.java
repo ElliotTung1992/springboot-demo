@@ -2,12 +2,12 @@ package com.github.dge1992.mybatis.config;
 
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
+import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.ArrayList;
@@ -30,7 +30,9 @@ public class MybatisPlusConfigConfig {
     //@Profile({"dev","test"})
     public PerformanceInterceptor performanceInterceptor() {
         PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
+        //maxTime SQL 执行最大时长，超过自动停止运行
         performanceInterceptor.setMaxTime(100l);
+        //format SQL SQL是否格式化，默认false
         performanceInterceptor.setFormat(true);
         return performanceInterceptor;
     }
@@ -48,5 +50,16 @@ public class MybatisPlusConfigConfig {
         sqlParserList.add(new BlockAttackSqlParser());
         paginationInterceptor.setSqlParserList(sqlParserList);
         return paginationInterceptor;
+    }
+
+    /**
+     * @author dongganen
+     * @date 2019/8/13
+     * @desc: 乐观锁插件
+     *        仅支持 updateById(id) 与 update(entity, wrapper) 方法
+     */
+    @Bean
+    public OptimisticLockerInterceptor optimisticLockerInterceptor() {
+        return new OptimisticLockerInterceptor();
     }
 }

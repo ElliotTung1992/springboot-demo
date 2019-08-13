@@ -20,4 +20,6 @@ public class User {
     private Integer deleted;
     @TableField(fill = FieldFill.INSERT)
     private String des;
+    @Version
+    private Integer version;
 }

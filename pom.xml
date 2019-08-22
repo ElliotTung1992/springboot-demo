@@ -79,6 +79,7 @@
         <module>restful-demo</module>
         <module>rabbitmq</module>
         <module>generator</module>
+        <module>jwt</module>
     </modules>
 
 </project>

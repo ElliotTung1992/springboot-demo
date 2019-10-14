@@ -9,9 +9,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, department_id, username, password, name, id_card_no, gender, date_of_birth, mobile,
-    phone_number, login_count, nation, country, province, city, district, address, date_of_modified, 
-    create_time, deleted, mobile_cornet, email, level, creator_admin_id, type
+    id, user_name as userName, age
   </sql>
 
   <select id="selectUserList" resultType="com.github.dge1992.mybatis.domain.User">

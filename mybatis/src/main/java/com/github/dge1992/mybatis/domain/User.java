@@ -16,7 +16,7 @@ public class User {
     //@TableField("user_name")//对象进行CRUD是指定表的字段,如开启驼峰映射不需要配置
     private String userName;
     private Integer age;
-    @TableLogic
+    //@TableLogic
     private Integer deleted;
     @TableField(fill = FieldFill.INSERT)
     private String des;

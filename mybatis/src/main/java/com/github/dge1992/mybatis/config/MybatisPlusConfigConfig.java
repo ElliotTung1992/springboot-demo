@@ -26,7 +26,7 @@ public class MybatisPlusConfigConfig {
     /**
      * SQL执行效率插件
      */
-    @Bean
+    //@Bean
     //@Profile({"dev","test"})
     public PerformanceInterceptor performanceInterceptor() {
         PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();

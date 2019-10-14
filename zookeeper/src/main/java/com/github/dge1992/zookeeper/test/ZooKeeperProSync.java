@@ -1,10 +1,12 @@
 package com.github.dge1992.zookeeper.test;
 
+import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 
+import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
 public class ZooKeeperProSync implements Watcher {
@@ -13,7 +15,7 @@ public class ZooKeeperProSync implements Watcher {
     private static ZooKeeper zk = null;
     private static Stat stat = new Stat();
 
-    public static void main (String[] args) throws Exception{
+    public static void main (String[] args) throws IOException, InterruptedException, KeeperException {
         //配置数据存放路径
         String path = "/username";
         //连接zookeeper并且注册一个默认监听器

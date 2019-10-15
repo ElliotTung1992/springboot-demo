@@ -5,6 +5,7 @@ import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -61,5 +62,13 @@ public class UserService {
         user.setVersion(3);
         userMapper.updateById(user);
         return "更新成功";
+    }
+
+    @Transactional
+    public Object testTransactional(User user) {
+        userMapper.insert(user);
+        //int i = 10/0;
+        userMapper.insert(user);
+        return "测试事务";
     }
 }

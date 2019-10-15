@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -72,6 +69,15 @@ public class UserController {
     @PostMapping("/updateById")
     public Object updateById(){
         return userService.updateById();
+    }
+
+    @RequestMapping("/testTransactional")
+    public Object testTransactional(){
+        User user = new User();
+        user.setUserName("sw");
+        user.setDes("31321");
+        user.setAge(12);
+        return userService.testTransactional(user);
     }
 
 }

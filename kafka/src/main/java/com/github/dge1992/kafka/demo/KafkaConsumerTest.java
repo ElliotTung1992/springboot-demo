@@ -16,7 +16,7 @@ public class KafkaConsumerTest implements Runnable {
     private final KafkaConsumer<String, String> consumer;
     private ConsumerRecords<String, String> msgList;
     private final String topic;
-    private static final String GROUP_ID = "groupA";
+    private static final String GROUP_ID = "groupB";
 
     public KafkaConsumerTest(String topicName) {
         Properties props = new Properties();

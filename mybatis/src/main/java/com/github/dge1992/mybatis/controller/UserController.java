@@ -63,7 +63,8 @@ public class UserController {
 
     @GetMapping("/getCompanyList")
     public Object getCompanyList(){
-        return userService.getCompanyList();
+        userService.getCompanyList();
+        return "查询成功";
     }
 
     @PostMapping("/updateById")

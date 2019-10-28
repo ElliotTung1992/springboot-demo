@@ -3,10 +3,18 @@ package com.github.dge1992.mybatis.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.mapper.UserMapper;
+import com.github.dge1992.mybatis.utils.ConnectionUtil;
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.SqlSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sql.PooledConnection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +28,9 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private SqlSessionTemplate template;
 
     public List<User> selectUserList() {
         return userMapper.selectUserList();
@@ -50,9 +61,12 @@ public class UserService {
         return "全部更新";
     }
 
-    public Object getCompanyList() {
-        userMapper.getCompanyList();
-        return "查询成功";
+    public void getCompanyList() {
+        //userMapper.getCompanyList();
+//        while (true){
+            ConnectionUtil.run(template, " select * from user");
+//        }
+        //return "查询成功";
     }
 
     public Object updateById() {
@@ -71,4 +85,6 @@ public class UserService {
         userMapper.insert(user);
         return "测试事务";
     }
+
+
 }

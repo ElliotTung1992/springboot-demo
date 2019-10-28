@@ -30,4 +30,8 @@
     select * from f_company LIMIT 0, 200
   </select>
 
+  <select id="selectBNMAINS" resultType="map">
+    select * from MODELHOME.A_TEST
+  </select>
+
 </mapper>

@@ -17,4 +17,6 @@ public interface UserMapper extends BaseMapper<User> {
     void updateAll();
 
     Map<String, Object> getCompanyList();
+
+    Object selectBNMAINS();
 }

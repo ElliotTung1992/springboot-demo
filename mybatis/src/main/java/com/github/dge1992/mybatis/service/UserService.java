@@ -87,4 +87,7 @@ public class UserService {
     }
 
 
+    public Object selectBNMAINS() {
+        return userMapper.selectBNMAINS();
+    }
 }

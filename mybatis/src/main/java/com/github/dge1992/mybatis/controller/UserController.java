@@ -81,4 +81,9 @@ public class UserController {
         return userService.testTransactional(user);
     }
 
+    @GetMapping("/selectBNMAINS")
+    public Object selectBNMAINS(){
+        return userService.selectBNMAINS();
+    }
+
 }

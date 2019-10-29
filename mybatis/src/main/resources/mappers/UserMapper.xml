@@ -34,4 +34,12 @@
     select * from MODELHOME.A_TEST
   </select>
 
+  <select id="selectStreamOffsetScn" resultType="map">
+    SELECT RAWTOHEX(tx.xid) as xid,START_SCN,DEPENDENT_SCN FROM v$transaction tx JOIN v$session s ON tx.ses_addr = s.saddr
+  </select>
+
+  <select id="openSession" statementType="CALLABLE">
+    {call opentSession}
+  </select>
+
 </mapper>

@@ -1,20 +1,15 @@
 package com.github.dge1992.mybatis.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ecer.kafka.connect.oracle.models.BusinessLog;
 import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.mapper.UserMapper;
-import com.github.dge1992.mybatis.utils.ConnectionUtil;
-import org.apache.ibatis.session.SqlSession;
+import com.github.dge1992.mybatis.utils.LogTask;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.SqlSessionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.sql.PooledConnection;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
@@ -64,7 +59,7 @@ public class UserService {
     public void getCompanyList() {
         //userMapper.getCompanyList();
 //        while (true){
-            ConnectionUtil.run(template, " select * from user");
+            //LogTask.run(template, log);
 //        }
         //return "查询成功";
     }
@@ -87,7 +82,16 @@ public class UserService {
     }
 
 
-    public Object selectBNMAINS() {
-        return userMapper.selectBNMAINS();
+    public Object selectStreamOffsetScn() {
+        BusinessLog log = new BusinessLog();
+        log.setXid("090018007B9C0000");
+        log.setScn(67154931l);
+        LogTask.run(template, log);
+        return "开启任务成功";
+    }
+
+    public Object openSession() {
+        userMapper.openSession();
+        return "开启会话！";
     }
 }

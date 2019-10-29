@@ -18,5 +18,9 @@ public interface UserMapper extends BaseMapper<User> {
 
     Map<String, Object> getCompanyList();
 
-    Object selectBNMAINS();
+    List<Map<String, String>> selectBNMAINS();
+
+    Object selectStreamOffsetScn();
+
+    void openSession();
 }

@@ -2,7 +2,7 @@ package com.github.dge1992.mybatis.utils;
 
 
 import com.ecer.kafka.connect.oracle.OracleSourceTask2;
-import com.ecer.kafka.connect.oracle.models.BusinessLog;
+import com.github.dge1992.mybatis.domain.BusinessLog;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.mybatis.spring.SqlSessionTemplate;

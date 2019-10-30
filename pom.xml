@@ -106,6 +106,7 @@
         <module>rabbitmq</module>
         <module>generator</module>
         <module>jwt</module>
+        <module>kafka</module>
     </modules>
 
 </project>

@@ -81,9 +81,4 @@ public class UserController {
         return userService.testTransactional(user);
     }
 
-    @GetMapping("/selectStreamOffsetScn")
-    public Object selectStreamOffsetScn(){
-        return userService.selectStreamOffsetScn();
-    }
-
 }

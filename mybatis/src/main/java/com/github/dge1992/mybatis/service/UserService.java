@@ -1,10 +1,8 @@
 package com.github.dge1992.mybatis.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.github.dge1992.mybatis.domain.BusinessLog;
 import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.mapper.UserMapper;
-import com.github.dge1992.mybatis.utils.LogTask;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,19 +77,5 @@ public class UserService {
         //int i = 10/0;
         userMapper.insert(user);
         return "测试事务";
-    }
-
-
-    public Object selectStreamOffsetScn() {
-        BusinessLog log = new BusinessLog();
-        log.setXid("090018007B9C0000");
-        log.setScn(67154931l);
-        LogTask.run(template, log);
-        return "开启任务成功";
-    }
-
-    public Object openSession() {
-        userMapper.openSession();
-        return "开启会话！";
     }
 }

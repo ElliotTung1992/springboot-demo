@@ -78,4 +78,10 @@ public class UserService {
         userMapper.insert(user);
         return "测试事务";
     }
+
+    @Transactional
+    public Object testOracle() {
+        userMapper.testOracle();
+        return "测试成功！";
+    }
 }

@@ -1,27 +1,113 @@
 package com.github.dge1992.mybatis.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
+import com.github.dge1992.mybatis.config.properties.DruidProperties;
+import com.github.dge1992.mybatis.spring.transaction.LogTransactionInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.aop.Advisor;
+import org.springframework.aop.aspectj.AspectJExpressionPointcut;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
+import org.springframework.core.Ordered;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
+import org.springframework.transaction.config.TransactionManagementConfigUtils;
+import org.springframework.transaction.interceptor.*;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @Author 小眼睛带鱼
- * @Description
+ * @Description 数据源配置及自定义事务拦截器配置
  * @Date 2019/8/7
  **/
 @Configuration
 @EnableTransactionManagement(proxyTargetClass = true)//开启事务
 @MapperScan(value = "com.github.dge1992.mybatis.mapper")
 public class MybatisPlusConfigConfig {
+
+    @Autowired
+    DruidProperties druidProperties;
+
+    /**
+     * druid数据库连接池
+     */
+    @Bean(initMethod = "init")
+    public DruidDataSource dataSource() {
+        DruidDataSource dataSource = new DruidDataSource();
+        druidProperties.config(dataSource);
+        return dataSource;
+    }
+
+    /**
+     *
+     * @author 小眼睛带鱼
+     * @date 2019-11-13 17:39:13
+     * @desc 事务管理器
+     **/
+    @Bean(name = "transactionManager")
+    public PlatformTransactionManager transactionManager() {
+        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
+        transactionManager.setDataSource(dataSource());
+        return transactionManager;
+    }
+
+    /**
+     *
+     * @author 小眼睛带鱼
+     * @date 2019-11-13 17:40:31
+     * @desc 事务策略
+     **/
+    @Bean("attributeSource")
+    public TransactionAttributeSource transactionAttributeSource() {
+        return new AnnotationTransactionAttributeSource(new SpringTransactionAnnotationParser());
+    }
+
+    /**
+     *
+     * @author 小眼睛带鱼
+     * @date 2019-11-13 17:41:53
+     * @desc 事务拦截器
+     **/
+    @Bean("interceptor")
+    public TransactionInterceptor interceptor(@Qualifier("transactionManager") PlatformTransactionManager transactionManager,
+                                                @Qualifier("attributeSource")TransactionAttributeSource source) {
+        TransactionInterceptor interceptor = new LogTransactionInterceptor(transactionManager, source);
+        return interceptor;
+    }
+
+    /**
+     *
+     * @author 小眼睛带鱼
+     * @date 2019-11-13 17:49:23
+     * @desc 事务切面
+     **/
+    @Bean(name = TransactionManagementConfigUtils.TRANSACTION_ADVISOR_BEAN_NAME)
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    public BeanFactoryTransactionAttributeSourceAdvisor transactionAdvisor(TransactionInterceptor interceptor) {
+        BeanFactoryTransactionAttributeSourceAdvisor advisor = new BeanFactoryTransactionAttributeSourceAdvisor();
+        advisor.setTransactionAttributeSource(transactionAttributeSource());
+        advisor.setAdvice(interceptor);
+        advisor.setOrder(Ordered.LOWEST_PRECEDENCE);
+        return advisor;
+    }
 
     /**
      * SQL执行效率插件

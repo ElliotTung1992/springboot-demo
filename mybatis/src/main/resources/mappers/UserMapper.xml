@@ -42,4 +42,17 @@
     {call opentSession}
   </select>
 
+  <select id="testOracle">
+    /*select count(1) from BN_MAINS;*/
+    UPDATE "MODELHOME"."BN_LOG"
+    SET "trance_id" = '2',
+    "xid" = '111',
+    "create_time" = TO_TIMESTAMP( '2019-11-04 14:05:04.000000', 'SYYYY-MM-DD HH24:MI:SS:FF6' ),
+    "is_handle" = '1',
+    "scn" = '1',
+    "ec" = '1'
+    WHERE
+        "id" = '6';
+  </select>
+
 </mapper>

@@ -17,7 +17,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        log.info("开启新增填充!");
+        //log.info("开启新增填充!");
         Object originalObject = metaObject.getOriginalObject();
         //判断是否是操作用户
         if(originalObject instanceof User){
@@ -29,7 +29,7 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        log.info("开启更新填充!");
+        //log.info("开启更新填充!");
         this.setFieldValByName("operator", "Tom", metaObject);
     }
 }

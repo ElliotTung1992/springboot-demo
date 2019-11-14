@@ -23,4 +23,6 @@ public interface UserMapper extends BaseMapper<User> {
     Object selectStreamOffsetScn();
 
     void openSession();
+
+    void testOracle();
 }

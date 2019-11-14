@@ -81,4 +81,9 @@ public class UserController {
         return userService.testTransactional(user);
     }
 
+    @RequestMapping("/testOracle")
+    public Object testOracle(){
+        return userService.testOracle();
+    }
+
 }

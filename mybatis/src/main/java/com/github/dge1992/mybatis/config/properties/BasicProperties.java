@@ -15,8 +15,8 @@ import java.sql.SQLException;
  **/
 @Data
 @Component
-@ConfigurationProperties(prefix = "spring.datasource")
-public class DruidProperties {
+@ConfigurationProperties(prefix = "spring.basic.datasource")
+public class BasicProperties {
 
     private String url;
 
@@ -38,8 +38,7 @@ public class DruidProperties {
 
     private Integer minEvictableIdleTimeMillis = 300000;
 
-//    private String validationQuery = "SELECT 'x'"; //mysql
-    private String validationQuery = "SELECT * from dual"; //oracle
+    private String validationQuery;
 
     private Boolean testWhileIdle = true;
 

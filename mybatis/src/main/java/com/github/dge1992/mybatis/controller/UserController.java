@@ -1,6 +1,7 @@
 package com.github.dge1992.mybatis.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.dge1992.mybatis.mutidatasource.annotion.DataSource;
 import com.github.dge1992.mybatis.domain.User;
 import com.github.dge1992.mybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,6 +73,7 @@ public class UserController {
         return userService.updateById();
     }
 
+    @DataSource(name = "second")
     @RequestMapping("/testTransactional")
     public Object testTransactional(){
         User user = new User();

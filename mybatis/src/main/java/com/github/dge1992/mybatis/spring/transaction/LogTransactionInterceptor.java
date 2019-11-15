@@ -1,6 +1,9 @@
 package com.github.dge1992.mybatis.spring.transaction;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.dge1992.mybatis.mutidatasource.DataSourceContextHolder;
+import com.github.dge1992.mybatis.mutidatasource.DynamicDataSource;
+import com.github.dge1992.mybatis.config.datasource.MultiDataSourceConfig;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -11,6 +14,7 @@ import org.springframework.transaction.interceptor.TransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -41,9 +45,19 @@ public class LogTransactionInterceptor extends TransactionInterceptor {
             }
             Map<String, Object> transactionData = new HashMap<>();
             if(!txInfo.getTransactionAttribute().isReadOnly()) {
+                String driverClassName = null;
                 DataSourceTransactionManager transactionManager = (DataSourceTransactionManager)txInfo.getTransactionManager();
-                DruidDataSource dataSource = (DruidDataSource)transactionManager.getDataSource();
-                String driverClassName = dataSource.getDriverClassName();
+                DataSource ds = transactionManager.getDataSource();
+                if(ds instanceof DruidDataSource){
+                    driverClassName = ((DruidDataSource)ds).getDriverClassName();
+                }else if(ds instanceof DynamicDataSource){
+                    String key = DataSourceContextHolder.getDataSourceType();
+                    if(StringUtils.isEmpty(key)){
+                        key = "basic";
+                    }
+                    DruidDataSource dataSource = (DruidDataSource) MultiDataSourceConfig.getDataSource(key);
+                    driverClassName = dataSource.getDriverClassName();
+                }
                 if(StringUtils.isNotBlank(driverClassName)) {
                     if("oracle.jdbc.driver.OracleDriver".equals(driverClassName)){
                         getOracleTransactionId(txInfo, transactionData);

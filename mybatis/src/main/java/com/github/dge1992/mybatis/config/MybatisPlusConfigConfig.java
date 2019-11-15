@@ -1,36 +1,16 @@
 package com.github.dge1992.mybatis.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
-import com.github.dge1992.mybatis.config.properties.DruidProperties;
-import com.github.dge1992.mybatis.spring.transaction.LogTransactionInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.aop.Advisor;
-import org.springframework.aop.aspectj.AspectJExpressionPointcut;
-import org.springframework.aop.support.DefaultPointcutAdvisor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Role;
-import org.springframework.core.Ordered;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.annotation.AnnotationTransactionAttributeSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.annotation.SpringTransactionAnnotationParser;
-import org.springframework.transaction.config.TransactionManagementConfigUtils;
-import org.springframework.transaction.interceptor.*;
 
-import javax.sql.DataSource;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,22 +19,8 @@ import java.util.List;
  * @Date 2019/8/7
  **/
 @Configuration
-@EnableTransactionManagement(proxyTargetClass = true)//开启事务
 @MapperScan(value = "com.github.dge1992.mybatis.mapper")
 public class MybatisPlusConfigConfig {
-
-    @Autowired
-    DruidProperties druidProperties;
-
-    /**
-     * druid数据库连接池
-     */
-    @Bean(initMethod = "init")
-    public DruidDataSource dataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        druidProperties.config(dataSource);
-        return dataSource;
-    }
 
     /**
      * SQL执行效率插件

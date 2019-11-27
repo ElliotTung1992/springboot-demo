@@ -157,6 +157,7 @@
         <module>kafka</module>
         <module>mybatis</module>
         <module>zookeeper</module>
+        <module>rocketmq</module>
     </modules>
 
 </project>

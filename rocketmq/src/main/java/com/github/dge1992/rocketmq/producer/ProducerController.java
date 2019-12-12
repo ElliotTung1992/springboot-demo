@@ -20,7 +20,7 @@ import java.util.concurrent.*;
  * @desc
  */
 @RestController
-public class ProducerTest {
+public class ProducerController {
 
     @Value("${rocketmq.name-server}")
     private String namesrvAddr;
@@ -32,20 +32,16 @@ public class ProducerTest {
         producer.start();
         for (int i = 0; i < 10; i++){
             Message msg = new Message("TopicTest",
-                    "",
+                    "tagA",
                     "OrderID188",
                     ("Hello world 1-" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             SendResult sendResult = producer.send(msg);
-            System.out.println("Hello world 1-" + i);
-            System.out.printf("%s%n", sendResult);
 
             Message msg2 = new Message("TopicTest",
-                    "",
+                    "tagB",
                     "OrderID188",
                     ("Hello world 2-" + i).getBytes(RemotingHelper.DEFAULT_CHARSET));
             SendResult sendResult2 = producer.send(msg2);
-            System.out.println("Hello world 2-" + i);
-            System.out.printf("%s%n", sendResult2);
         }
         producer.shutdown();
     }
@@ -122,7 +118,7 @@ public class ProducerTest {
 
         //producer.setInstanceName("aaaa");
 
-        String topic = "BatchTest";
+        String topic = "TopicTest";
         List<Message> messages = new ArrayList<>();
         messages.add(new Message(topic, "", "OrderID001", "Hello world 0".getBytes()));
         messages.add(new Message(topic, "", "OrderID002", "Hello world 1".getBytes()));

@@ -1,6 +1,7 @@
 package com.github.dge1992.rocketmq.consumer2.concurrent;
 
 import lombok.extern.log4j.Log4j2;
+import org.apache.rocketmq.client.consumer.DefaultMQPullConsumer;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -33,12 +34,17 @@ public abstract class DefaultConsumerConfigure {
 
         //consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
+        //设置消费起始时间，可以用于消息回溯
+        //consumer.setConsumeTimestamp("20191126000000");
+
         consumer.subscribe(topic, tag);
 
         // 开启内部类实现监听
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+                msgs.stream().forEach(e -> System.out.println(e.getReconsumeTimes()));
+                int i = 10 / 0;
                 return DefaultConsumerConfigure.this.dealBody(msgs);
             }
         });

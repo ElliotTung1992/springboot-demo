@@ -18,7 +18,7 @@ public class TestDistributedLockController {
     @RequestMapping("dtest")
     public Object test(@RequestBody User user){
         try {
-            Thread.sleep(3000);
+            Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

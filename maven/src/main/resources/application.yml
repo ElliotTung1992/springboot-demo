@@ -1,0 +1,23 @@
+
+
+spring:
+  profiles:
+    active: @profile.active@
+
+#---
+#spring:
+#  profiles: dev
+#server:
+#  port: 7777
+#
+#---
+#spring:
+#  profiles: test
+#server:
+#  port: 7778
+#
+#---
+#spring:
+#  profiles: produce
+#server:
+#  port: 7779

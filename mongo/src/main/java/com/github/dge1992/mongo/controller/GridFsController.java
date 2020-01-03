@@ -33,7 +33,7 @@ import java.util.List;
  **/
 @RequestMapping("/gridFs")
 @RestController
-@Api(description = "Mongo文件系统Api测试")
+@Api("Mongo文件系统Api测试")
 public class GridFsController {
 
     @Autowired

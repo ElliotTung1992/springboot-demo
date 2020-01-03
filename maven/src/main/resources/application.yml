@@ -21,3 +21,6 @@ spring:
 #  profiles: produce
 #server:
 #  port: 7779
+
+# clean package -Dmaven.test.skip=true -P test(指定profile打包)
+

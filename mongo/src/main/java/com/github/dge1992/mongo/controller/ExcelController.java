@@ -2,13 +2,12 @@ package com.github.dge1992.mongo.controller;
 
 import com.github.dge1992.mongo.excel.ExcelDemo;
 import com.github.dge1992.mongo.excel.ExcelUtils;
-import com.github.dge1992.mongo.excel.ReflectUtils;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,21 +25,22 @@ public class ExcelController {
 //        ExcelUtils excelUtils = new ExcelUtils<VesselVoyageExcel>();
 //        List list = excelUtils.getList(file, new VesselVoyageExcel());
         ExcelUtils excelUtils = new ExcelUtils<ExcelDemo>();
-        long start = System.currentTimeMillis();
+        //long start = System.currentTimeMillis();
         ExcelUtils.ExcelResult excelResult = excelUtils.analysisData(file, new ExcelDemo());
-        System.out.println(System.currentTimeMillis() - start);
+        //System.out.println(System.currentTimeMillis() - start);
         List<ExcelDemo> dataList = excelResult.getDataList();
-        System.out.println(dataList.size());
-//        dataList.stream().forEach(e -> System.out.println(e.getIndex()));
+        List errorList = excelResult.getErrorList();
+        //System.out.println(dataList.size());
+        errorList.stream().forEach(e -> System.out.println(e));
+        dataList.stream().forEach(e -> System.out.println(e));
         return null;
     }
 
-    public static void main(String[] args) {
-        //getDemoAnnotations(ExcelDemo.class);
-        Object obj = ReflectUtils.reflect(ExcelDemo.class).get();
-        System.out.println(obj);
+    @GetMapping("/createExcel/{filePathName}")
+    public void createExcel(@PathVariable("filePathName") String filePathName) {
+        filePathName = "/Users/apple/Desktop/Members.xlsx";
+        ExcelUtils excelUtils = new ExcelUtils<ExcelDemo>();
+        List<ExcelDemo> excelDemos = Arrays.asList(new ExcelDemo("dge", 12, new Date(), 1.70, 13523636794l, true), new ExcelDemo("fnn", 23, new Date(), 1.84, 13523636794l, false));
+        excelUtils.createExcel(excelDemos, filePathName);
     }
-
-
-
 }

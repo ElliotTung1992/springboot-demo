@@ -1,10 +1,10 @@
 package com.github.dge1992.jwt;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dge1992.jwt.doamin.User;
-import com.github.dge1992.jwt.converter.BaseTransferEntity;
-import com.github.dge1992.jwt.security.impl.Base64SecurityAction;
 import com.github.dge1992.common.utils.MD5Util;
+import com.github.dge1992.jwt.converter.BaseTransferEntity;
+import com.github.dge1992.jwt.doamin.User;
+import com.github.dge1992.jwt.security.impl.Base64SecurityAction;
 
 /**
  * @Author 小眼睛带鱼
@@ -14,9 +14,8 @@ import com.github.dge1992.common.utils.MD5Util;
 public class DecryptTest {
 
     public static void main(String[] args) {
-
         //随机字符串，盐
-        String salt = "hello5";
+        String salt = "fdwf9j";
 
         User simpleObject = new User();
         simpleObject.setUser("dge");

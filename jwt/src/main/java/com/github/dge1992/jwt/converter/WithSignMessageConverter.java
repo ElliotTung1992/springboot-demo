@@ -5,6 +5,7 @@ import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import com.github.dge1992.jwt.config.properties.JwtProperties;
 import com.github.dge1992.jwt.security.DataSecurityAction;
 import com.github.dge1992.common.utils.HttpKit;
+import com.github.dge1992.jwt.security.impl.PBESecurityAction;
 import com.github.dge1992.jwt.util.JwtTokenUtil;
 import com.github.dge1992.common.utils.MD5Util;
 import lombok.extern.log4j.Log4j2;
@@ -37,6 +38,11 @@ public class WithSignMessageConverter extends FastJsonHttpMessageConverter {
     @Override
     public Object read(Type type, Class<?> contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
 
+        //不校验认证服务
+        if (HttpKit.getRequest().getServletPath().equals("/" + jwtProperties.getAuthPath())) {
+            return super.read(type, contextClass, inputMessage);
+        }
+
         InputStream in = inputMessage.getBody();
         Object o = JSON.parseObject(in, super.getFastJsonConfig().getCharset(), BaseTransferEntity.class, super.getFastJsonConfig().getFeatures());
 
@@ -45,6 +51,8 @@ public class WithSignMessageConverter extends FastJsonHttpMessageConverter {
 
         //校验签名
         String token = HttpKit.getRequest().getHeader(jwtProperties.getHeader()).substring(7);
+        //对token进行解密
+        token = new PBESecurityAction().unlock(token);
         String md5KeyFromToken = jwtTokenUtil.getMd5KeyFromToken(token);
 
         String object = baseTransferEntity.getObject();

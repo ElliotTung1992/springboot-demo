@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TestDistributedLockController {
 
-    @DistributedLock(lockNamePre = "m3", lockNamePost = "first", fairLock = true, tryLock = true, argNum = 0, param = "age",
-                    waitTime = 5, leaseTime = 10)
+    @DistributedLock(lockNamePre = "m3", fairLock = true, tryLock = true, argNum = 2,
+                    waitTime = 8, leaseTime = 10)
     @RequestMapping("dtest")
-    public Object test(@RequestBody User user){
+    public Object test(@RequestParam("name") String name, @RequestParam("age")  Integer age){
         try {
-            Thread.sleep(6000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

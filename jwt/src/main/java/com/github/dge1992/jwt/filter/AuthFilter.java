@@ -4,6 +4,7 @@ import com.github.dge1992.common.base.tips.ErrorTip;
 import com.github.dge1992.common.exception.CustomExceptionEnum;
 import com.github.dge1992.common.utils.RenderUtil;
 import com.github.dge1992.jwt.config.properties.JwtProperties;
+import com.github.dge1992.jwt.security.impl.PBESecurityAction;
 import com.github.dge1992.jwt.util.JwtTokenUtil;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,9 @@ public class AuthFilter extends OncePerRequestFilter {
         String authToken = null;
         if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
             authToken = requestHeader.substring(7);
-
+            //对token进行解密
+            authToken = new PBESecurityAction().unlock(authToken);
+            System.out.println(authToken);
             //验证token是否过期,包含了验证jwt是否正确
             try {
                 boolean flag = jwtTokenUtil.isTokenExpired(authToken);

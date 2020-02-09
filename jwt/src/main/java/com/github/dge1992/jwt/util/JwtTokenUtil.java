@@ -78,10 +78,11 @@ public class JwtTokenUtil {
      * 获取jwt的payload部分
      */
     public Claims getClaimFromToken(String token) {
-        return Jwts.parser()
+        Claims body = Jwts.parser()
                 .setSigningKey(jwtProperties.getSecret())
                 .parseClaimsJws(token)
                 .getBody();
+        return body;
     }
 
     /**
@@ -123,7 +124,7 @@ public class JwtTokenUtil {
         final Date expirationDate = new Date(createdDate.getTime() + jwtProperties.getExpiration() * 1000);
 
         return Jwts.builder()
-                .setClaims(claims)//设置私有声明
+                .setClaims(claims)//设置私有声明,根据具体需求添加
                 .setSubject(subject)//设置主题
                 .setIssuedAt(createdDate)//设置JWT的签发时间
                 .setExpiration(expirationDate)//设置过期时间

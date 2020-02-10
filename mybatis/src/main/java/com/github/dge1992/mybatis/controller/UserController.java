@@ -3,12 +3,14 @@ package com.github.dge1992.mybatis.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.dge1992.mybatis.mutidatasource.annotion.DataSource;
 import com.github.dge1992.mybatis.domain.User;
+import com.github.dge1992.mybatis.service.IUserService;
 import com.github.dge1992.mybatis.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @Author 小眼睛带鱼
@@ -28,7 +30,8 @@ public class UserController {
 
     @GetMapping("/selectUserById/{id}")
     public User selectUserById(@PathVariable Integer id){
-        return userService.selectUserById(id);
+        Optional<User> user = userService.selectUserById(id);
+        return user.orElse(null);
     }
 
     @GetMapping("/selectList")
@@ -86,6 +89,15 @@ public class UserController {
     @RequestMapping("/testOracle")
     public Object testOracle(){
         return userService.testOracle();
+    }
+
+    @Autowired
+    IUserService userService2;
+
+    @GetMapping("/getUserById/{id}")
+    public User getUserById(@PathVariable("id") Integer id){
+        Optional<User> optionalUser = userService2.getUserById(null);
+        return optionalUser.orElse(new User());
     }
 
 }

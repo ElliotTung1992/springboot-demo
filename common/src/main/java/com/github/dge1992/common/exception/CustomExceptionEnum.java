@@ -43,7 +43,14 @@ public enum CustomExceptionEnum implements ServiceExceptionEnum {
     /**
      * 账号密码错误
      */
-    AUTH_REQUEST_ERROR(400, "账号密码错误");
+    AUTH_REQUEST_ERROR(400, "账号密码错误"),
+
+    /**
+     * 请求参数校验异常
+     */
+    BAD_REQUEST_PARAM(400, "请求参数校验异常");
+
+
 
     CustomExceptionEnum(int code, String message) {
         this.code = code;

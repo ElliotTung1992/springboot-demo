@@ -12,10 +12,10 @@ import javax.validation.ValidatorFactory;
 /**
  * @author 董感恩
  * @date 2020-02-10 13:19
- * @desc 实体配置
+ * @desc 校验器配置
  */
 @Configuration
-public class BeanConfig {
+public class ValidatorConfig {
 
     /**
      * @author 董感恩

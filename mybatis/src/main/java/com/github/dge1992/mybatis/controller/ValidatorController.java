@@ -4,7 +4,6 @@ import com.github.dge1992.mybatis.domain.*;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +20,27 @@ import java.util.Set;
  * @author 董感恩
  * @date 2020-02-10 13:01
  * @desc 校验控制器
+ *
+ *  web依赖包含hibernate-validator，无需重复引入
+ *  <artifactId>spring-boot-starter-web</artifactId>
+ *
+ *  可以配置错误返回模式（快速失败返回模式/普通模式）
+ *
+ *  配置统一错误处理
+ *
+ *  1. 在@RequestBody DemoModel demo之间加注解 @Valid，然后后面加BindingResult即可
+ *
+ *  2. a: 校验@RequestParam需要配置MethodValidationPostProcessor的Bean
+ *     b: 方法所在的Controller上加注解@Validated
+ *
+ *  3. 使用validator.validate(demo2)校验对象
+ *
+ *  4. 级联校验: 对象内部包含另一个对象作为属性，属性上加@Valid，可以验证作为属性的对象内部的验证
+ *
+ *  5. 分组校验: validator.validate(p, GroupA.class, GroupB.class);
+ *
+ *  6. 自定义校验
+ *
  */
 @RequestMapping("/validator")
 @RestController
@@ -162,7 +182,7 @@ public class ValidatorController {
     /**
      * @author 董感恩
      * @date 2020-02-10 16:29:52
-     * @desc 测试大小写验证
+     * @desc 自定义校验，测试大小写验证
      **/
     @PostMapping("/CheckCase")
     public Object CheckCase(@RequestBody @Valid CheckCaseDomain checkCaseDomain, BindingResult result){

@@ -13,15 +13,9 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class User implements Serializable {
     private Integer id;
     private String name;
     private Integer age;
-
-    public User(Integer id, String name, Integer age) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-    }
 }

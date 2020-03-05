@@ -1,6 +1,7 @@
 package com.github.dge1992.mybatis.controller;
 
 import com.github.dge1992.mybatis.domain.*;
+import com.github.dge1992.mybatis.service.IValidatorService;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -46,6 +47,9 @@ import java.util.Set;
 @RestController
 @Validated
 public class ValidatorController {
+
+    @Autowired
+    private IValidatorService validatorService;
 
     @Autowired
     private Validator validator;
@@ -190,6 +194,17 @@ public class ValidatorController {
             result.getAllErrors().stream().forEach(e -> System.out.println(e.getDefaultMessage()));
         }
         return checkCaseDomain;
+    }
+
+    /**
+     * @author 董感恩
+     * @date 2020-02-24 10:11:57
+     * @desc 校验service层
+     **/
+    @GetMapping("/checkService")
+    public Object checkService(){
+        validatorService.checkService("");
+        return "校验成功";
     }
 
 }

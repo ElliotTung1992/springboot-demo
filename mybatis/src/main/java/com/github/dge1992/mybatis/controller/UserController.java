@@ -99,5 +99,4 @@ public class UserController {
         Optional<User> optionalUser = userService2.getUserById(null);
         return optionalUser.orElse(new User());
     }
-
 }

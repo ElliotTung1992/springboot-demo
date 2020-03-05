@@ -1,4 +1,4 @@
-package com.github.dge1992.rocketmq.producer;
+package com.github.dge1992.rocketmq.product2;
 
 import org.apache.rocketmq.common.message.Message;
 

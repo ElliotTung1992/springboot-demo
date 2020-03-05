@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author 小眼睛带鱼
  * @date 2019-11-19 18:50
- * @desc
+ * @desc 在Spring容器初始化完成会触发ContextRefreshedEvent事件
  */
 @Log4j2
 @Configuration
@@ -27,7 +27,6 @@ public class TestConsumer extends DefaultConsumerConfigure implements Applicatio
         } catch (MQClientException e) {
             log.error("消费者监听器启动失败", e);
         }
-
     }
 
     @Override
@@ -40,7 +39,6 @@ public class TestConsumer extends DefaultConsumerConfigure implements Applicatio
                 log.error("body转字符串解析失败");
             }
         }
-
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }

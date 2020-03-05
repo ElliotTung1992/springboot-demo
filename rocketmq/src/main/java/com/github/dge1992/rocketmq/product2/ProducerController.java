@@ -1,4 +1,4 @@
-package com.github.dge1992.rocketmq.producer;
+package com.github.dge1992.rocketmq.product2;
 
 import com.github.dge1992.rocketmq.consumer2.transaction.TransactionListenerImpl;
 import org.apache.rocketmq.client.exception.MQClientException;

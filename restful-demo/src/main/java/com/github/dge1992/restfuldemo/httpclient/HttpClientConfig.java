@@ -2,19 +2,15 @@ package com.github.dge1992.restfuldemo.httpclient;
 
 import org.apache.http.HttpEntityEnclosingRequest;
 import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.HttpRequestRetryHandler;
-import org.apache.http.client.ServiceUnavailableRetryStrategy;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.protocol.HttpContext;
-import org.apache.http.util.Args;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +19,6 @@ import org.springframework.context.annotation.Configuration;
 import javax.net.ssl.SSLException;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Iterator;
 
 /**
  * @author 董感恩
@@ -135,13 +130,20 @@ public class HttpClientConfig {
     }
 }
 
+/**
+ * @author 董感恩
+ * @date 2020-03-05 14:37:21
+ * @desc 自定义重试处理器
+ **/
 class MyHttpRequestRetryHandler implements HttpRequestRetryHandler {
 
     @Override
     public boolean retryRequest(IOException exception, int executionCount, HttpContext context) {
+        //设置重试次数
         if (executionCount > 5) {
             return false;
         }
+        //设置指定异常进行重试
         if (exception instanceof UnknownHostException || exception instanceof ConnectTimeoutException
                 || !(exception instanceof SSLException) || exception instanceof NoHttpResponseException) {
             return true;
@@ -150,7 +152,7 @@ class MyHttpRequestRetryHandler implements HttpRequestRetryHandler {
         HttpRequest request = clientContext.getRequest();
         boolean idempotent = !(request instanceof HttpEntityEnclosingRequest);
         if (idempotent) {
-            // 如果请求被认为是幂等的，那么就重试。即重复执行不影响程序其他效果的
+            //如果请求被认为是幂等的，那么就重试。即重复执行不影响程序其他效果的
             return true;
         }
         return false;

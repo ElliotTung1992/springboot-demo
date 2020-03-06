@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class GunsGeneratorConfig extends AbstractGeneratorConfig {
 
     protected void globalConfig() {
-        globalConfig.setOutputDir("D:\\aaa");//写自己项目的绝对路径,注意具体到java目录
+        globalConfig.setOutputDir("/Users/apple/generator");//写自己项目的绝对路径,注意具体到java目录
         globalConfig.setFileOverride(true);
         globalConfig.setEnableCache(false);
         globalConfig.setBaseResultMap(true);
@@ -24,14 +24,14 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
     protected void dataSourceConfig() {
         dataSourceConfig.setDbType(DbType.MYSQL);
         dataSourceConfig.setDriverName("com.mysql.jdbc.Driver");
-        dataSourceConfig.setUsername("");
-        dataSourceConfig.setPassword("");
-        dataSourceConfig.setUrl("jdbc:mysql://47.99.62.141:3306/home?characterEncoding=utf8");
+        dataSourceConfig.setUsername("saas1");
+        dataSourceConfig.setPassword("olymtech1");
+        dataSourceConfig.setUrl("jdbc:mysql://rm-bp149t3or0eb470956o.mysql.rds.aliyuncs.com:3306/fms?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull");
     }
 
     protected void strategyConfig() {
         strategyConfig.setTablePrefix(new String[]{"sys_"});// 此处可以修改为您的表前缀
-        strategyConfig.setInclude("sys_dict");// 数据库表
+        strategyConfig.setInclude("dic_item");// 数据库表
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);//表名生成策略
     }
 
@@ -46,10 +46,10 @@ public class GunsGeneratorConfig extends AbstractGeneratorConfig {
         contextConfig.setProPackage("com.stylefeng.guns.admin");
         contextConfig.setCoreBasePackage("com.stylefeng.guns.core");
         contextConfig.setBizChName("字典管理");
-        contextConfig.setBizEnName("sysDict");
+        contextConfig.setBizEnName("dicItem");
         contextConfig.setModuleName("system");
-        contextConfig.setProjectPath("D:\\aaa2");//写自己项目的绝对路径
-        contextConfig.setEntityName("SysDict");
+        contextConfig.setProjectPath("/Users/apple/generator");//写自己项目的绝对路径
+        contextConfig.setEntityName("DicItem");
         sqlConfig.setParentMenuName(null);//这里写已有菜单的名称,当做父节点
 
         /**

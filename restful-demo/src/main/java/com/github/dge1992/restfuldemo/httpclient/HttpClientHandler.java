@@ -73,17 +73,12 @@ public class HttpClientHandler {
      * @author 董感恩
      * @date 2020-02-28 19:43:36
      * @desc 带参数的Post请求
+     *       a=value1&b=value2
      **/
-    public HttpResult doPost(String url, Map<String, Object> map, Map<String, String> headParams) throws Exception {
-        // 声明httpPost请求
-        HttpPost httpPost = new HttpPost(url);
-        // 拼接请求头参数
-        if(MapUtils.isNotEmpty(headParams)){
-            for (Map.Entry<String, String> entry : headParams.entrySet()) {
-                httpPost.addHeader(entry.getKey(), entry.getValue());
-            }
-        }
-        // 发起请求
+    public HttpResult doPostForm(String url, Map<String, Object> map, Map<String, String> headParams) throws Exception {
+        HttpPost httpPost = doPost(url, headParams);
+        //提交的数据按照 key1=val1&key2=val2 的方式进行编码
+        httpPost.addHeader("Content-type", "application/x-www-form-urlencoded");
         // 判断map是否为空，不为空则进行遍历，封装from表单对象
         if (map != null) {
             List<NameValuePair> list = new ArrayList<>();
@@ -95,10 +90,7 @@ public class HttpClientHandler {
             // 把表单放到post里
             httpPost.setEntity(urlEncodedFormEntity);
         }
-        log.info("HttpClient对 " + url + " 发起Post请求！");
-        CloseableHttpResponse response = this.httpClient.execute(httpPost);
-        HttpResult httpResult = buildResponse(response);
-        log.info(url + " 的返回结果是:" + JSON.toJSONString(httpResult));
+        HttpResult httpResult = sendPost(httpPost, url);
         return httpResult;
     }
 
@@ -106,8 +98,27 @@ public class HttpClientHandler {
      * @author 董感恩
      * @date 2020-02-29 21:15:34
      * @desc Json形式的Post请求
+     *       {"a":"value1", "b":"value2"}
      **/
     public HttpResult doPostJson(String url, Map<String, Object> map, Map<String, String> headParams) throws IOException {
+        HttpPost httpPost = doPost(url, headParams);
+        //以json形式传递数据
+        httpPost.addHeader("Content-type", "application/json");
+        // 判断map是否为空，不为空则进行遍历，封装from表单对象
+        if (map != null) {
+            StringEntity formEntity = new StringEntity(JSON.toJSONString(map), "UTF-8");
+            httpPost.setEntity(formEntity);
+        }
+        HttpResult httpResult = sendPost(httpPost, url);
+        return httpResult;
+    }
+
+    /**
+     * @author 董感恩
+     * @date 2020-03-05 15:26:42
+     * @desc 创建Post请求，并设置头信息
+     **/
+    private HttpPost doPost(String url, Map<String, String> headParams){
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
         // 拼接请求头参数
@@ -116,13 +127,15 @@ public class HttpClientHandler {
                 httpPost.addHeader(entry.getKey(), entry.getValue());
             }
         }
-        httpPost.addHeader("Content-type", "application/json");
-        // 发起请求
-        // 判断map是否为空，不为空则进行遍历，封装from表单对象
-        if (map != null) {
-            StringEntity formEntity = new StringEntity(JSON.toJSONString(map), "UTF-8");
-            httpPost.setEntity(formEntity);
-        }
+        return httpPost;
+    }
+
+    /**
+     * @author 董感恩
+     * @date 2020-03-05 15:27:24
+     * @desc 发送Post请求并且记录日志
+     **/
+    private HttpResult sendPost(HttpPost httpPost, String url) throws IOException {
         log.info("HttpClient对 " + url + " 发起Post请求！");
         CloseableHttpResponse response = this.httpClient.execute(httpPost);
         HttpResult httpResult = buildResponse(response);
@@ -135,7 +148,7 @@ public class HttpClientHandler {
      * @date 2020-02-28 20:04:48
      * @desc 构建返回值
      **/
-    public HttpResult buildResponse(CloseableHttpResponse response) throws IOException {
+    private HttpResult buildResponse(CloseableHttpResponse response) throws IOException {
         if(response.getStatusLine().getStatusCode() == 200){
             return new HttpResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(
                     response.getEntity(), "UTF-8"));

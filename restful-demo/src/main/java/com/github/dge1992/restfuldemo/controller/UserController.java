@@ -33,6 +33,16 @@ public class UserController {
     @ApiOperation(value = "获取用户列表", notes = "获取用户列表")
     @GetMapping
     public List<User> getUserList(){
+        User user = new User();
+        user.setId(1l);
+        user.setName("dge");
+        user.setAge(11);
+        User user2 = new User();
+        user2.setId(2l);
+        user2.setName("fnn");
+        user2.setAge(12);
+        map.put(1l, user);
+        map.put(2l, user2);
         return new ArrayList<>(map.values());
     }
 

@@ -38,8 +38,8 @@ public class AuthController {
             final String tokenOriginal = jwtTokenUtil.generateToken(authObject.getUsername(), randomKey);
             System.out.println(tokenOriginal);
             //对token进行加密
-            final String token = new PBESecurityAction().doAction(tokenOriginal);
-            return ResponseEntity.ok(new AuthResponse(token, randomKey));
+            //final String token = new PBESecurityAction().doAction(tokenOriginal);
+            return ResponseEntity.ok(new AuthResponse(tokenOriginal, randomKey));
         } else {
             //账号密码校验失败
             throw new CustomException(CustomExceptionEnum.AUTH_REQUEST_ERROR);

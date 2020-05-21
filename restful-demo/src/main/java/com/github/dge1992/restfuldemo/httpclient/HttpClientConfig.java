@@ -82,9 +82,9 @@ public class HttpClientConfig {
         new IdleConnectionThread(httpClientConnectionManager).start();
         //禁止重试，并发请求量大的情况推荐关闭
         //DefaultHttpRequestRetryHandler默认实现
-        //httpClientBuilder.disableAutomaticRetries();
+        httpClientBuilder.disableAutomaticRetries();
         //设置重试
-        httpClientBuilder.setRetryHandler(new MyHttpRequestRetryHandler());
+        //httpClientBuilder.setRetryHandler(new MyHttpRequestRetryHandler());
         return httpClientBuilder;
     }
 

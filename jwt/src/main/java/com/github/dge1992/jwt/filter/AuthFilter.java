@@ -41,7 +41,7 @@ public class AuthFilter extends OncePerRequestFilter {
         if (requestHeader != null && requestHeader.startsWith("Bearer ")) {
             authToken = requestHeader.substring(7);
             //对token进行解密
-            authToken = new PBESecurityAction().unlock(authToken);
+            //authToken = new PBESecurityAction().unlock(authToken);
             System.out.println(authToken);
             //验证token是否过期,包含了验证jwt是否正确
             try {

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * @author 董感恩
  * @date 2019-12-29 16:16
@@ -20,8 +21,8 @@ import java.util.List;
 @RestController
 public class ExcelController {
 
-    @PostMapping("/exportExcel")
-    public Object exportExcel(MultipartFile file){
+    @PostMapping("/importExcel")
+    public Object importExcel(MultipartFile file){
 //        ExcelUtils excelUtils = new ExcelUtils<VesselVoyageExcel>();
 //        List list = excelUtils.getList(file, new VesselVoyageExcel());
         ExcelUtils excelUtils = new ExcelUtils<ExcelDemo>();
@@ -43,4 +44,6 @@ public class ExcelController {
         List<ExcelDemo> excelDemos = Arrays.asList(new ExcelDemo("dge", 12, new Date(), 1.70, 13523636794l, true), new ExcelDemo("fnn", 23, new Date(), 1.84, 13523636794l, false));
         excelUtils.createExcel(excelDemos, filePathName);
     }
+
+
 }

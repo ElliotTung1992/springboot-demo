@@ -15,7 +15,7 @@ public class DecryptTest {
 
     public static void main(String[] args) {
         //随机字符串，盐
-        String salt = "fdwf9j";
+        String salt = "3zk7xm";
 
         User simpleObject = new User();
         simpleObject.setUser("dge");

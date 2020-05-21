@@ -52,7 +52,7 @@ public class WithSignMessageConverter extends FastJsonHttpMessageConverter {
         //校验签名
         String token = HttpKit.getRequest().getHeader(jwtProperties.getHeader()).substring(7);
         //对token进行解密
-        token = new PBESecurityAction().unlock(token);
+        //token = new PBESecurityAction().unlock(token);
         String md5KeyFromToken = jwtTokenUtil.getMd5KeyFromToken(token);
 
         String object = baseTransferEntity.getObject();

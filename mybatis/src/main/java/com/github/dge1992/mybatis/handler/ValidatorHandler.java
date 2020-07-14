@@ -28,4 +28,17 @@ public class ValidatorHandler<T> {
         }
         return null;
     }
+
+    public String validate(T t, Class... groupClazz){
+        StringBuilder stringBuilder = new StringBuilder();
+        Set<ConstraintViolation<T>> validate =
+                validator.validate(t, groupClazz);
+        for (ConstraintViolation<T> model : validate) {
+            stringBuilder.append(model.getMessage()).append(" ");
+        }
+        if(stringBuilder.length() > 0){
+            return stringBuilder.toString();
+        }
+        return null;
+    }
 }

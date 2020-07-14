@@ -5,6 +5,7 @@ import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.read.metadata.ReadSheet;
 import com.alibaba.fastjson.JSON;
 import com.github.dge1992.application.easyexcel.dao.ExcelDao;
+import com.github.dge1992.application.easyexcel.domain.DemoData;
 import com.github.dge1992.application.easyexcel.util.TestFileUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;

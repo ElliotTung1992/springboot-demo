@@ -20,5 +20,19 @@ public class BeansTest {
 
         BeanUtils.copyProperties(userPo, userVo2);
         System.out.println(userVo2);
+
+
+        System.out.println("========================");
+
+        UserVo userVo4 = new UserVo();
+        UserVo userVo5 = new UserVo();
+
+        userVo4.setName("dge");
+        userVo4.setAge(11);
+
+        userVo5.setName("dge");
+        userVo5.setAge(11);
+
+        System.out.println(userVo4.equals(userVo5));
     }
 }

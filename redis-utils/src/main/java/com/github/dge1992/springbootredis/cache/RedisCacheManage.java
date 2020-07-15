@@ -1,7 +1,6 @@
 package com.github.dge1992.springbootredis.cache;
 
 import com.github.dge1992.springbootredis.utils.CommonUtils;
-import com.github.dge1992.springbootredis.utils.TimeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisCallback;
@@ -162,8 +161,8 @@ public class RedisCacheManage implements CacheManage {
         String diffKeyTwo = CommonUtils.getUUID();
         map1.entrySet().stream().forEach(e -> redisTemplate.opsForSet().add(diffKeyOne,e.getKey() + ":" + e.getValue()));
         map2.entrySet().stream().forEach(e -> redisTemplate.opsForSet().add(diffKeyTwo,e.getKey() + ":" + e.getValue()));
-        this.expireKey(diffKeyOne, TimeEnum.ONE_MINUTE.getKey());
-        this.expireKey(diffKeyTwo, TimeEnum.ONE_MINUTE.getKey());
+        this.expireKey(diffKeyOne, TimeUnit.MINUTES.toMillis(1));
+        this.expireKey(diffKeyTwo, TimeUnit.MINUTES.toMillis(1));
         return new String[]{diffKeyOne, diffKeyTwo};
     }
 

@@ -1,9 +1,14 @@
 package com.github.dge1992.mybatis.service.impl;
 
+import com.github.dge1992.mybatis.domain.User;
+import com.github.dge1992.mybatis.mapper.UserMapper;
 import com.github.dge1992.mybatis.service.IAsyncService;
+import org.springframework.aop.framework.AopContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.concurrent.Future;
 
@@ -15,6 +20,10 @@ import java.util.concurrent.Future;
 @Service
 public class AsyncService implements IAsyncService {
 
+    @Autowired
+    private UserMapper userMapper;
+
+    @Async
     public void async(){
         try {
             Thread.sleep(10000l);
@@ -34,5 +43,24 @@ public class AsyncService implements IAsyncService {
         }
         // 消息汇总
         return new AsyncResult<>(String.format("这个是第{%s}个异步调用的证书", i));
+    }
+
+    @Transactional
+    @Override
+    public void testExposeProxy() {
+        try{
+            User user = new User();
+            user.setUserName("zz");
+            user.setAge(10);
+            user.setDes("测试");
+            user.setVersion(1);
+            userMapper.insert(user);
+            int i = 10 / 0;
+        }catch (Exception e){
+            //不做处理
+        }
+        IAsyncService asyncService = (IAsyncService) AopContext.currentProxy();
+        asyncService.async();
+        System.out.println("哈哈");
     }
 }

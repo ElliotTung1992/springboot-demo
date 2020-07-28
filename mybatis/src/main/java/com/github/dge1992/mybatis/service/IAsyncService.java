@@ -11,9 +11,10 @@ import java.util.concurrent.Future;
  */
 public interface IAsyncService {
 
-    @Async
     void async();
 
     @Async
     Future<String> asyncHasResult(int i);
+
+    void testExposeProxy();
 }

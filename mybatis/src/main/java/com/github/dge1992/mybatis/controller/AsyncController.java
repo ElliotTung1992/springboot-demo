@@ -1,9 +1,14 @@
 package com.github.dge1992.mybatis.controller;
 
+import com.github.dge1992.mybatis.domain.User;
+import com.github.dge1992.mybatis.mapper.UserMapper;
 import com.github.dge1992.mybatis.service.IAsyncService;
+import com.github.dge1992.mybatis.service.IUserService;
 import com.github.dge1992.mybatis.utils.SpringContextHolder;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -78,4 +83,16 @@ public class AsyncController {
         map.put("消耗时间", String.format("任务执行成功,耗时{%s}毫秒", System.currentTimeMillis() - start));
         return map;
     }
+
+    /**
+     * @author 董感恩
+     * @date 2020-07-28 16:21:26
+     * @desc 测试AopContext的bug
+     **/
+    @GetMapping("/testExposeProxy")
+    public void testExposeProxy(){
+        asyncService.testExposeProxy();
+    }
+
+
 }

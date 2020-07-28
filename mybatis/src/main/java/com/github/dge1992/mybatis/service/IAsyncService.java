@@ -1,4 +1,4 @@
-package com.github.dge1992.restfuldemo.service;
+package com.github.dge1992.mybatis.service;
 
 import org.springframework.scheduling.annotation.Async;
 

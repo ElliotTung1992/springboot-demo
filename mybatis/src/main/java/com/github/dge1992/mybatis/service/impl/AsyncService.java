@@ -1,6 +1,6 @@
-package com.github.dge1992.restfuldemo.service.impl;
+package com.github.dge1992.mybatis.service.impl;
 
-import com.github.dge1992.restfuldemo.service.IAsyncService;
+import com.github.dge1992.mybatis.service.IAsyncService;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;

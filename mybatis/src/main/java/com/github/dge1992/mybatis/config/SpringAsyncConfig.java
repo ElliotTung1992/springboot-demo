@@ -1,4 +1,4 @@
-package com.github.dge1992.restfuldemo.config;
+package com.github.dge1992.mybatis.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;

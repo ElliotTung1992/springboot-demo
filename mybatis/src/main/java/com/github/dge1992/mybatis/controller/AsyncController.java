@@ -1,7 +1,7 @@
-package com.github.dge1992.restfuldemo.controller;
+package com.github.dge1992.mybatis.controller;
 
-import com.github.dge1992.restfuldemo.service.IAsyncService;
-import com.github.dge1992.restfuldemo.utils.SpringContextHolder;
+import com.github.dge1992.mybatis.service.IAsyncService;
+import com.github.dge1992.mybatis.utils.SpringContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;

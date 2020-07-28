@@ -41,8 +41,11 @@ public class AsyncController {
     @RequestMapping("/testAsync")
     public void testAsync() {
         asyncService.async();
+
+        //第一种解决方案:
         AsyncController asyncController = SpringContextHolder.getBean("asyncController");
         asyncController.async();
+
         System.out.println("哈哈");
     }
 

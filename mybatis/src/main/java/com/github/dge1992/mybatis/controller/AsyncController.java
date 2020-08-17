@@ -1,14 +1,9 @@
 package com.github.dge1992.mybatis.controller;
 
-import com.github.dge1992.mybatis.domain.User;
-import com.github.dge1992.mybatis.mapper.UserMapper;
 import com.github.dge1992.mybatis.service.IAsyncService;
-import com.github.dge1992.mybatis.service.IUserService;
 import com.github.dge1992.mybatis.utils.SpringContextHolder;
-import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

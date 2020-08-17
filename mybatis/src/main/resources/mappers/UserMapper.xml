@@ -55,4 +55,10 @@
         "id" = '6';
   </select>
 
+  <insert id="insertShardingProxyOrder">
+    INSERT INTO `t_order` ( `order_id`, `user_id` )
+    VALUES
+        ( 3, 3 );
+  </insert>
+
 </mapper>

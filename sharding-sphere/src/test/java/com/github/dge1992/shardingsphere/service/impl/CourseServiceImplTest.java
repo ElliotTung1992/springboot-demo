@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author 董感恩
@@ -33,6 +34,7 @@ public class CourseServiceImplTest {
     @Resource
     private DictMapper dictMapper;
 
+    //水平单库分表，插入数据
     @Test
     public void addCourse() {
         for (int i = 1; i <= 10; i++) {
@@ -42,11 +44,14 @@ public class CourseServiceImplTest {
         }
     }
 
-    //水平单库分表
+    //水平单库分表, 查询
     @Test
     public void findCourse() {
-        Course course = courseMapper.selectOne(new QueryWrapper<Course>().eq("cid", 490901825906540545l));
+        Course course = courseMapper.selectOne(new QueryWrapper<Course>().eq("cid", 497734210715385857l));
         System.out.println(course);
+
+        Course course2 = courseMapper.selectOne(new QueryWrapper<Course>().eq("user_id", 101));
+        System.out.println(course2);
     }
 
     //水平分库分表
@@ -64,12 +69,32 @@ public class CourseServiceImplTest {
         }
     }
 
-    //垂直分库
+    //水平单库分表, 查询
+    @Test
+    public void findCourseDB() {
+        Course course = courseMapper.selectOne(new QueryWrapper<Course>().eq("cid", 497798262833545217l));
+        System.out.println(course);
+
+        List<Course> courseList = courseMapper.selectList(new QueryWrapper<Course>().eq("user_id", 101));
+        courseList.stream().forEach(System.out::println);
+
+        List<Course> courseList2 = courseMapper.selectList(new QueryWrapper<Course>().eq("cname", "JavaDB"));
+        courseList2.stream().forEach(System.out::println);
+    }
+
+    //垂直分库 新增
     @Test
     public void addUser() {
         User user = new User();
-        user.setUsername("Manaphy").setAge(18);
+        user.setUsername("Mike").setAge(19);
         userMapper.insert(user);
+    }
+
+    //垂直分库 查询
+    @Test
+    public void selectUser() {
+        User user = userMapper.selectOne(new QueryWrapper<User>().eq("username", "Mike"));
+        System.out.println(user);
     }
 
     @Test

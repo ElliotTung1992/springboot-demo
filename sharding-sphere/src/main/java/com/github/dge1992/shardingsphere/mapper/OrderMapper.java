@@ -1,8 +1,10 @@
 package com.github.dge1992.shardingsphere.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.dge1992.shardingsphere.domain.Order;
 import com.github.dge1992.shardingsphere.domain.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @author 董感恩
@@ -10,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @desc
  */
 @Mapper
-public interface UserMapper extends BaseMapper<User> {
+public interface OrderMapper extends BaseMapper<Order> {
 
-    void insertShardingProxyOrder();
+    void insertShardingProxyOrder(@Param("order") Order order);
 }

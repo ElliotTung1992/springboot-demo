@@ -25,6 +25,4 @@ public interface UserMapper extends BaseMapper<User> {
     void openSession();
 
     void testOracle();
-
-    void insertShardingProxyOrder();
 }

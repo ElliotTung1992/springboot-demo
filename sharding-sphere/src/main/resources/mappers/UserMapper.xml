@@ -14,4 +14,8 @@
         ( 3, 3 );
   </insert>
 
+    <insert id="insertMasterSlave">
+        INSERT INTO `t_user`(`id`, `name`, `age`) VALUES (1, '1', 1);
+    </insert>
+
 </mapper>

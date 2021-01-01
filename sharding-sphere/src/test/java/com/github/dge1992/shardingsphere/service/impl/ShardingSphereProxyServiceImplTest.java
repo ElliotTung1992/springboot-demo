@@ -26,7 +26,7 @@ public class ShardingSphereProxyServiceImplTest {
     /**
      * @author 董感恩
      * @date 2020-08-18 11:34:08
-     * @desc 单库分表
+     * @desc 分表
      **/
     @Test
     public void testShardingProxy() {
@@ -34,5 +34,23 @@ public class ShardingSphereProxyServiceImplTest {
         order.setUserId(4);
         order.setOrderId(4);
         orderMapper.insertShardingProxyOrder(order);
+    }
+
+    /**
+     * @author 董感恩
+     * @date 2020-08-18 11:34:08
+     * @desc 分库分表
+     **/
+    @Test
+    public void testShardingDBAndTable() {
+        Order order = new Order();
+        order.setUserId(1);
+        order.setOrderId(1);
+        orderMapper.insertShardingProxyOrder(order);
+
+        Order order2 = new Order();
+        order2.setUserId(2);
+        order2.setOrderId(2);
+        orderMapper.insertShardingProxyOrder(order2);
     }
 }

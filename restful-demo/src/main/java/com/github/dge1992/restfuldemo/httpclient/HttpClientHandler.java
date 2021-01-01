@@ -70,6 +70,15 @@ public class HttpClientHandler {
     }
 
     /**
+     *
+     *  UrlEncodedFormEntity 和 StringEntity的区别
+     *  后台接收参数的形式不一样
+     *  UrlEncodedFormEntity是a=value1&b=value2
+     *  StringEntity是{"a":"value1", "b":"value2"}的形式
+     *
+     **/
+
+    /**
      * @author 董感恩
      * @date 2020-02-28 19:43:36
      * @desc 带参数的Post请求

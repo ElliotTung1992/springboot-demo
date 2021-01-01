@@ -86,7 +86,7 @@ public class CourseServiceImplTest {
     @Test
     public void addUser() {
         User user = new User();
-        user.setUsername("Mike").setAge(19);
+        user.setName("Mike").setAge(19);
         userMapper.insert(user);
     }
 
@@ -102,6 +102,31 @@ public class CourseServiceImplTest {
         Dict dict = new Dict();
         dict.setDictName("测试").setDictValue("启用");
         dictMapper.insert(dict);
+    }
+
+    /**
+     * @author 董感恩
+     * @date 2020-08-18 17:45:47
+     * @desc 测试主从新增
+     **/
+    @Test
+    public void insertMasterSlave(){
+        User user = new User();
+        user.setId(1);
+        user.setName("1");
+        user.setAge(1);
+        userMapper.insert(user);
+    }
+
+    /**
+     * @author 董感恩
+     * @date 2020-08-18 17:45:47
+     * @desc 测试主从查询
+     **/
+    @Test
+    public void selectMasterSlave(){
+        User user = userMapper.selectById(1);
+        System.out.println(user);
     }
 
 }

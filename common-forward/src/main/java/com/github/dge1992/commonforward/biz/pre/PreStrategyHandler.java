@@ -12,11 +12,11 @@ public class PreStrategyHandler {
 
     private PreStrategy preStrategy;
 
-    public PreStrategyHandler(PreStrategy preStrategy){
+    public PreStrategyHandler(PreStrategy preStrategy) {
         this.preStrategy = preStrategy;
     }
 
-    public void execute(CommonReceiveObject receiveObject){
+    public void execute(CommonReceiveObject receiveObject) {
         preStrategy.preExecute(receiveObject);
     }
 }

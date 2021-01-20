@@ -25,7 +25,7 @@ import java.util.Optional;
  * @date 2021-01-19 11:12
  */
 @Component
-public class HttpForwardTemplate extends BaseForwardTemplate{
+public class HttpForwardTemplate extends BaseForwardTemplate {
 
     @Autowired
     private BeanNameService beanNameService;
@@ -62,10 +62,10 @@ public class HttpForwardTemplate extends BaseForwardTemplate{
             String url = optionalUrl.orElseThrow(NullPointerException::new);
             //头信息
             HashMap<String, String> headMap = receiveObject.getHeadMap();
-            if(null == method){
+            if (null == method) {
                 throw new NullPointerException("method is null");
             }
-            switch (method){
+            switch (method) {
                 case GET:
                     //get请求
                     httpResult = httpClientHandler.doGet(url, paramsMap);
@@ -83,7 +83,7 @@ public class HttpForwardTemplate extends BaseForwardTemplate{
             }
             //设置返回结果
             receiveObject.setResult(JSON.toJSONString(httpResult));
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return httpResult;

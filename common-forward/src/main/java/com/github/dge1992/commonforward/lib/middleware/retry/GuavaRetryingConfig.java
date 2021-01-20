@@ -26,7 +26,7 @@ public class GuavaRetryingConfig {
     private Integer attemptNumber;
 
     @Bean
-    public Retryer<Object> retryer(){
+    public Retryer<Object> retryer() {
         Retryer<Object> retryer = RetryerBuilder.newBuilder()
                 //抛出RuntimeException会进行重试
                 .retryIfException()

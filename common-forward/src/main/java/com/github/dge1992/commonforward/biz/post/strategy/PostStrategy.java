@@ -11,8 +11,9 @@ public interface PostStrategy {
 
     /**
      * 后置处理
+     *
      * @param commonReceiveObject 接收对象
-     * @param resultStr 字符串结果集
+     * @param resultStr           字符串结果集
      * @author dge
      * @date 2021-01-14 10:29
      */

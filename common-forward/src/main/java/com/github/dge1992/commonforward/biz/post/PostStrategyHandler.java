@@ -12,11 +12,11 @@ public class PostStrategyHandler {
 
     private PostStrategy postStrategy;
 
-    public PostStrategyHandler(PostStrategy postStrategy){
+    public PostStrategyHandler(PostStrategy postStrategy) {
         this.postStrategy = postStrategy;
     }
 
-    public void execute(CommonReceiveObject commonReceiveObject, String resultStr){
+    public void execute(CommonReceiveObject commonReceiveObject, String resultStr) {
         postStrategy.postExecute(commonReceiveObject, resultStr);
     }
 }

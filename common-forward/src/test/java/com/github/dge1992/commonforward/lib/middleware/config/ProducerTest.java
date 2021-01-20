@@ -43,7 +43,7 @@ public class ProducerTest extends BaseTestCase {
     }
 
     @Test
-    void testJson(){
+    void testJson() {
         CommonReceiveObject receiveObject = new CommonReceiveObject();
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("age", "12");

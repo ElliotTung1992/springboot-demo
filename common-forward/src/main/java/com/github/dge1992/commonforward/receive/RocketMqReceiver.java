@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RocketMQMessageListener(topic = "dgeTopicTest", consumerGroup = "my-group",
-                            messageModel = MessageModel.CLUSTERING)
+        messageModel = MessageModel.CLUSTERING)
 public class RocketMqReceiver implements RocketMQListener<String> {
 
     private Logger logger = LoggerFactory.getLogger(RocketMqReceiver.class);
@@ -32,11 +32,11 @@ public class RocketMqReceiver implements RocketMQListener<String> {
         logger.info("RocketMQReceiver | onMessage | messageStr:{}", JSON.toJSONString(messageStr));
 
         //转换
-        try{
+        try {
             CommonReceiveObject receiveObject = JSON.parseObject(messageStr, CommonReceiveObject.class);
             logger.info("RocketMQReceiver | onMessage | receiveObject:{}", JSON.toJSONString(receiveObject));
             baseForwardTemplate.forward(receiveObject);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

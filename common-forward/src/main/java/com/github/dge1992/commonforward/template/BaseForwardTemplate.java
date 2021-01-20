@@ -29,6 +29,7 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 前置处理
+     *
      * @param receiveObject 接收对象
      * @author dge
      * @date 2021-01-19 11:13
@@ -37,6 +38,7 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 发送
+     *
      * @param receiveObject 接收对象
      * @return com.github.dge1992.commonforward.api.model.BaseResult
      * @author dge
@@ -46,7 +48,8 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 后置处理
-     * @param result 结果
+     *
+     * @param result        结果
      * @param receiveObject 接收对象
      * @author dge
      * @date 2021-01-19 11:14
@@ -55,25 +58,26 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 远程访问
+     *
      * @param commonRemoteObj 接收对象
      * @author dge
      * @date 2021-01-19 11:14
      */
     public final void forward(CommonReceiveObject commonRemoteObj) {
         // todo 此方法需要加锁
-        try{
+        try {
             logger.info("BaseForwardTemplate forward commonRemoteObj is :" + JSON.toJSONString(commonRemoteObj));
             validate(commonRemoteObj);
             //幂等
             int idempotent = recordService.idempotent(commonRemoteObj.getUuid());
-            if(idempotent == 0){
+            if (idempotent == 0) {
                 template(commonRemoteObj);
                 commonRemoteObj.setIsSuccess(Boolean.TRUE);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             commonRemoteObj.setIsSuccess(Boolean.FALSE);
-        }finally {
+        } finally {
             //数据记录
             recordService.add(commonRemoteObj);
         }
@@ -81,6 +85,7 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 模版方法
+     *
      * @param commonRemoteObj 接收对象
      * @author dge
      * @date 2021-01-20 09:54
@@ -88,7 +93,7 @@ public abstract class BaseForwardTemplate {
     public final void template(CommonReceiveObject commonRemoteObj) throws Exception {
         preExecute(commonRemoteObj);
         Object obj = retryer.call(() -> send(commonRemoteObj));
-        if(obj instanceof BaseResult){
+        if (obj instanceof BaseResult) {
             BaseResult result = (BaseResult) obj;
             postExecute(result, commonRemoteObj);
         }
@@ -96,11 +101,12 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 公共字段的校验
+     *
      * @param commonRemoteObj 公共接收对象
      * @author dge
      * @date 2021-01-19 13:55
      */
-    private void validate(CommonReceiveObject commonRemoteObj){
+    private void validate(CommonReceiveObject commonRemoteObj) {
         //请求方法
         Integer method = commonRemoteObj.getMethod();
         //url
@@ -109,13 +115,13 @@ public abstract class BaseForwardTemplate {
         String urlCode = commonRemoteObj.getURLCode();
         //唯一标识
         String uuid = commonRemoteObj.getUuid();
-        if(method == null){
+        if (method == null) {
             throw new NullPointerException("method is null");
         }
-        if(StringUtils.isBlank(url) && StringUtils.isBlank(urlCode)){
+        if (StringUtils.isBlank(url) && StringUtils.isBlank(urlCode)) {
             throw new NullPointerException("url and urlCode all null");
         }
-        if(StringUtils.isBlank(uuid)){
+        if (StringUtils.isBlank(uuid)) {
             throw new NullPointerException("uuid is null");
         }
     }

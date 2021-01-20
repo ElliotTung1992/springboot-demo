@@ -12,6 +12,7 @@ public interface PreStrategy {
 
     /**
      * 前置处理
+     *
      * @param receiveObject 接收的实体对象
      * @author dge
      * @date 2021-01-13 16:50

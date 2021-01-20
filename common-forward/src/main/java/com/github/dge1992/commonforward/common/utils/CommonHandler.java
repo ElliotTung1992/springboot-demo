@@ -20,13 +20,13 @@ public class CommonHandler {
     @Autowired
     private UrlService urlService;
 
-    public Optional<String> getUrl(CommonReceiveObject receiveObject){
+    public Optional<String> getUrl(CommonReceiveObject receiveObject) {
         AtomicReference<String> url = new AtomicReference<>();
         String urlCode = receiveObject.getURLCode();
-        if(StringUtils.isNotBlank(receiveObject.getURL())) {
+        if (StringUtils.isNotBlank(receiveObject.getURL())) {
             url.set(receiveObject.getURL());
         }
-        if(StringUtils.isNotBlank(urlCode)){
+        if (StringUtils.isNotBlank(urlCode)) {
             urlService.getUrl(urlCode).ifPresent(url::set);
         }
         return Optional.ofNullable(url.get());

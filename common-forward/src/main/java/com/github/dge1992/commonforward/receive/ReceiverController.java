@@ -20,7 +20,7 @@ public class ReceiverController {
     private BaseForwardTemplate baseForwardTemplate;
 
     @PostMapping("/receive")
-    public void receive(@RequestBody CommonReceiveObject receiveObject){
+    public void receive(@RequestBody CommonReceiveObject receiveObject) {
         baseForwardTemplate.forward(receiveObject);
     }
 }

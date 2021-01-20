@@ -36,10 +36,10 @@ public enum HttpMethodEnum {
         return desc;
     }
 
-    public static HttpMethodEnum getByMethodCode(Integer methodCode){
+    public static HttpMethodEnum getByMethodCode(Integer methodCode) {
         HttpMethodEnum[] values = HttpMethodEnum.values();
         for (HttpMethodEnum methodEnum : values) {
-            if(methodEnum.getMethodCode().equals(methodCode)){
+            if (methodEnum.getMethodCode().equals(methodCode)) {
                 return methodEnum;
             }
         }

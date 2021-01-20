@@ -18,9 +18,9 @@ public class LogRetryListener implements RetryListener {
     public <V> void onRetry(Attempt<V> attempt) {
         logger.info("第{}次调用", attempt.getAttemptNumber());
         logger.info("距离上一次的延迟{}", attempt.getDelaySinceFirstAttempt());
-        if(attempt.hasException()){
+        if (attempt.hasException()) {
             logger.info("错误信息: {}", attempt.getExceptionCause());
-        }else{
+        } else {
             logger.info("返回结果是: {}", attempt.getResult());
         }
     }

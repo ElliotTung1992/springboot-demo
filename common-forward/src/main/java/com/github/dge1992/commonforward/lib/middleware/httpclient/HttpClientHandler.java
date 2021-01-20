@@ -39,6 +39,7 @@ public class HttpClientHandler {
 
     /**
      * 不带参数的Get请求
+     *
      * @param url 请求地址
      * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
      * @author dge
@@ -57,6 +58,7 @@ public class HttpClientHandler {
 
     /**
      * 带参数的Get请求
+     *
      * @param url 请求地址
      * @param map 请求参数
      * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
@@ -78,8 +80,9 @@ public class HttpClientHandler {
 
     /**
      * 带参数的Post请求
-     * @param url 请求地址
-     * @param map 请求参数
+     *
+     * @param url        请求地址
+     * @param map        请求参数
      * @param headParams 请求头信息
      * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
      * @author dge
@@ -100,8 +103,9 @@ public class HttpClientHandler {
 
     /**
      * 带参数的Post请求
-     * @param url 请求地址
-     * @param list 请求参数
+     *
+     * @param url        请求地址
+     * @param list       请求参数
      * @param headParams 请求头信息
      * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
      * @author dge
@@ -111,7 +115,7 @@ public class HttpClientHandler {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
         // 拼接请求头参数
-        if(MapUtils.isNotEmpty(headParams)){
+        if (MapUtils.isNotEmpty(headParams)) {
             for (Map.Entry<String, String> entry : headParams.entrySet()) {
                 httpPost.addHeader(entry.getKey(), entry.getValue());
             }
@@ -129,8 +133,9 @@ public class HttpClientHandler {
 
     /**
      * Json形式的Post请求
-     * @param url 请求地址
-     * @param jsonStr 请求参数
+     *
+     * @param url        请求地址
+     * @param jsonStr    请求参数
      * @param headParams 请求头信息
      * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
      * @author dge
@@ -140,7 +145,7 @@ public class HttpClientHandler {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
         // 拼接请求头参数
-        if(MapUtils.isNotEmpty(headParams)){
+        if (MapUtils.isNotEmpty(headParams)) {
             for (Map.Entry<String, String> entry : headParams.entrySet()) {
                 httpPost.addHeader(entry.getKey(), entry.getValue());
             }
@@ -161,6 +166,7 @@ public class HttpClientHandler {
 
     /**
      * 构建返回值
+     *
      * @param response 响应
      * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
      * @author dge

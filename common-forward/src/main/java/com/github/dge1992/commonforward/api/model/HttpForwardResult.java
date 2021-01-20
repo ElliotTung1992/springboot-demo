@@ -5,7 +5,7 @@ package com.github.dge1992.commonforward.api.model;
  * @date 2020-02-24 17:26
  * @desc Http返回结果对象
  */
-public class HttpForwardResult extends BaseResult{
+public class HttpForwardResult extends BaseResult {
 
     /**
      * code

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-01-13 16:11
  */
 @Component("testPostStrategy")
-public class TestPostStrategy implements PostStrategy{
+public class TestPostStrategy implements PostStrategy {
 
     @Override
     public void postExecute(CommonReceiveObject commonReceiveObject, String resultStr) {

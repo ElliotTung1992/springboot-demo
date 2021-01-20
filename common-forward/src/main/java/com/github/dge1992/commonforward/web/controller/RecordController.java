@@ -24,34 +24,37 @@ public class RecordController {
 
     /**
      * 根据uuid进行重试
+     *
      * @param uuid 唯一标识
      * @author dge
      * @date 2021-01-20 13:46
      */
     @PostMapping("/retryByUuid")
-    public void retryByUuid(@RequestBody String uuid){
+    public void retryByUuid(@RequestBody String uuid) {
         recordService.retryByUuid(uuid);
     }
 
     /**
      * 根据创建时间倒叙查询记录列表
+     *
      * @return java.util.List<com.github.dge1992.commonforward.api.model.CommonReceiveObject>
      * @author dge
      * @date 2021-01-20 13:46
      */
     @GetMapping("/queryListOrderByCreateTime")
-    public List<CommonReceiveObject> queryListOrderByCreateTime(){
+    public List<CommonReceiveObject> queryListOrderByCreateTime() {
         return recordService.queryListOrderByCreateTime();
     }
 
     /**
      * 根据创建时间倒叙查询错误记录列表
+     *
      * @return java.util.List<com.github.dge1992.commonforward.api.model.CommonReceiveObject>
      * @author dge
      * @date 2021-01-20 13:47
      */
     @GetMapping("/queryNotSuccessListOrderByCreateTime")
-    public List<CommonReceiveObject> queryNotSuccessListOrderByCreateTime(){
+    public List<CommonReceiveObject> queryNotSuccessListOrderByCreateTime() {
         return recordService.queryNotSuccessListOrderByCreateTime();
     }
 

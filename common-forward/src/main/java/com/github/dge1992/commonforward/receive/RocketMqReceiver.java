@@ -12,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * 消息队列接收者
  * @author dge
  * @date 2021-01-04 22:44
+ * RocketMq远程调用接收者
  */
 @Service
 @RocketMQMessageListener(topic = "dgeTopicTest", consumerGroup = "my-group",

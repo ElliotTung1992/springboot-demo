@@ -36,7 +36,9 @@ public class HttpClientConfig {
 
     /**
      * 连接池管理器，设置最大连接数、并发连接数
-     * @return
+     * @return org.apache.http.impl.conn.PoolingHttpClientConnectionManager
+     * @author dge
+     * @date 2021-01-20 13:57
      */
     @Bean(name = "httpClientConnectionManager")
     public PoolingHttpClientConnectionManager getHttpClientConnectionManager(){
@@ -51,8 +53,11 @@ public class HttpClientConfig {
     /**
      * 实例化连接池，设置连接池管理器。
      * 这里需要以参数形式注入上面实例化的连接池管理器
-     * @param httpClientConnectionManager
-     * @return
+     * @param httpClientConnectionManager 连接管理器
+     * @param requestConfig 请求配置
+     * @return org.apache.http.impl.client.HttpClientBuilder
+     * @author dge
+     * @date 2021-01-20 13:58
      */
     @Bean(name = "httpClientBuilder")
     public HttpClientBuilder getHttpClientBuilder(@Qualifier("httpClientConnectionManager")PoolingHttpClientConnectionManager httpClientConnectionManager,
@@ -74,8 +79,10 @@ public class HttpClientConfig {
 
     /**
      * 注入连接池，用于获取httpClient
-     * @param httpClientBuilder
-     * @return
+     * @param httpClientBuilder 构建对象
+     * @return org.apache.http.impl.client.CloseableHttpClient
+     * @author dge
+     * @date 2021-01-20 13:58
      */
     @Bean
     public CloseableHttpClient getCloseableHttpClient(@Qualifier("httpClientBuilder") HttpClientBuilder httpClientBuilder){
@@ -87,8 +94,9 @@ public class HttpClientConfig {
      * 通过RequestConfig的custom方法来获取到一个Builder对象
      * 设置builder的连接信息
      * 这里还可以设置proxy，cookieSpec等属性。有需要的话可以在此设置
-     * 超时时间设置
-     * @return
+     * @return org.apache.http.client.config.RequestConfig.Builder
+     * @author dge
+     * @date 2021-01-20 13:59
      */
     @Bean(name = "builder")
     public RequestConfig.Builder getBuilder(){
@@ -103,8 +111,10 @@ public class HttpClientConfig {
 
     /**
      * 使用builder构建一个RequestConfig对象
-     * @param builder
-     * @return
+     * @param builder 构建对象
+     * @return org.apache.http.client.config.RequestConfig
+     * @author dge
+     * @date 2021-01-20 13:59
      */
     @Bean
     public RequestConfig getRequestConfig(@Qualifier("builder") RequestConfig.Builder builder){

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dge
  * @version 1.0
  * @date 2021-01-04 22:46
- * 接收者控制器
+ * Http远程调用控制器
  */
 @RestController
 public class ReceiverController {

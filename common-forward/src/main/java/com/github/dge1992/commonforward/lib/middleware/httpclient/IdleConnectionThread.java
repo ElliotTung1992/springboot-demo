@@ -5,7 +5,7 @@ import org.apache.http.conn.HttpClientConnectionManager;
 /**
  * @author 董感恩
  * @date 2020-02-24 17:30
- * @desc 连接逐出策略
+ * 连接逐出策略
  */
 public class IdleConnectionThread extends Thread {
 

@@ -13,7 +13,6 @@ public interface PreStrategy {
     /**
      * 前置处理
      * @param receiveObject 接收的实体对象
-     * @return com.github.dge1992.commonforward.api.model.CallbackReceiveObject
      * @author dge
      * @date 2021-01-13 16:50
      */

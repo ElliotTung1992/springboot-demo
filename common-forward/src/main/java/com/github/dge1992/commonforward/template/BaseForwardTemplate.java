@@ -87,8 +87,11 @@ public abstract class BaseForwardTemplate {
      */
     public final void template(CommonReceiveObject commonRemoteObj) throws Exception {
         preExecute(commonRemoteObj);
-        BaseResult result = (BaseResult) retryer.call(() -> send(commonRemoteObj));
-        postExecute(result, commonRemoteObj);
+        Object obj = retryer.call(() -> send(commonRemoteObj));
+        if(obj instanceof BaseResult){
+            BaseResult result = (BaseResult) obj;
+            postExecute(result, commonRemoteObj);
+        }
     }
 
     /**

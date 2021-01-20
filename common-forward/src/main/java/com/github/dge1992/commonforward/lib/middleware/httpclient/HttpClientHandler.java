@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * @author 董感恩
  * @date 2020-02-24 17:24
- * @desc HttpClient处理器
+ * HttpClient处理器
  */
 @Component
 public class HttpClientHandler {
@@ -38,11 +38,12 @@ public class HttpClientHandler {
     private CloseableHttpClient httpClient;
 
     /**
-     * @author 董感恩
-     * @date 2020-02-28 17:34:05
-     * @desc 不带参数的Get请求
-     *
-     * @return*/
+     * 不带参数的Get请求
+     * @param url 请求地址
+     * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
+     * @author dge
+     * @date 2021-01-20 13:54
+     */
     public HttpForwardResult doGet(String url) throws Exception {
         // 声明 http get 请求
         HttpGet httpGet = new HttpGet(url);
@@ -55,10 +56,13 @@ public class HttpClientHandler {
     }
 
     /**
-     * @author 董感恩
-     * @date 2020-02-28 17:48:56
-     * @desc 带参数的Get请求
-     **/
+     * 带参数的Get请求
+     * @param url 请求地址
+     * @param map 请求参数
+     * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
+     * @author dge
+     * @date 2021-01-20 13:54
+     */
     public HttpForwardResult doGet(String url, Map<String, Object> map) throws Exception {
         // 构建请求
         URIBuilder uriBuilder = new URIBuilder(url);
@@ -73,10 +77,14 @@ public class HttpClientHandler {
     }
 
     /**
-     * @author 董感恩
-     * @date 2020-02-28 19:43:36
-     * @desc 带参数的Post请求
-     **/
+     * 带参数的Post请求
+     * @param url 请求地址
+     * @param map 请求参数
+     * @param headParams 请求头信息
+     * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
+     * @author dge
+     * @date 2021-01-20 13:55
+     */
     public HttpForwardResult doPost(String url, Map<String, Object> map, Map<String, String> headParams) throws Exception {
         // 发起请求
         // 判断map是否为空，不为空则进行遍历，封装from表单对象
@@ -91,10 +99,14 @@ public class HttpClientHandler {
     }
 
     /**
-     * @author 董感恩
-     * @date 2020-02-28 19:43:36
-     * @desc 带参数的Post请求
-     **/
+     * 带参数的Post请求
+     * @param url 请求地址
+     * @param list 请求参数
+     * @param headParams 请求头信息
+     * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
+     * @author dge
+     * @date 2021-01-20 13:55
+     */
     public HttpForwardResult doPost(String url, List<NameValuePair> list, Map<String, String> headParams) throws Exception {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
@@ -116,10 +128,14 @@ public class HttpClientHandler {
     }
 
     /**
-     * @author 董感恩
-     * @date 2020-02-29 21:15:34
-     * @desc Json形式的Post请求
-     **/
+     * Json形式的Post请求
+     * @param url 请求地址
+     * @param jsonStr 请求参数
+     * @param headParams 请求头信息
+     * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
+     * @author dge
+     * @date 2021-01-20 13:56
+     */
     public HttpForwardResult doPostJson(String url, String jsonStr, Map<String, String> headParams) throws IOException {
         // 声明httpPost请求
         HttpPost httpPost = new HttpPost(url);
@@ -144,11 +160,13 @@ public class HttpClientHandler {
     }
 
     /**
-     * @author 董感恩
-     * @date 2020-02-28 20:04:48
-     * @desc 构建返回值
-     **/
-    public HttpForwardResult buildResponse(CloseableHttpResponse response) throws IOException {
+     * 构建返回值
+     * @param response 响应
+     * @return com.github.dge1992.commonforward.api.model.HttpForwardResult
+     * @author dge
+     * @date 2021-01-20 13:57
+     */
+    private HttpForwardResult buildResponse(CloseableHttpResponse response) throws IOException {
         return new HttpForwardResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(
                 response.getEntity(), "UTF-8"));
     }

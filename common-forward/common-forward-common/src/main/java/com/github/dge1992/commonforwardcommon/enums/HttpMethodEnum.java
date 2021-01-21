@@ -1,4 +1,4 @@
-package com.github.dge1992.commonforwardapi.enums;
+package com.github.dge1992.commonforwardcommon.enums;
 
 /**
  * @author 董感恩

@@ -1,7 +1,7 @@
 package com.github.dge1992.commonforwardbiz.template;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dge1992.commonforwardapi.enums.HttpMethodEnum;
+import com.github.dge1992.commonforwardcommon.enums.HttpMethodEnum;
 import com.github.dge1992.commonforwardapi.model.BaseResult;
 import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
 import com.github.dge1992.commonforwardapi.model.HttpForwardResult;

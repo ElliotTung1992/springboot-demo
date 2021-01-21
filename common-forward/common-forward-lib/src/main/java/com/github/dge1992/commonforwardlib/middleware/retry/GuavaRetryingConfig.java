@@ -19,11 +19,11 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 public class GuavaRetryingConfig {
 
-    //@Value("${guava.retry.sleepTime}")
-    private Integer sleepTime = 3000;
+    @Value("${guava.retry.sleepTime}")
+    private Integer sleepTime;
 
-    //@Value("${guava.retry.attemptNumber}")
-    private Integer attemptNumber = 3;
+    @Value("${guava.retry.attemptNumber}")
+    private Integer attemptNumber;
 
     @Bean
     public Retryer<Object> retryer() {

@@ -19,5 +19,4 @@ public interface FutureService {
      * @date 2021-01-25 11:06
      */
     void testFuture();
-
 }

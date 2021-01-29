@@ -63,13 +63,21 @@ public class FutureServiceImpl implements FutureService {
          * FutureTask实现了RunnableFuture接口
          * RunnableFuture接口继承了Runnable接口和Future接口
          *
+         * FutureTask既可以当作Runnable又可以当作是Future
+         * 线程真正执行的是FutureTask的run方法
+         * 把运行结果存储在FutureTask的result中
+         * 可以调用FutureTask的get方法获取运行结果，该方法是阻塞的，直到获取返回结果或者异常
+         *
          */
 
         // 传统方式
         new Thread(() -> System.out.println("传统方式启动线程")).start();
 
         // 有返回值的线程
-        FutureTask<Integer> futureTask = new FutureTask<>(() -> 10);
+        FutureTask<Integer> futureTask = new FutureTask<>(() -> {
+            TimeUnit.SECONDS.sleep(100000L);
+            return 10;
+        });
         new Thread(futureTask).start();
         Integer integer = futureTask.get();
         System.out.println("返回值integer:" + integer);

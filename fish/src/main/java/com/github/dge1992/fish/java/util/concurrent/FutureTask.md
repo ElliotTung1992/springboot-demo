@@ -323,6 +323,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * @return {@code true} if successfully run and reset
      */
     protected boolean runAndReset() {
+        //如果线程状态不为NEW或者线程不为空则返回
         if (state != NEW ||
             !RUNNER.compareAndSet(this, null, Thread.currentThread()))
             return false;
@@ -377,6 +378,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * Simple linked list nodes to record waiting threads in a Treiber
      * stack.  See other classes such as Phaser and SynchronousQueue
      * for more detailed explanation.
+     * 等待节点对象
      */
     static final class WaitNode {
         volatile Thread thread;
@@ -387,6 +389,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
     /**
      * Removes and signals all waiting threads, invokes done(), and
      * nulls out callable.
+     * 唤醒等待线程
      */
     private void finishCompletion() {
         // assert state > COMPLETING;

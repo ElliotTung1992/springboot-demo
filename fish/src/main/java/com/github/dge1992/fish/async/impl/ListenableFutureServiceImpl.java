@@ -35,13 +35,14 @@ public class ListenableFutureServiceImpl implements ListenableFutureService {
             return 8;
         });
 
-        Futures.addCallback(listenableFuture, new FutureCallback<Integer>() {
+        Futures.addCallback(listenableFuture, new FutureCallback<>() {
 
             @Override
             public void onSuccess(@Nullable Integer integer) {
+
                 System.out.println("listen integer:" + integer);
 
-                Futures.addCallback(listenableFuture2, new FutureCallback<Integer>() {
+                Futures.addCallback(listenableFuture2, new FutureCallback<>() {
                     @Override
                     public void onSuccess(@Nullable Integer integer2) {
                         System.out.println("listen integer:" + integer2);

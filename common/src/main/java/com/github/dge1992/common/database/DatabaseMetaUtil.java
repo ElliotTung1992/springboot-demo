@@ -19,9 +19,9 @@ public class DatabaseMetaUtil {
         try {
             if (dbMetaData == null) {
                 Class.forName("com.mysql.jdbc.Driver");
-                String url = "jdbc:mysql://39.105.12.20:9000/" + DATABASE_NAME;
-                String user = "root";
-                String password = "123";
+                String url = "" + DATABASE_NAME;
+                String user = "";
+                String password = "";
                 con = DriverManager.getConnection(url, user, password);
                 dbMetaData = con.getMetaData();
             }

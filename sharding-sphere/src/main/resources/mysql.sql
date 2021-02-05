@@ -29,3 +29,10 @@ CREATE TABLE `t_dict` (
   `dict_value` varchar(100) NOT NULL,
   PRIMARY KEY (`dict_id`)
 ) ENGINE=InnoDB;
+
+
+CREATE TABLE `t_order` (
+  `order_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

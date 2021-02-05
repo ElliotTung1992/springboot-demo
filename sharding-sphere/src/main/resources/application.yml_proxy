@@ -1,30 +1,17 @@
 
 server:
-  port: 8090
+  port: 9090
 
 spring:
-  multi-datasource:
-    open: false # 是否开启多数据源
-  basic: # 基本数据源
-    datasource:
-      url:
-      username:
-      password:
-      filters: log4j,wall,mergeStat
-      validation-query: SELECT 'x'
-  second: # 第二个数据库
-    datasource:
-      # url:
-      url:
-      username:
-      password:
-      filters: log4j,wall,mergeStat
-      driver-class-name: oracle.jdbc.driver.OracleDriver
-      validation-query: SELECT * from dual #{oracle: SELECT * from dual} {mysql: SELECT 'x'}
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url:
+    username:
+    password:
 
 mybatis-plus:
   mapper-locations:  classpath:mappers/*.xml
-  typeAliasesPackage: com.github.dge1992.mybatis.domain
+  typeAliasesPackage: com.github.dge1992.shardingsphere.domain
   global-config:
     id-type: 0  #0:数据库ID自增   1:该类型为未设置主键类型  2:该类型可以通过自己注册自动填充插件进行填充  3:全局唯一ID
     db-column-underline: false
@@ -40,4 +27,32 @@ mybatis-plus:
 
 logging:
   level:
-    com.github.dge1992: debug #\u5F00\u542F\u6253\u5370sql\u8BED\u53E5
+    com.github.dge1992: debug
+
+
+
+#schemaName: master_slave_db
+#
+#dataSources:
+#  master_ds:
+#    url:
+#    username:
+#    password:
+#    connectionTimeoutMilliseconds: 30000
+#    idleTimeoutMilliseconds: 60000
+#    maxLifetimeMilliseconds: 1800000
+#    maxPoolSize: 50
+#  slave_ds_0:
+#    url:
+#    username:
+#    password:
+#    connectionTimeoutMilliseconds: 30000
+#    idleTimeoutMilliseconds: 60000
+#    maxLifetimeMilliseconds: 1800000
+#    maxPoolSize: 50
+#
+#masterSlaveRule:
+#  name: ms_ds
+#  masterDataSourceName: master_ds
+#  slaveDataSourceNames:
+#    - slave_ds_0

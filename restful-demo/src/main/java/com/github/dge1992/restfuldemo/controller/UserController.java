@@ -34,15 +34,15 @@ public class UserController {
     @GetMapping
     public List<User> getUserList(){
         User user = new User();
-        user.setId(1l);
+        user.setId(1L);
         user.setName("dge");
         user.setAge(11);
         User user2 = new User();
-        user2.setId(2l);
+        user2.setId(2L);
         user2.setName("fnn");
         user2.setAge(12);
-        map.put(1l, user);
-        map.put(2l, user2);
+        map.put(1L, user);
+        map.put(2L, user2);
         return new ArrayList<>(map.values());
     }
 

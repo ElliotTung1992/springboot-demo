@@ -22,9 +22,9 @@ spring.shardingsphere.sharding.tables.t_dict.key-generator.type=SNOWFLAKE
 #配置第三个数据源具体内容，垂直分库
 spring.shardingsphere.datasource.m2.type=com.alibaba.druid.pool.DruidDataSource
 spring.shardingsphere.datasource.m2.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.m2.url=jdbc:mysql://47.100.220.23:3306/sharding_jdbc_user?serverTimezone=GMT%2B8&characterEncoding=UTF-8
-spring.shardingsphere.datasource.m2.username=root
-spring.shardingsphere.datasource.m2.password=123
+spring.shardingsphere.datasource.m2.url=
+spring.shardingsphere.datasource.m2.username=
+spring.shardingsphere.datasource.m2.password=
 
 # 配置user_db数据库里面 t_user 专库专表
 spring.shardingsphere.sharding.tables.t_user.actual-data-nodes=m2.t_user
@@ -42,16 +42,16 @@ spring.shardingsphere.sharding.tables.t_user.table-strategy.inline.algorithm-exp
 #配置第一个数据源具体内容，包含连接池，驱动，地址，用户名和密码
 spring.shardingsphere.datasource.m0.type=com.alibaba.druid.pool.DruidDataSource
 spring.shardingsphere.datasource.m0.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.m0.url=jdbc:mysql://47.100.220.23:3306/sharding_jdbc_1?serverTimezone=GMT%2B8&characterEncoding=UTF-8
-spring.shardingsphere.datasource.m0.username=root
-spring.shardingsphere.datasource.m0.password=123
+spring.shardingsphere.datasource.m0.url=
+spring.shardingsphere.datasource.m0.username=
+spring.shardingsphere.datasource.m0.password=
 
 #配置第二个数据源具体内容，包含连接池，驱动，地址，用户名和密码
 spring.shardingsphere.datasource.m1.type=com.alibaba.druid.pool.DruidDataSource
 spring.shardingsphere.datasource.m1.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.shardingsphere.datasource.m1.url=jdbc:mysql://47.100.220.23:3306/sharding_jdbc_2?serverTimezone=GMT%2B8&characterEncoding=UTF-8
-spring.shardingsphere.datasource.m1.username=root
-spring.shardingsphere.datasource.m1.password=123
+spring.shardingsphere.datasource.m1.url=
+spring.shardingsphere.datasource.m1.username=
+spring.shardingsphere.datasource.m1.password=
 
 #指定数据库分布情况，数据库里面表分布情况
 # m1  m2    course_0 course_1

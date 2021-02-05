@@ -22,6 +22,6 @@ class ListenableFutureServiceImplTest extends FishApplicationTests {
     @Test
     void testListenableFuture() throws InterruptedException {
         listenableFutureService.testListenableFuture();
-        TimeUnit.SECONDS.sleep(4);
+        TimeUnit.SECONDS.sleep(5);
     }
 }

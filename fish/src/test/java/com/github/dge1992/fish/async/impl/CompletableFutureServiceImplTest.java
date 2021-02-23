@@ -5,6 +5,8 @@ import com.github.dge1992.fish.async.CompletableFutureService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -18,7 +20,8 @@ class CompletableFutureServiceImplTest extends FishApplicationTests {
     private CompletableFutureService completableFutureService;
 
     @Test
-    void testCompletableFuture() {
+    void testCompletableFuture() throws InterruptedException {
         completableFutureService.testCompletableFuture();
+        TimeUnit.SECONDS.sleep(5);
     }
 }

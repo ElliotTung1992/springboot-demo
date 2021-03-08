@@ -2,6 +2,7 @@ package com.github.dge1992.fish.async.impl;
 
 import com.github.dge1992.fish.async.CompletableFutureService;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,23 @@ import java.util.concurrent.*;
  * @author dge
  * @version 1.0
  * @date 2021-01-25 14:14
+ *
+ * 数据结构:
+ *
+ * CompletableFuture
+ *      Object result;
+ *      Completion stack;
+ *           |
+ *      UniCompletion
+ *         Executor executor;
+ *         CompletableFuture<V> dep;
+ *         CompletableFuture<T> src;
+ *
+ * CompletableFuture是一个链式数据结构
+ *
+ *
+ *
+ *
  */
 @Service
 public class CompletableFutureServiceImpl implements CompletableFutureService {
@@ -21,8 +39,47 @@ public class CompletableFutureServiceImpl implements CompletableFutureService {
 
     @Override
     public void testCompletableFuture() {
+        caseSix();
+    }
 
+    /**
+     * 案例6 - 有返回值
+     * @author dge
+     * @date 2021-03-02 11:30
+     */
+    private void caseSix() {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "hello")
+                .thenApply((s) -> s.concat(" java"));
 
+        try {
+            String s = future.get();
+            System.out.println(s);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 案例5 - 常规使用案例
+     * @author dge
+     * @date 2021-03-02 11:26
+     */
+    private void caseFive() {
+        //自定义线程池
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "java";
+        }, executorService)
+                .thenApply(s -> "hello ".concat(s))
+                .thenAccept(t -> System.out.println(t));
     }
 
     /**
@@ -208,5 +265,9 @@ public class CompletableFutureServiceImpl implements CompletableFutureService {
             throw new RuntimeException();
         }
         return random;
+    }
+
+    public static void main(String[] args) {
+
     }
 }

@@ -1,9 +1,0 @@
-
-
-rocketmq:
-  name-server:
-
-guava:
-  retry:
-    sleepTime: 2000
-    attemptNumber: 3

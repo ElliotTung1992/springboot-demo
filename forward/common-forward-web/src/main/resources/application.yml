@@ -1,7 +1,7 @@
 
 
 rocketmq:
-  name-server: 47.100.220.23:9876
+  name-server:
 
 guava:
   retry:

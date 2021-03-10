@@ -1,11 +1,9 @@
 package com.github.dge1992.fish.async.impl;
 
 import com.github.dge1992.fish.FishApplicationTests;
-import com.github.dge1992.fish.async.FlowService;
+import com.github.dge1992.fish.reactive.FlowService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author dge

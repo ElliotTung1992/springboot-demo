@@ -1,6 +1,6 @@
-package com.github.dge1992.fish.async.impl;
+package com.github.dge1992.fish.reactive.impl;
 
-import com.github.dge1992.fish.async.FlowService;
+import com.github.dge1992.fish.reactive.FlowService;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.Flow;

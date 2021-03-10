@@ -1,4 +1,4 @@
-package com.github.dge1992.fish.async;
+package com.github.dge1992.fish.reactive;
 
 /**
  * @author dge

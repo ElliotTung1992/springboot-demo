@@ -1,5 +1,9 @@
 package com.github.dge1992.fish.thread;
 
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -30,8 +34,59 @@ public class ThreadLockTest {
 
         //test.testSeven();
 
-        testEight();
+        //testEight();
+
+        //test.testNine();
+
+        //test.testTen();
+
+        test.testEleven();
     }
+
+    private void testEleven() {
+        // Map<String, String> set = new HashMap<>();
+        Map<String, String> set = new ConcurrentHashMap<>();
+
+        for (int i = 0; i < 30; i++) {
+            new Thread(() -> {
+                set.put(UUID.randomUUID().toString().substring(0, 5), "a");
+                System.out.println(set.toString());
+            }).start();
+        }
+
+    }
+
+    private void testTen() {
+        // Set<String> se new HashSet<>();
+        Set<String> set = new CopyOnWriteArraySet<>();
+
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                set.add(UUID.randomUUID().toString().substring(0, 5));
+                System.out.println(set.toString());
+            }).start();
+        }
+    }
+
+    private void testNine() {
+
+        // List<String> list = new ArrayList<>();
+        List<String> list = new CopyOnWriteArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                listTest();
+            }).start();
+        }
+    }
+
+    private void listTest(){
+        List<String> list = new ArrayList<>();
+        list.add(UUID.randomUUID().toString().substring(0, 5));
+        System.out.println(list.toString());
+    }
+
+
 
     private static void testEight() {
         new Thread(() -> ThreadLockTest.sendMessage()).start();

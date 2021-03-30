@@ -44,8 +44,8 @@ public class ThreadLockTest {
     }
 
     private void testEleven() {
-        // Map<String, String> set = new HashMap<>();
-        Map<String, String> set = new ConcurrentHashMap<>();
+        Map<String, String> set = new HashMap<>();
+        //Map<String, String> set = new ConcurrentHashMap<>();
 
         for (int i = 0; i < 30; i++) {
             new Thread(() -> {

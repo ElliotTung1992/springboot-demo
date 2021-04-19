@@ -14,6 +14,14 @@ public class CASTest {
     public static void main(String[] args) {
         CASTest test = new CASTest();
         test.testOne();
+
+        /*Integer i = 99;
+        Integer j = i;
+        j = j + 0;
+
+        System.out.println(i == j);
+        System.out.println(i.equals(j));*/
+
     }
 
     private void testOne() {

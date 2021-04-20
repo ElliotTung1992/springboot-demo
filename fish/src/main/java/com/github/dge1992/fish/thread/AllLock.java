@@ -24,7 +24,20 @@ public class AllLock {
         //test.testThree();
         //test.testFour();
         //test.testFive();
-        test.testSix();
+        //test.testSix();
+        test.testSeven();
+    }
+
+    /**
+     * 公平锁和非公平锁
+     * @author dge
+     * @date 2021-04-20 22:12
+     */
+    private void testSeven() {
+        // 非公平锁
+        Lock lock = new ReentrantLock();
+        // 公平锁
+        Lock lock2 = new ReentrantLock(true);
     }
 
     /**

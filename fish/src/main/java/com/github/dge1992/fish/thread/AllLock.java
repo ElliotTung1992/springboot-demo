@@ -23,10 +23,57 @@ public class AllLock {
         //test.testTwo(test);
         //test.testThree();
         //test.testFour();
+        //test.testFive();
+        test.testSix();
     }
 
     /**
-     * 自旋锁
+     * 测试不可重入锁
+     * @author dge
+     * @date 2021-04-19 22:53
+     */
+    private void testSix() {
+        SpinLock2 spinLock = new SpinLock2();
+
+        new Thread(() -> {
+            spinLock.lock();
+            System.out.println("haha");
+            spinLock.lock();
+            System.out.println("hehe");
+
+            spinLock.unlock();
+            try {
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            spinLock.unlock();
+        }).start();
+
+        new Thread(() -> {
+            spinLock.lock();
+            System.out.println("xixi");
+        }).start();
+    }
+
+    /**
+     * 测试不可重入锁
+     * @author dge
+     * @date 2021-04-19 22:53
+     */
+    private void testFive() {
+        SpinLock spinLock = new SpinLock();
+
+        new Thread(() -> {
+            spinLock.lock();
+            System.out.println("haha");
+            spinLock.lock();
+            System.out.println("hehe");
+        }).start();
+    }
+
+    /**
+     * 自旋锁测试
      * @author dge
      * @date 2021-04-14 22:34
      */
@@ -74,13 +121,12 @@ public class AllLock {
     }
 
     /**
-     * 可重入锁
+     * 可重入锁测试
      * @author dge
      * @date 2021-04-14 22:15
      */
     private void testTwo(AllLock test) {
-        AllLock test2 = new AllLock();
-        test.haha(test2);
+        test.haha();
     }
 
     /**
@@ -119,9 +165,9 @@ public class AllLock {
         }
     }
 
-    private synchronized void haha(AllLock allLock){
+    private synchronized void haha(){
         System.out.println("start haha");
-        allLock.hehe();
+        hehe();
         System.out.println("end haha");
     }
 
@@ -156,7 +202,7 @@ public class AllLock {
 }
 
 /**
- * 自旋锁
+ * 自旋锁 - 不可重入锁
  * @author dge
  * @date 2021-04-14 22:27
  */
@@ -174,6 +220,40 @@ class SpinLock{
     public void unlock(){
         Thread thread = Thread.currentThread();
         atomicReference.compareAndSet(thread, null);
+    }
+}
+
+/**
+ * 自旋锁 - 可重入锁
+ * @author dge
+ * @date 2021-04-14 22:27
+ */
+class SpinLock2{
+
+    AtomicReference<Thread> atomicReference = new AtomicReference<>(null);
+
+    private int state = 0;
+
+    public void lock(){
+        Thread thread = Thread.currentThread();
+        if(atomicReference.get() == thread){
+            state++;
+            return;
+        }
+        while (!atomicReference.compareAndSet(null, thread)){
+
+        }
+    }
+
+    public void unlock(){
+        Thread thread = Thread.currentThread();
+        if(thread == atomicReference.get()){
+            if(state > 0){
+                state--;
+            }else{
+                atomicReference.compareAndSet(thread, null);
+            }
+        }
     }
 }
 

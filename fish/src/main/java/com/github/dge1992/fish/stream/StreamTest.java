@@ -4,6 +4,7 @@ import com.github.dge1992.fish.domain.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -43,5 +44,9 @@ public class StreamTest {
         // map
         List<Integer> collect1 = list.stream().map(e -> e.getAge() + 1).collect(Collectors.toList());
         System.out.println(collect1);
+    }
+
+    private static void testTwo(List<Person> list){
+        Map<Integer, List<Person>> map = list.stream().collect(Collectors.groupingBy(Person::getAge));
     }
 }

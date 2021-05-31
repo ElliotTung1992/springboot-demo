@@ -1,7 +1,7 @@
 package com.github.dge1992.commonforwardbiz.pre;
 
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.pre.strategy.PreStrategy;
 
 /**
@@ -17,7 +17,7 @@ public class PreStrategyHandler {
         this.preStrategy = preStrategy;
     }
 
-    public void execute(CommonReceiveObject receiveObject) {
+    public void execute(CommonReceiveRequest receiveObject) {
         preStrategy.preExecute(receiveObject);
     }
 }

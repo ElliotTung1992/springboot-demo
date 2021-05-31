@@ -1,7 +1,7 @@
 package com.github.dge1992.commonforwardlib.middleware.httpclient;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dge1992.commonforwardapi.model.HttpForwardResult;
+import com.github.dge1992.commonforwardapi.model.result.HttpForwardResult;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;

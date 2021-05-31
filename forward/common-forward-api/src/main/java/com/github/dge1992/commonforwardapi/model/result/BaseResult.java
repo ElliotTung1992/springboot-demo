@@ -1,4 +1,4 @@
-package com.github.dge1992.commonforwardapi.model;
+package com.github.dge1992.commonforwardapi.model.result;
 
 /**
  * @author dge

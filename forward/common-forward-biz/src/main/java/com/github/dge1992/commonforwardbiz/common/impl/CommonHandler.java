@@ -1,6 +1,6 @@
 package com.github.dge1992.commonforwardbiz.common.impl;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.common.UrlService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class CommonHandler {
     @Autowired
     private UrlService urlService;
 
-    public Optional<String> getUrl(CommonReceiveObject receiveObject) {
+    public Optional<String> getUrl(CommonReceiveRequest receiveObject) {
         AtomicReference<String> url = new AtomicReference<>();
         String urlCode = receiveObject.getURLCode();
         if (StringUtils.isNotBlank(receiveObject.getURL())) {

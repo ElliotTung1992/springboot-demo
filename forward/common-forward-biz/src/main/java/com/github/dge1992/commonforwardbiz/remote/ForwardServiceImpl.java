@@ -1,6 +1,6 @@
 package com.github.dge1992.commonforwardbiz.remote;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardapi.remote.ForwardService;
 import com.github.dge1992.commonforwardbiz.template.BaseForwardTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class ForwardServiceImpl implements ForwardService {
     private BaseForwardTemplate baseForwardTemplate;
 
     @Override
-    public void receive(CommonReceiveObject receiveObject) {
+    public void receive(CommonReceiveRequest receiveObject) {
         baseForwardTemplate.forward(receiveObject);
     }
 }

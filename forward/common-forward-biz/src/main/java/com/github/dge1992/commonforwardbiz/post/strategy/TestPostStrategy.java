@@ -1,6 +1,6 @@
 package com.github.dge1992.commonforwardbiz.post.strategy;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class TestPostStrategy implements PostStrategy {
 
     @Override
-    public void postExecute(CommonReceiveObject commonReceiveObject, String resultStr) {
+    public void postExecute(CommonReceiveRequest commonReceiveObject, String resultStr) {
         System.out.println("HEHE");
     }
 }

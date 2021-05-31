@@ -6,7 +6,7 @@ package com.github.dge1992.commonforwardapi.model;
  * @date 2021-01-12 16:18
  * 前置后置接收对象
  */
-public class PrePostReceiveObject extends BaseReceiveObject {
+public class PrePostReceiveRequest extends BaseReceiveRequest {
 
     /**
      * 前置策略编号

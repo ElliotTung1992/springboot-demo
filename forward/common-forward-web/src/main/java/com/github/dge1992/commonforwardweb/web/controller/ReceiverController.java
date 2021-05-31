@@ -1,13 +1,12 @@
 package com.github.dge1992.commonforwardweb.web.controller;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
+import com.github.dge1992.commonforwardapi.model.result.HttpForwardResult;
 import com.github.dge1992.commonforwardbiz.template.BaseForwardTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * @author dge
@@ -19,15 +18,10 @@ import java.util.concurrent.CompletableFuture;
 public class ReceiverController {
 
     @Autowired
-    private BaseForwardTemplate baseForwardTemplate;
+    private BaseForwardTemplate<HttpForwardResult> baseForwardTemplate;
 
     @PostMapping("/receive")
-    public void receive(@RequestBody CommonReceiveObject receiveObject) {
-        CompletableFuture.runAsync(() -> baseForwardTemplate.forward(receiveObject))
-                .exceptionally(e -> {
-                    // 异常处理
-                    e.printStackTrace();
-                    return null;
-                });
+    public HttpForwardResult receive(@RequestBody CommonReceiveRequest receiveObject) {
+        return baseForwardTemplate.forward(receiveObject);
     }
 }

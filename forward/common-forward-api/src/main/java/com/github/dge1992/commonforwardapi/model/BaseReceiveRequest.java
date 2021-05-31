@@ -10,7 +10,7 @@ import java.util.HashMap;
  * @date 2021-01-04 17:27
  * 转发服务接收公共对象
  */
-public class BaseReceiveObject implements Serializable {
+public class BaseReceiveRequest implements Serializable {
 
     /**
      * 唯一编号

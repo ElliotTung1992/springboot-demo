@@ -3,7 +3,7 @@ package com.github.dge1992.commonforwardlib.middleware.mq;
 
 import com.alibaba.fastjson.JSON;
 import com.github.dge1992.CommonForwardWebApplicationTests;
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -26,7 +26,7 @@ class ProducerConfigTest extends CommonForwardWebApplicationTests {
 
     @Test
     void test() throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
-        CommonReceiveObject receiveObject = new CommonReceiveObject();
+        CommonReceiveRequest receiveObject = new CommonReceiveRequest();
         Message message = new Message();
         message.setTopic("dgeTopicTest");
         message.setBody(JSON.toJSONString(receiveObject).getBytes());

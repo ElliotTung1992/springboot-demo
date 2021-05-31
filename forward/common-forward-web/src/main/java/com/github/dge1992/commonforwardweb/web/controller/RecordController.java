@@ -1,6 +1,6 @@
 package com.github.dge1992.commonforwardweb.web.controller;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.common.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +25,6 @@ public class RecordController {
 
     /**
      * 根据uuid进行重试
-     *
      * @param uuid 唯一标识
      * @author dge
      * @date 2021-01-20 13:46
@@ -37,25 +36,23 @@ public class RecordController {
 
     /**
      * 根据创建时间倒叙查询记录列表
-     *
      * @return java.util.List<com.github.dge1992.commonforward.api.model.CommonReceiveObject>
      * @author dge
      * @date 2021-01-20 13:46
      */
     @GetMapping("/queryListOrderByCreateTime")
-    public List<CommonReceiveObject> queryListOrderByCreateTime() {
+    public List<CommonReceiveRequest> queryListOrderByCreateTime() {
         return recordService.queryListOrderByCreateTime();
     }
 
     /**
      * 根据创建时间倒叙查询错误记录列表
-     *
      * @return java.util.List<com.github.dge1992.commonforward.api.model.CommonReceiveObject>
      * @author dge
      * @date 2021-01-20 13:47
      */
     @GetMapping("/queryNotSuccessListOrderByCreateTime")
-    public List<CommonReceiveObject> queryNotSuccessListOrderByCreateTime() {
+    public List<CommonReceiveRequest> queryNotSuccessListOrderByCreateTime() {
         return recordService.queryNotSuccessListOrderByCreateTime();
     }
 

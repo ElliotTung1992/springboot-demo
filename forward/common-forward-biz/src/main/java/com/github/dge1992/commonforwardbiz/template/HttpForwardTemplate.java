@@ -2,9 +2,9 @@ package com.github.dge1992.commonforwardbiz.template;
 
 import com.alibaba.fastjson.JSON;
 import com.github.dge1992.commonforwardcommon.enums.HttpMethodEnum;
-import com.github.dge1992.commonforwardapi.model.BaseResult;
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
-import com.github.dge1992.commonforwardapi.model.HttpForwardResult;
+import com.github.dge1992.commonforwardapi.model.result.BaseResult;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
+import com.github.dge1992.commonforwardapi.model.result.HttpForwardResult;
 import com.github.dge1992.commonforwardbiz.common.BeanNameService;
 import com.github.dge1992.commonforwardbiz.common.impl.CommonHandler;
 import com.github.dge1992.commonforwardbiz.post.PostStrategyHandler;
@@ -37,7 +37,7 @@ public class HttpForwardTemplate extends BaseForwardTemplate {
     private CommonHandler commonHandler;
 
     @Override
-    protected void preExecute(CommonReceiveObject receiveObject) {
+    protected void preExecute(CommonReceiveRequest receiveObject) {
         //前置处理
         String preStrategyCode = receiveObject.getPreStrategyCode();
         beanNameService.getBeanName(preStrategyCode).ifPresent(e -> {
@@ -48,7 +48,7 @@ public class HttpForwardTemplate extends BaseForwardTemplate {
     }
 
     @Override
-    protected BaseResult send(CommonReceiveObject receiveObject) {
+    protected HttpForwardResult send(CommonReceiveRequest receiveObject) {
         //发送
         HttpForwardResult httpResult = null;
         try {
@@ -90,7 +90,7 @@ public class HttpForwardTemplate extends BaseForwardTemplate {
     }
 
     @Override
-    protected void postExecute(BaseResult result, CommonReceiveObject receiveObject) {
+    protected void postExecute(BaseResult result, CommonReceiveRequest receiveObject) {
         //后置处理
         String postStrategyCode = receiveObject.getPostStrategyCode();
         String resultStr = receiveObject.getResult();

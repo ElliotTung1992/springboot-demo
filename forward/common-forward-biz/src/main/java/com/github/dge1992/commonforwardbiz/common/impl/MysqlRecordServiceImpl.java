@@ -1,6 +1,6 @@
 package com.github.dge1992.commonforwardbiz.common.impl;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.common.RecordService;
 import com.github.dge1992.commonforwardbiz.template.BaseForwardTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,23 +20,23 @@ public class MysqlRecordServiceImpl implements RecordService {
     private BaseForwardTemplate baseForwardTemplate;
 
     @Override
-    public void add(CommonReceiveObject commonRemoteObj) {
+    public void add(CommonReceiveRequest commonRemoteObj) {
 
     }
 
     @Override
-    public List<CommonReceiveObject> queryListOrderByCreateTime() {
+    public List<CommonReceiveRequest> queryListOrderByCreateTime() {
         return null;
     }
 
     @Override
-    public List<CommonReceiveObject> queryNotSuccessListOrderByCreateTime() {
+    public List<CommonReceiveRequest> queryNotSuccessListOrderByCreateTime() {
         return null;
     }
 
     @Override
     public void retryByUuid(String uuid) {
-        CommonReceiveObject commonRemoteObj = new CommonReceiveObject();
+        CommonReceiveRequest commonRemoteObj = new CommonReceiveRequest();
         baseForwardTemplate.forward(commonRemoteObj);
     }
 

@@ -1,8 +1,8 @@
 package com.github.dge1992.commonforwardbiz.template;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dge1992.commonforwardapi.model.BaseResult;
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.result.BaseResult;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.common.RecordService;
 import com.github.rholder.retry.Retryer;
 import org.apache.commons.lang3.StringUtils;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
  * 远程访问模版
  */
 @Component
-public abstract class BaseForwardTemplate {
+public abstract class BaseForwardTemplate<T extends BaseResult> {
 
     private Logger logger = LoggerFactory.getLogger(BaseForwardTemplate.class);
 
@@ -29,50 +29,46 @@ public abstract class BaseForwardTemplate {
 
     /**
      * 前置处理
-     *
      * @param receiveObject 接收对象
      * @author dge
      * @date 2021-01-19 11:13
      */
-    protected abstract void preExecute(CommonReceiveObject receiveObject);
+    protected abstract void preExecute(CommonReceiveRequest receiveObject);
 
     /**
      * 发送
-     *
      * @param receiveObject 接收对象
      * @return com.github.dge1992.commonforward.api.model.BaseResult
      * @author dge
      * @date 2021-01-19 11:13
      */
-    protected abstract BaseResult send(CommonReceiveObject receiveObject) throws Exception;
+    protected abstract T send(CommonReceiveRequest receiveObject) throws Exception;
 
     /**
      * 后置处理
-     *
-     * @param result        结果
+     * @param t        结果
      * @param receiveObject 接收对象
      * @author dge
      * @date 2021-01-19 11:14
      */
-    protected abstract void postExecute(BaseResult result, CommonReceiveObject receiveObject);
+    protected abstract void postExecute(T t, CommonReceiveRequest receiveObject);
 
     /**
      * 远程访问
-     *
      * @param commonRemoteObj 接收对象
      * @author dge
      * @date 2021-01-19 11:14
      */
-    public final void forward(CommonReceiveObject commonRemoteObj) {
+    public final T forward(CommonReceiveRequest commonRemoteObj) {
+        logger.info("BaseForwardTemplate | forward | commonRemoteObj is :{}" + JSON.toJSONString(commonRemoteObj));
         // todo 此方法需要加锁
         try {
-            logger.info("BaseForwardTemplate forward commonRemoteObj is :" + JSON.toJSONString(commonRemoteObj));
             validate(commonRemoteObj);
             //幂等
-            int idempotent = recordService.idempotent(commonRemoteObj.getUuid());
-            if (idempotent == 0) {
-                template(commonRemoteObj);
+            if (recordService.idempotent(commonRemoteObj.getUuid()) == 0) {
+                T t = template(commonRemoteObj);
                 commonRemoteObj.setIsSuccess(Boolean.TRUE);
+                return t;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -81,32 +77,29 @@ public abstract class BaseForwardTemplate {
             //数据记录
             recordService.add(commonRemoteObj);
         }
+        return null;
     }
 
     /**
      * 模版方法
-     *
      * @param commonRemoteObj 接收对象
      * @author dge
      * @date 2021-01-20 09:54
      */
-    public final void template(CommonReceiveObject commonRemoteObj) throws Exception {
+    public final T template(CommonReceiveRequest commonRemoteObj) throws Exception {
         preExecute(commonRemoteObj);
-        Object obj = retryer.call(() -> send(commonRemoteObj));
-        if (obj instanceof BaseResult) {
-            BaseResult result = (BaseResult) obj;
-            postExecute(result, commonRemoteObj);
-        }
+        T result = (T) retryer.call(() -> send(commonRemoteObj));
+        postExecute(result, commonRemoteObj);
+        return result;
     }
 
     /**
      * 公共字段的校验
-     *
      * @param commonRemoteObj 公共接收对象
      * @author dge
      * @date 2021-01-19 13:55
      */
-    private void validate(CommonReceiveObject commonRemoteObj) {
+    private void validate(CommonReceiveRequest commonRemoteObj) {
         //请求方法
         Integer method = commonRemoteObj.getMethod();
         //url

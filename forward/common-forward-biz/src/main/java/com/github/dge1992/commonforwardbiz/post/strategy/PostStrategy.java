@@ -1,7 +1,7 @@
 package com.github.dge1992.commonforwardbiz.post.strategy;
 
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 
 /**
  * @author 董感恩
@@ -18,5 +18,5 @@ public interface PostStrategy {
      * @author dge
      * @date 2021-01-14 10:29
      */
-    void postExecute(CommonReceiveObject commonReceiveObject, String resultStr);
+    void postExecute(CommonReceiveRequest commonReceiveObject, String resultStr);
 }

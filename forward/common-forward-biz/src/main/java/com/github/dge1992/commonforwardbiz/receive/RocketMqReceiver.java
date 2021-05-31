@@ -1,7 +1,7 @@
 package com.github.dge1992.commonforwardbiz.receive;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.template.BaseForwardTemplate;
 import org.apache.rocketmq.spring.annotation.MessageModel;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
@@ -33,8 +33,7 @@ public class RocketMqReceiver implements RocketMQListener<String> {
 
         //转换
         try {
-            CommonReceiveObject receiveObject = JSON.parseObject(messageStr, CommonReceiveObject.class);
-            logger.info("RocketMQReceiver | onMessage | receiveObject:{}", JSON.toJSONString(receiveObject));
+            CommonReceiveRequest receiveObject = JSON.parseObject(messageStr, CommonReceiveRequest.class);
             baseForwardTemplate.forward(receiveObject);
         } catch (Exception e) {
             e.printStackTrace();

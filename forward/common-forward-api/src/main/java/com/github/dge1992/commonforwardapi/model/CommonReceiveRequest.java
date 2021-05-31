@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @date 2021-01-04 16:45
  * 回调转发服务接收对象
  */
-public class CommonReceiveObject extends PrePostReceiveObject {
+public class CommonReceiveRequest extends PrePostReceiveRequest {
 
     /**
      * 回调类名

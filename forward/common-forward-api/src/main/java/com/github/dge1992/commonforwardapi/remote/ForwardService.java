@@ -1,6 +1,6 @@
 package com.github.dge1992.commonforwardapi.remote;
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 
 /**
  * @author dge
@@ -15,5 +15,5 @@ public interface ForwardService {
      * @author dge
      * @date 2021-01-21 17:45
      */
-    void receive(CommonReceiveObject receiveObject);
+    void receive(CommonReceiveRequest receiveObject);
 }

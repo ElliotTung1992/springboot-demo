@@ -1,7 +1,7 @@
 package com.github.dge1992.commonforwardbiz.post;
 
 
-import com.github.dge1992.commonforwardapi.model.CommonReceiveObject;
+import com.github.dge1992.commonforwardapi.model.CommonReceiveRequest;
 import com.github.dge1992.commonforwardbiz.post.strategy.PostStrategy;
 
 /**
@@ -17,7 +17,7 @@ public class PostStrategyHandler {
         this.postStrategy = postStrategy;
     }
 
-    public void execute(CommonReceiveObject commonReceiveObject, String resultStr) {
+    public void execute(CommonReceiveRequest commonReceiveObject, String resultStr) {
         postStrategy.postExecute(commonReceiveObject, resultStr);
     }
 }

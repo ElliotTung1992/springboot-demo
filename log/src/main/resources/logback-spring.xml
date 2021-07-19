@@ -40,7 +40,7 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%logger{18}]%msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%thread] --- [%logger{18}]%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -52,7 +52,7 @@
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%logger{18}]%msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%thread] --- [%logger{18}]%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -64,7 +64,7 @@
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%logger{18}]%msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%thread] --- [%logger{18}]%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -76,7 +76,7 @@
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%logger{18}]%msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%thread] --- [%logger{18}]%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
@@ -88,62 +88,27 @@
             <maxHistory>7</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%logger{18}]%msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%thread] --- [%logger{18}]%msg%n</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
 
-    <appender name="WORKFLOW_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGGING_FILE_HOME}workflow.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGGING_FILE_HOME}workflow.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%X{EagleEye-TraceID}][%-5level][%logger{18}]%msg%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-
-    <appender name="FCT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOGGING_FILE_HOME}fct.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOGGING_FILE_HOME}fct.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>%msg%n</pattern>
-        </encoder>
-    </appender>
-
-    <logger name="FCT_LOG" additivity="false">
-        <level value="INFO"/>
-        <appender-ref ref="FCT_FILE"/>
-    </logger>
-
-    <logger name="SYSTEM_LOG" additivity="false">
+    <logger name="SYSTEM_LOG" additivity="true">
         <level value="INFO"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="SYSTEM_LOG_FILE"/>
     </logger>
 
-    <logger name="ERROR_LOG" additivity="false">
+    <logger name="ERROR_LOG" additivity="true">
         <level value="ERROR"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ERROR_LOG_FILE"/>
     </logger>
 
-    <logger name="RPC_LOG" additivity="false">
+    <logger name="RPC_LOG" additivity="true">
         <level value="INFO"/>
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="RPC_LOG_FILE"/>
-    </logger>
-
-    <logger name="WORKFLOW_LOG" additivity="false">
-        <level value="INFO"/>
-        <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="WORKFLOW_FILE"/>
     </logger>
 
     <root level="INFO">

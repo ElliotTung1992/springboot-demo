@@ -29,7 +29,9 @@ public class LogApplicationTests {
         ERROR_LOGGER.error("哈哈");
 
 
-        logger.error("呵呵");
+        new Thread(() -> {
+            logger.error("呵呵");
+        }).start();
     }
 
 }

@@ -5,6 +5,11 @@ import org.slf4j.MDC;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 测试类
+ * @author dge
+ * @date 2021-07-19 10:35
+ */
 @Log
 @RestController
 public class TestController {

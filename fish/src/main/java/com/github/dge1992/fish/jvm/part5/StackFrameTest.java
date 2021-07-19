@@ -39,6 +39,16 @@ public class StackFrameTest {
         int k = i + 20;
     }
 
+    public void method6(){
+        /**
+         * 变量根据类型可以分为2类 1：基础类型  2：引用类型
+         * 变量根据位置可以分为2类 1：成员变量   1.1 类变量 1.2 实例变量
+         *                    2：局部变量
+         */
+        /*int num;
+        System.out.println(num);*/
+    }
+
     public void method1(){
         System.out.println("method1执行开始");
         method2();

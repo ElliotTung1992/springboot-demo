@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.github.dge1992</groupId>
-    <artifactId>log</artifactId>
+    <artifactId>log-framework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>log</name>
     <description>Demo project for Spring Boot</description>

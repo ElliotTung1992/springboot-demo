@@ -15,7 +15,9 @@ public class LogApplicationTests {
 
     private final Logger logger = LoggerFactory.getLogger(LogApplicationTests.class);
 
-    public static final Logger ERROR_LOGGER = LoggerFactory.getLogger("ERROR_LOG");
+    public static final Logger ERROR_LOGGER = LoggerFactory.getLogger("RPC_LOG");
+
+    public static final Logger ASYNC_LOGGER = LoggerFactory.getLogger("ASYNC_LOG");
 
     @Test
     public void contextLoads() {
@@ -26,11 +28,12 @@ public class LogApplicationTests {
         log.error("i am a error log");
         logger.warn("i am a warn log");
 
-        ERROR_LOGGER.error("哈哈");
-
-
         new Thread(() -> {
             logger.error("呵呵");
+        }).start();
+
+        new Thread(() -> {
+            ASYNC_LOGGER.info("哈哈");
         }).start();
     }
 

@@ -1,30 +1,41 @@
+/*
 package com.github.dge1992.fish.thread;
 
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.VarHandle;
 
+*/
 /**
  * @author dge
  * @version 1.0
  * @date 2021-02-25 21:21
- */
+ *//*
+
 public class VarHandleTest {
 
-    /**
+    */
+/**
      * 普通字符串
-     */
+     *//*
+
     private String str;
-    /**
+    */
+/**
      * 静态字符串
-     */
+     *//*
+
     private static String staticStr;
-    /**
+    */
+/**
      * 反射字符串
-     */
+     *//*
+
     private String reflectStr;
-    /**
+    */
+/**
      * 字符串数组
-     */
+     *//*
+
     private String[] arrayStr = new String[10];
 
     volatile Integer i;
@@ -94,3 +105,4 @@ public class VarHandleTest {
         System.out.println(i);
     }
 }
+*/

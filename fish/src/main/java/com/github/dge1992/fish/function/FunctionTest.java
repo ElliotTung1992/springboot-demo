@@ -1,5 +1,8 @@
 package com.github.dge1992.fish.function;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 /**
@@ -10,16 +13,20 @@ import java.util.function.Function;
 public class FunctionTest {
 
     public static void main(String[] args) {
-
-        /*Function<String, Integer> function = new Function<String, Integer>() {
-            @Override
-            public Integer apply(String str) {
-                return str.length();
-            }
-        };*/
-
         Function<String, Integer> function = (str) -> str.length();
-
         System.out.println(function.apply("hello"));
+
+        FunctionTest test = new FunctionTest();
+        test.caseOne();
+    }
+
+    private void caseOne() {
+        List<String> listOne = new ArrayList<>();
+        listOne.add("aaa");
+        List<String> listTwo = new ArrayList<>();
+        listTwo.add("bbb");
+        BinaryOperator<List> combiner = (left, right) -> { left.addAll(right); return left; };
+        combiner.apply(listOne, listTwo);
+        System.out.println(listOne);
     }
 }

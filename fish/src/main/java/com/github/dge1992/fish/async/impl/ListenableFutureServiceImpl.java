@@ -1,17 +1,17 @@
 package com.github.dge1992.fish.async.impl;
 
-import com.github.dge1992.fish.async.ListenableFutureService;
+/*import com.github.dge1992.fish.async.ListenableFutureService;
 import com.google.common.util.concurrent.*;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.*;
 
-/**
+*//**
  * @author dge
  * @version 1.0
  * @date 2021-01-25 13:45
- */
+ *//*
 @Service
 public class ListenableFutureServiceImpl implements ListenableFutureService {
 
@@ -62,4 +62,4 @@ public class ListenableFutureServiceImpl implements ListenableFutureService {
             }
         }, threadPoolExecutor);
     }
-}
+}*/

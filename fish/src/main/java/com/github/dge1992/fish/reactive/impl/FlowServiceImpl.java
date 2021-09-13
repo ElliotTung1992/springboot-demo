@@ -3,14 +3,14 @@ package com.github.dge1992.fish.reactive.impl;
 import com.github.dge1992.fish.reactive.FlowService;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.Flow;
+/*import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
 
-/**
+*//**
  * @author dge
  * @version 1.0
  * @date 2021-03-08 11:24
- */
+ *//*
 @Service
 public class FlowServiceImpl implements FlowService {
 
@@ -85,11 +85,11 @@ public class FlowServiceImpl implements FlowService {
         }
     }
 
-    /**
+    *//**
      * 自定义处理器
      * @author dge
      * @date 2021-03-08 16:40
-     */
+     *//*
     class MyProcessor extends SubmissionPublisher<String>
             implements Flow.Processor<Integer, String> {
 
@@ -135,4 +135,4 @@ public class FlowServiceImpl implements FlowService {
             this.close();
         }
     }
-}
+}*/

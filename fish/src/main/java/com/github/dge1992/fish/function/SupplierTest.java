@@ -1,5 +1,7 @@
 package com.github.dge1992.fish.function;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 /**
@@ -10,15 +12,17 @@ import java.util.function.Supplier;
 public class SupplierTest {
 
     public static void main(String[] args) {
-        /*Supplier<String> supplier = new Supplier<>() {
-            @Override
-            public String get() {
-                return "hello dge";
-            }
-        };*/
 
         Supplier<String> supplier = () -> "hello dge";
-
         System.out.println(supplier.get());
+
+        SupplierTest test = new SupplierTest();
+        test.caseOne();
+    }
+
+    private void caseOne() {
+        Supplier<List<String>> supplier = ArrayList::new;
+        List<String> strings = supplier.get();
+        System.out.println(strings);
     }
 }

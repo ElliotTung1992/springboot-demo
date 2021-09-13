@@ -10,15 +10,8 @@ import java.util.function.Predicate;
 public class PredicateTest {
 
     public static void main(String[] args) {
-        /*Predicate<String> predicate = new Predicate<String>(){
 
-            @Override
-            public boolean test(String str) {
-                return str.isBlank();
-            }
-        };*/
-
-        Predicate<String> predicate = str -> str.isBlank();
+        Predicate<String> predicate = str -> str.isEmpty();
 
         System.out.println(predicate.test(""));
     }

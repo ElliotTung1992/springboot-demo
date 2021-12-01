@@ -15,6 +15,8 @@ public class Person {
 
     private BigDecimal money;
 
+    private Car car;
+
     public String getName() {
         return this.name;
     }
@@ -37,6 +39,14 @@ public class Person {
 
     public void setMoney(BigDecimal money) {
         this.money = money;
+    }
+
+    public Car getCar() {
+        return this.car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     @Override

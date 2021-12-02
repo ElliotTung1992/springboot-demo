@@ -1,6 +1,7 @@
 package com.github.dge1992.fish.algorithm.duplicateremoval;
 
 import com.google.common.collect.Lists;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class DuplicateRemoval {
 
-    private static List<Integer> listTwo = new ArrayList<>();//Arrays.asList(1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 15, 17, 19);
-    private static List<Integer> listOne = new ArrayList<>();//Arrays.asList(0, 1, 2, 4, 6, 8, 10, 11, 12, 13, 14, 16, 18, 20, 21, 22);
+    private static List<Integer> listTwo = new ArrayList<>();
+    private static List<Integer> listOne = new ArrayList<>();
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -49,8 +50,8 @@ public class DuplicateRemoval {
         //System.out.println(listOne);
         //System.out.println(listTwo);
 
-        //listOne = Arrays.asList(1, 4, 5, 6, 8, 12, 13, 17, 18, 20);
-        //listTwo = Arrays.asList(2, 4, 6, 7, 8, 10, 11, 12, 15, 18);
+        //listOne = Arrays.asList(1, 4, 5, 6, 8, 12, 13, 17, 18, 20, 22, 24, 26);
+        //listTwo = Arrays.asList(2, 4, 6, 7, 8, 10, 11, 12, 15, 18, 19, 21, 23);
 
         DuplicateRemoval duplicateRemoval = new DuplicateRemoval();
         //duplicateRemoval.caseOne();
@@ -127,13 +128,13 @@ public class DuplicateRemoval {
     private void caseThree(){
         long start = System.currentTimeMillis();
         List<Integer> listThree = new ArrayList<>();
-        List<List<Integer>> partition = Lists.partition(listOne, 5000000);
+        List<List<Integer>> partition = Lists.partition(listOne, 300000);
         int startIndex = 0;
         List<MergeListForkJoinTask> tasks = new ArrayList<>();
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         for (List<Integer> integers : partition) {
             Integer maxInteger = integers.get(integers.size() - 1);
-            Integer index = returnIndex(listTwo, maxInteger);
+            Integer index = returnIndex(listTwo, maxInteger, startIndex);
             List<Integer> subList = listTwo.subList(startIndex, index);
             MergeListForkJoinTask task = new MergeListForkJoinTask(integers, subList);
             forkJoinPool.submit(task);
@@ -148,13 +149,13 @@ public class DuplicateRemoval {
         //System.out.println(listThree);
     }
 
-    private Integer returnIndex(List<Integer> lists, Integer maxInteger){
-        if(lists.contains(maxInteger)){
-            return lists.indexOf(maxInteger) + 1;
-        }
-        for (Integer i : lists) {
-            if(i > maxInteger){
-                return lists.indexOf(i);
+    private Integer returnIndex(List<Integer> lists, Integer maxInteger, Integer forStartIndex){
+        for (int i = forStartIndex; i < lists.size(); i++) {
+            if(lists.get(i).equals(maxInteger)){
+                return i + 1;
+            }
+            if(lists.get(i) > maxInteger){
+                return i;
             }
         }
         return lists.size();
@@ -249,6 +250,10 @@ class MergeListForkJoinTask extends RecursiveTask<List<Integer>> {
                     listThree.add(listOne.get(i));
                 }
             }
+        }
+        if(CollectionUtils.isEmpty(listTwo) || CollectionUtils.isEmpty(listOne)){
+            listThree.addAll(listOne);
+            listThree.addAll(listTwo);
         }
         return listThree;
     }

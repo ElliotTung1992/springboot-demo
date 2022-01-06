@@ -1,4 +1,4 @@
-package com.github.dge.core.domain;
+package com.github.dge.fishspringbootstarter.domain;
 
 import com.alibaba.fastjson.JSON;
 

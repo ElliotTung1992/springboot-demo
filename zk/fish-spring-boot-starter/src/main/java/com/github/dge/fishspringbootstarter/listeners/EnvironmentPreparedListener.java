@@ -1,13 +1,14 @@
-package com.github.dge.core.listeners;
+package com.github.dge.fishspringbootstarter.listeners;
 
 import com.alibaba.fastjson.JSON;
-import com.github.dge.core.cache.ValueBeanDefinitionContainer;
 import com.github.dge.core.config.ZkClient;
-import com.github.dge.core.constants.ConfigCenterConstant;
-import com.github.dge.core.domain.AppConfigData;
-import com.github.dge.core.instance.ConfigCenterInstance;
 import com.github.dge.core.instance.ConfigCenterManager;
-import com.github.dge.core.processor.ValueBeanPostProcessor;
+import com.github.dge.core.listeners.ZkConnectionStateChangeListener;
+import com.github.dge.fishspringbootstarter.cache.ValueBeanDefinitionContainer;
+import com.github.dge.fishspringbootstarter.constants.ConfigCenterConstant;
+import com.github.dge.fishspringbootstarter.domain.AppConfigData;
+import com.github.dge.fishspringbootstarter.instance.ConfigCenterInstance;
+import com.github.dge.fishspringbootstarter.processor.ValueBeanPostProcessor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
@@ -30,6 +31,7 @@ import java.util.Properties;
  * 2. 自定义Bean后置处理器{@link ValueBeanPostProcessor}获取使用{@link org.springframework.beans.factory.annotation.Value}
  *    注解的Bean对象并放置至缓存{@link ValueBeanDefinitionContainer}
  * 3. 监听{@link ConfigCenterZkNodeChangeListener}配置中心配置变更，刷新bean的属性值
+ * 4. 监听zk链接状态{@link ZkConnectionStateChangeListener}
  */
 public class EnvironmentPreparedListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
 
@@ -45,7 +47,7 @@ public class EnvironmentPreparedListener implements ApplicationListener<Applicat
         initConfigCenterInstance(environment);
         // 加载配置中心自定义配置
         AppConfigData appConfigData = getConfigCenterData();
-        if(Objects.isNull(appConfigData)){
+        if(Objects.nonNull(appConfigData)){
             Map<String, String> configFileDataMap = appConfigData.getConfigFileDataMap();
             Properties properties = new Properties();
             configFileDataMap.forEach(properties::setProperty);

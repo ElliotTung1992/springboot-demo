@@ -1,8 +1,8 @@
-package com.github.dge.core.processor;
+package com.github.dge.fishspringbootstarter.processor;
 
-import com.github.dge.core.cache.ValueBeanDefinitionContainer;
-import com.github.dge.core.cache.ValueBeanDefinitionObject;
 import com.github.dge.core.instance.ConfigCenterManager;
+import com.github.dge.fishspringbootstarter.cache.ValueBeanDefinitionContainer;
+import com.github.dge.fishspringbootstarter.cache.ValueBeanDefinitionObject;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;

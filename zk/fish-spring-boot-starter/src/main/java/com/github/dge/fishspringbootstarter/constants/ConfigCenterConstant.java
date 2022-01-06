@@ -1,4 +1,4 @@
-package com.github.dge.core.constants;
+package com.github.dge.fishspringbootstarter.constants;
 
 /**
  * @author dge

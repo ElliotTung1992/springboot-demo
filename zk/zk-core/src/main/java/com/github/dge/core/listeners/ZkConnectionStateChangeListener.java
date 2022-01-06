@@ -14,11 +14,11 @@ public class ZkConnectionStateChangeListener implements ConnectionStateListener 
     @Override
     public void stateChanged(CuratorFramework curatorFramework, ConnectionState connectionState) {
         if(ConnectionState.LOST == connectionState){
-            // TODO 当zk失去链接时
+            // TODO 当zk失去链接时 通知管理员处理
             try {
                 while (Boolean.TRUE){
                     if (curatorFramework.getZookeeperClient().blockUntilConnectedOrTimedOut()){
-                        // TODO 当zk重新链接时
+                        // TODO 当zk重新链接时 通知管理员处理
                         System.out.println("zk reconnect");
                         break;
                     }

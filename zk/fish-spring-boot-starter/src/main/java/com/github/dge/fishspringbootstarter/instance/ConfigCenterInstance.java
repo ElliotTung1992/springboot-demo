@@ -1,6 +1,7 @@
-package com.github.dge.core.instance;
+package com.github.dge.fishspringbootstarter.instance;
 
-import com.github.dge.core.constants.ConfigCenterConstant;
+
+import com.github.dge.fishspringbootstarter.constants.ConfigCenterConstant;
 
 /**
  * @author dge

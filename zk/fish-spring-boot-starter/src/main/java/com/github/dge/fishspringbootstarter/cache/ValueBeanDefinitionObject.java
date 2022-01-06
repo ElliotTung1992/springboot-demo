@@ -1,4 +1,4 @@
-package com.github.dge.core.cache;
+package com.github.dge.fishspringbootstarter.cache;
 
 /**
  * @author dge

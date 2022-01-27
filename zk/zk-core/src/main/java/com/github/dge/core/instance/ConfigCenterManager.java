@@ -30,7 +30,7 @@ public class ConfigCenterManager {
     public static synchronized CuratorFramework getCuratorFramework(){
         if(curatorFramework == null){
             WrapperZk wrapperZk = new WrapperZk();
-            wrapperZk.setConnectString("47.100.220.23:2181");
+            wrapperZk.setConnectString("");
             wrapperZk.setElapsedTimeMs(5000);
             wrapperZk.setConnectionTimeoutMs(5000);
             wrapperZk.setRetryCount(5);

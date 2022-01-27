@@ -60,9 +60,21 @@ public class EnvironmentPreparedListener implements ApplicationListener<Applicat
 
     private void initConfigCenterInstance(ConfigurableEnvironment environment) {
         String appCode = environment.getProperty(ConfigCenterConstant.FISH_CONFIG_CENTER_APP_CODE);
+        if(StringUtils.isBlank(appCode)){
+            throw new RuntimeException(ConfigCenterConstant.FISH_CONFIG_CENTER_APP_CODE + " cannot be null");
+        }
         String serverUrl = environment.getProperty(ConfigCenterConstant.FISH_CONFIG_CENTER_SERVER_URL);
+        if(StringUtils.isBlank(serverUrl)){
+            throw new RuntimeException(ConfigCenterConstant.FISH_CONFIG_CENTER_SERVER_URL + " cannot be null");
+        }
         String env = environment.getProperty(ConfigCenterConstant.FISH_CONFIG_CENTER_ENV);
+        if(StringUtils.isBlank(env)){
+            throw new RuntimeException(ConfigCenterConstant.FISH_CONFIG_CENTER_ENV + " cannot be null");
+        }
         String appName = environment.getProperty(ConfigCenterConstant.FISH_CONFIG_CENTER_APP_NAME);
+        if(StringUtils.isBlank(appName)){
+            throw new RuntimeException(ConfigCenterConstant.FISH_CONFIG_CENTER_APP_NAME + " cannot be null");
+        }
         String enable = environment.getProperty(ConfigCenterConstant.FISH_CONFIG_CENTER_ENABLE);
         ConfigCenterInstance instance = ConfigCenterInstance.getInstance();
         instance.setAppCode(appCode);

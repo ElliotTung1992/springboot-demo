@@ -30,6 +30,7 @@ public class MaximumSubarray {
         return max;
     }
 
+    // TODO 分治算法实现方式
     public class Status {
         public int lSum, rSum, mSum, iSum;
 

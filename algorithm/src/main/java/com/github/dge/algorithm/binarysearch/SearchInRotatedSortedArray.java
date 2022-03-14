@@ -9,6 +9,7 @@ package com.github.dge.algorithm.binarysearch;
  */
 public class SearchInRotatedSortedArray {
 
+    // TODO 划分数组
     public static void main(String[] args) {
         int[] nums1 = {1,2,4,5}, nums2 = {3,6,7,8};
         SearchInRotatedSortedArray  searchInRotatedSortedArray = new SearchInRotatedSortedArray();

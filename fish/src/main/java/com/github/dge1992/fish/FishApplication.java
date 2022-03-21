@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 五饼二鱼
+ * @author dge
  */
 @SpringBootApplication
 public class FishApplication {

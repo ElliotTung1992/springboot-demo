@@ -16,7 +16,7 @@ public class Permutations {
 
     public static void main(String[] args) {
         Permutations permutations = new Permutations();
-        int[] nums = {1,2,3};
+        int[] nums = {1,1,2};
         List<List<Integer>> list = permutations.permute(nums);
         System.out.println(list);
     }

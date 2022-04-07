@@ -3,6 +3,7 @@ package com.github.dge1992.fish.stream;
 import com.github.dge1992.fish.domain.Person;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,7 +17,19 @@ import java.util.stream.IntStream;
 public class StreamTest {
 
     public static void main(String[] args) {
+        StreamTest streamTest = new StreamTest();
+        streamTest.listAddAllTwo();
+    }
 
+    private void listAddAllTwo(){
+        List<Integer> collect = IntStream.range(1, 10).boxed().collect(Collectors.toList());
+        List<Integer> collect1 = IntStream.range(10, 20).boxed().collect(Collectors.toList());
+
+        List<List<Integer>> lists = new ArrayList<>();
+        lists.add(collect);
+        lists.add(collect1);
+        List<Integer> resultList = lists.stream().flatMap(Collection::stream).collect(Collectors.toList());
+        System.out.println(resultList);
     }
 
     /**

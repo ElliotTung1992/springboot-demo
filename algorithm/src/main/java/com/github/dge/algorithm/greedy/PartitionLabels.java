@@ -11,7 +11,7 @@ import java.util.Map;
  * @date 2022-03-09 9:56 上午
  * https://leetcode.com/problems/partition-labels/description/
  * https://leetcode-cn.com/problems/partition-labels/description/
- *
+ * 763. 划分字母区间
  * 这道题目我觉得不是很好，没有说清楚具体规则，什么时候切换下一个集合
  * String s = "ababcbacadefegdehijhklijc";
  * 官方的答案就是25，不科学

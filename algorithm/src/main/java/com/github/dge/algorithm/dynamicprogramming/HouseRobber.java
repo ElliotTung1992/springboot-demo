@@ -12,7 +12,7 @@ public class HouseRobber {
 
     public static void main(String[] args) {
         HouseRobber houseRobber = new HouseRobber();
-        int[] nums = {2,1,1,2};
+        int[] nums = {2, 10, 3, 5, 10, 5, 3, 6};
         int rob = houseRobber.rob(nums);
         System.out.println(rob);
     }

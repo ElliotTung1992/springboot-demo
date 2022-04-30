@@ -31,6 +31,7 @@ public class UserController {
     @ApiOperation(value = "新增用户", notes = "新增用户")
     @PostMapping
     public Object addUser(@RequestBody User user){
+        user.setAge(user.getAge() + 10);
         map.put(user.getId(), user);
         return "添加成功";
     }

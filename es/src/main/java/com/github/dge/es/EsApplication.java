@@ -1,18 +1,18 @@
-package com.github.dge1992.restfuldemo;
+package com.github.dge.es;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * web相关的应用
+ * ES主程序
  * @author dge
- * @date 2021-08-13 16:21
+ * @date 2021-11-08 21:14
  */
 @SpringBootApplication
-public class RestfulDemoApplication {
+public class EsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RestfulDemoApplication.class, args);
+        SpringApplication.run(EsApplication.class, args);
     }
 
 }

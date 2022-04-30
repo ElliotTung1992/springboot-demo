@@ -2,6 +2,8 @@ package com.github.dge1992.zookeeper;
 
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.NodeCache;
+import org.apache.curator.framework.recipes.locks.InterProcessMutex;
+import org.apache.curator.framework.recipes.locks.InterProcessReadWriteLock;
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.data.Stat;
 import org.junit.Test;
@@ -101,5 +103,50 @@ public class ZookeeperApplicationTests {
         nodeCache.start();
 
         System.in.read();
+    }
+
+    @Test
+    public void testReadLock() throws Exception {
+        InterProcessReadWriteLock interProcessReadWriteLock = new InterProcessReadWriteLock(zkclient, "/myLock");
+        InterProcessMutex interProcessMutex = interProcessReadWriteLock.readLock();
+        System.out.println("尝试获取读锁");
+        interProcessMutex.acquire();
+        System.out.println("获取到读锁");
+        for (int i = 0; i < 100; i++) {
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println(i);
+        }
+        interProcessMutex.release();
+        System.out.println("释放读锁");
+    }
+
+    @Test
+    public void testReadLockTwo() throws Exception {
+        InterProcessReadWriteLock interProcessReadWriteLock = new InterProcessReadWriteLock(zkclient, "/myLock");
+        InterProcessMutex interProcessMutex = interProcessReadWriteLock.readLock();
+        System.out.println("尝试获取读锁");
+        interProcessMutex.acquire();
+        System.out.println("获取到读锁");
+        for (int i = 0; i < 100; i++) {
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println(i);
+        }
+        interProcessMutex.release();
+        System.out.println("释放读锁");
+    }
+
+    @Test
+    public void testWriteLock() throws Exception {
+        InterProcessReadWriteLock interProcessReadWriteLock = new InterProcessReadWriteLock(zkclient, "/myLock");
+        InterProcessMutex interProcessMutex = interProcessReadWriteLock.writeLock();
+        System.out.println("尝试获取写锁");
+        interProcessMutex.acquire();
+        System.out.println("获取到写锁");
+        for (int i = 0; i < 100; i++) {
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println(i);
+        }
+        interProcessMutex.release();
+        System.out.println("释放锁");
     }
 }

@@ -1,5 +1,7 @@
 package com.github.dge.algorithm.dynamicprogramming;
 
+import java.util.Arrays;
+
 /**
  * @author dge
  * @version 1.0
@@ -16,32 +18,35 @@ public class OnesAndZeroes {
         int m = 5, n = 3;
         int maxForm = onesAndZeroes.findMaxForm(strs, m, n);
         System.out.println(maxForm);
+
+        int[] zerosOnes = onesAndZeroes.getZerosOnes("1100");
+        System.out.println(Arrays.toString(zerosOnes));
     }
 
     public int findMaxForm(String[] strs, int m, int n) {
         int length = strs.length;
-        int[][][] dp = new int[length + 1][m + 1][n + 1];
+        int[][][] bp = new int[length + 1][m + 1][n + 1];
         for (int i = 1; i <= length; i++) {
             int[] zerosOnes = getZerosOnes(strs[i - 1]);
             int zeros = zerosOnes[0], ones = zerosOnes[1];
             for (int j = 0; j <= m; j++) {
                 for (int k = 0; k <= n; k++) {
-                    dp[i][j][k] = dp[i - 1][j][k];
-                    if (j >= zeros && k >= ones) {
-                        dp[i][j][k] = Math.max(dp[i][j][k], dp[i - 1][j - zeros][k - ones] + 1);
+                    bp[i][j][k] = bp[i - 1][j][k];
+                    if(zeros <= j && ones <= k){
+                        bp[i][j][k] = Math.max(bp[i - 1][j][k], bp[i - 1][j - zeros][k - ones] + 1);
                     }
                 }
             }
         }
-        return dp[length][m][n];
+        return bp[length][m][n];
     }
 
     public int[] getZerosOnes(String str) {
-        int[] zerosOnes = new int[2];
+        int[] arr = new int[2];
         int length = str.length();
         for (int i = 0; i < length; i++) {
-            zerosOnes[str.charAt(i) - '0']++;
+            arr[str.charAt(i) - '0']++;
         }
-        return zerosOnes;
+        return arr;
     }
 }

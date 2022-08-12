@@ -7,6 +7,8 @@ import java.util.Set;
  * @author dge
  * @version 1.0
  * @date 2022-08-10 11:28 AM
+ * https://leetcode.com/problems/intersection-of-two-linked-lists/description/
+ * https://leetcode.cn/problems/intersection-of-two-linked-lists/comments/
  */
 public class IntersectionOfTwoLinkedList {
 
@@ -56,11 +58,11 @@ public class IntersectionOfTwoLinkedList {
     }
 }
 
-class ListNode {
+/*class ListNode {
     int val;
     ListNode next;
     ListNode(int x) {
         val = x;
         next = null;
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package com.github.dge1992.fish.utils;
+package com.github.dge1992.fish.util;
 
 import com.github.dge1992.fish.domain.A;
 import com.github.dge1992.fish.domain.B;

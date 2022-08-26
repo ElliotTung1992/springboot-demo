@@ -12,11 +12,29 @@ public class Car {
      */
     private String brand;
 
+    private Long creatDate;
+
     public String getBrand() {
         return this.brand;
     }
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public Long getCreatDate() {
+        return this.creatDate;
+    }
+
+    public void setCreatDate(Long creatDate) {
+        this.creatDate = creatDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "brand='" + brand + '\'' +
+                ", creatDate=" + creatDate +
+                '}';
     }
 }

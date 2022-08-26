@@ -1,8 +1,6 @@
-package com.github.dge1992.fish.utils;
+package com.github.dge1992.fish.util;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author dge
@@ -12,7 +10,7 @@ import java.util.List;
 public class BigDecimalUtil {
 
     public static void main(String[] args) {
-        BigDecimal receiptBillAmount = new BigDecimal("10000.00");
+        /*BigDecimal receiptBillAmount = new BigDecimal("10000.00");
         BigDecimal remainingAmount = new BigDecimal("10000.00");
         BigDecimal receiptConsumingAmount = new BigDecimal("0");
         BigDecimal multiply = receiptBillAmount.subtract(receiptConsumingAmount);
@@ -23,7 +21,12 @@ public class BigDecimalUtil {
         List<BigDecimal> list = new ArrayList<>();
         list.add(new BigDecimal("6.00"));
         list.add(new BigDecimal("2.22"));
-        System.out.println(list.contains(new BigDecimal("6")));
+        System.out.println(list.contains(new BigDecimal("6")));*/
+
+
+        System.out.println(BigDecimal.ZERO.compareTo(new BigDecimal("0")));
+
+
     }
 
 

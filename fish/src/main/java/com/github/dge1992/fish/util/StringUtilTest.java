@@ -1,4 +1,4 @@
-package com.github.dge1992.fish.utils;
+package com.github.dge1992.fish.util;
 
 import cn.hutool.core.util.StrUtil;
 import org.apache.commons.lang3.StringUtils;

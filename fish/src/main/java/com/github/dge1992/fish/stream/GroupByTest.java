@@ -48,6 +48,17 @@ public class GroupByTest {
         personList.add(person4);
         personList.add(person5);
 
+        // 用户信息 默认很多信息
+        Map<String, BigDecimal> collect = personList.stream().collect(
+                Collectors.groupingBy(a -> a.getName() + "#" + a.getAge(), Collectors.mapping(Person::getMoney, BigDecimalCollector.toSum())));
+
+        for (Map.Entry<String, BigDecimal> stringListEntry : collect.entrySet()) {
+            System.out.println(stringListEntry.getKey());
+            System.out.println(stringListEntry.getValue());
+        }
+    }
+
+    private void testOne(List<Person> personList){
         Map<String, Map<Integer, Map<BigDecimal, List<Person>>>> collect = personList.stream().
                 collect(Collectors.groupingBy(Person::getName, Collectors.groupingBy(Person::getAge, Collectors.groupingBy(Person::getMoney))));
         collect.forEach((k, v) -> {

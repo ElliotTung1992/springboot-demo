@@ -1,4 +1,4 @@
-package com.github.dge1992.fish.utils;
+package com.github.dge1992.fish.util;
 
 import org.apache.commons.collections4.CollectionUtils;
 

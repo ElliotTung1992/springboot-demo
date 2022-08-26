@@ -1,4 +1,4 @@
-package com.github.dge1992.fish.utils;
+package com.github.dge1992.fish.util;
 
 import com.github.dge1992.fish.domain.Person;
 import com.github.dge1992.fish.java.util.stream.BigDecimalCollector;

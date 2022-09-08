@@ -14,51 +14,25 @@ public class LongestUnivaluePath {
     }
 
     public int longestUnivaluePath(TreeNode root) {
-        if(root == null){
-            return 0;
-        }
-        search(root, root.left, root.right);
-        if(aaa > 1){
-            return aaa - 1;
-        }
-        return aaa;
+        search(root);
+        return res;
     }
     
-    int aaa = 0;
+    int res = 0;
 
-    public int search(TreeNode root, TreeNode left, TreeNode right){
-        if(root == null){
+    public int search(TreeNode treeNode){
+        if(treeNode == null){
             return 0;
         }
-        if(left == null && right == null){
-            return 0;
+        int left = search(treeNode.left), right = search(treeNode.right);
+        int left1 = 0, right1 = 0;
+        if(treeNode.left != null && treeNode.left.val == treeNode.val){
+            left1 = left + 1;
         }
-        int leftCount = 0, rightCount = 0;
-        if(left != null){
-            leftCount = search(left, left.left, left.right);
+        if(treeNode.right != null && treeNode.right.val == treeNode.val){
+            right1 = right + 1;
         }
-        if(right != null){
-            rightCount = search(right, right.left, right.right);
-        }
-        if(left != null && root.val == left.val){
-            if(leftCount > 0){
-                leftCount ++;
-            }else{
-                leftCount += 2;
-            }
-        }
-        if(right != null && root.val == right.val){
-            if(rightCount > 0){
-                rightCount ++;
-            }else{
-                rightCount += 2;
-            }
-        }
-        if(left != null && right != null && root.val == left.val && left.val == right.val){
-            aaa = Math.max(aaa, leftCount + rightCount - 1);
-        }
-        int bbb = Math.max(leftCount, rightCount);
-        aaa = Math.max(aaa, bbb);
-        return bbb;
+        res = Math.max(res, left1 + right1);
+        return Math.max(left1, right1);
     }
 }

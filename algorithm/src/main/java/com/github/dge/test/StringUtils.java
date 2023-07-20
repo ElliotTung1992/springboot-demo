@@ -1,6 +1,8 @@
-package com.github.dge1992.common.utils;
+package com.github.dge.test;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * @Author 小眼睛带鱼
@@ -10,9 +12,10 @@ import java.util.Random;
 public class StringUtils {
 
     public static void main(String[] args) {
-        String str = "aa1231";
-        System.out.println(isAlphaNumeric(str));
-        System.out.println(str.toUpperCase());
+        Set<String> set = new HashSet<>();
+        System.out.println(set.contains("aa"));
+        System.out.println(set.contains(""));
+        System.out.println(set.contains(null));
     }
 
     /**

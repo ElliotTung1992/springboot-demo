@@ -80,6 +80,8 @@ public class Test {
                 System.out.println(demoTwo);
             }).start();
         }
+
+        new Integer(1);
     }
 
     /**

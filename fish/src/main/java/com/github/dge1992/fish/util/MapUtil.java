@@ -17,8 +17,20 @@ import java.util.stream.Collectors;
 public class MapUtil {
 
     public static void main(String[] args) {
-        MapUtil util = new MapUtil();
-        util.caseOne();
+
+        /*new Thread(() -> {
+            System.out.println("hello world");
+        }).start();*/
+
+        /*MapUtil util = new MapUtil();
+        util.caseOne();*/
+
+        /*Integer a2 = new Integer(127);
+        Integer b2 = 127;
+        System.out.println(a2 == b2);*/
+
+        /*float a = 3.14;
+        System.out.println(a);*/
     }
 
     private void caseOne() {

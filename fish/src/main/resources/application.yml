@@ -4,8 +4,12 @@
 oa:
   leave:
     processCode: PROC-EBAF0CFE-F0E9-40E2-94C9-892711D9C086
-    agent: 哈哈
+    agent: ENC(oq+J+VvRwhRY3mDfH1wo0WbYog6Cd/sm+EnMRwdlrDFGS/7gUlkh0KeYXvQcmoXW)
     time: >
       "开始时间",
       "开始时间"
 
+
+jasypt:
+  encryptor:
+    password: test

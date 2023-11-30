@@ -24,6 +24,7 @@ public class JasyptComponent {
     }
 
     public void testDecrypt(){
-        System.out.println(agent);
+        String str = "oq+J+VvRwhRY3mDfH1wo0WbYog6Cd/sm+EnMRwdlrDFGS/7gUlkh0KeYXvQcmoXW";
+        System.out.println(encryptor.decrypt(str));
     }
 }

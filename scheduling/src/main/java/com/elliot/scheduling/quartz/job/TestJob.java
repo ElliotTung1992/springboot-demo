@@ -45,6 +45,8 @@ public class TestJob implements Job {
         System.out.println("job run time is " + context.getJobRunTime());
         System.out.println("job fire time is " + context.getFireTime());
         System.out.println("job next fire time is " + context.getNextFireTime());
+        System.out.println("job start time is " + context.getTrigger().getStartTime());
+        System.out.println("job end time is " + context.getTrigger().getEndTime());
         System.out.println(LocalDateTime.now() + "执行结束了");
     }
 }

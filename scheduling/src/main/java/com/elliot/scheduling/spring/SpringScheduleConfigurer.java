@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@EnableScheduling
+//@EnableScheduling
 @Component
 public class SpringScheduleConfigurer implements SchedulingConfigurer {
 

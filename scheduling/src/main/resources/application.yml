@@ -6,25 +6,32 @@ spring:
       username: root
       password: dge_1992@163.com
   quartz:
-    job-store-type: jdbc # ???????
-    scheduler-name: hyhScheduler # ?? Scheduler ?????????? Quartz ??
-    wait-for-jobs-to-complete-on-shutdown: true # ?????????????????????? false ?????? true
-    jdbc:
-      initialize-schema: never # ?????? SQL ??? Quartz ????????? never ???????????
+    job-store-type: jdbc
+    scheduler-name: clusteredScheduler
+    wait-for-jobs-to-complete-on-shutdown: true
+    startup-delay: 1s
+    overwrite-existing-jobs: true
+    auto-startup: true
     properties:
       org:
         quartz:
-          # JobStore ????
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+            skipUpdateCheck: true
           jobStore:
-            dataSource: quartzDataSource # ??????
-            class: org.quartz.impl.jdbcjobstore.JobStoreTX # JobStore ???
+            class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
             driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
-            tablePrefix: QRTZ_ # Quartz ???
-            isClustered: true # ?????
-            clusterCheckinInterval: 1000
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
             useProperties: false
-          # ???????
+            maxMisfiresToHandleAtATime: 1
+            misfireThreshold: 12000
+            txIsolationLevelSerializable: true
           threadPool:
-            threadCount: 25 # ????????? 10 ?
-            threadPriority: 5 # ?????
-            class: org.quartz.simpl.SimpleThreadPool # ?????
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 20
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+            threadNamePrefix: quartz

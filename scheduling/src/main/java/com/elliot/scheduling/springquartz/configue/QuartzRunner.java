@@ -21,7 +21,7 @@ public class QuartzRunner implements ApplicationRunner {
                 .build();
 
         CronScheduleBuilder cronScheduleBuilder =
-                CronScheduleBuilder.cronSchedule("0/5 * * * * ? *");
+                CronScheduleBuilder.cronSchedule("0/6 * * * * ? *");
 
         CronTrigger trigger = TriggerBuilder.newTrigger()
                 .withIdentity("secondCronTrigger")

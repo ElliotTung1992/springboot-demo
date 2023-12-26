@@ -35,6 +35,9 @@ public class ThreadPoolTest {
             executorService.shutdown();
         }
 
+        Thread thread = new Thread(() -> {
+            System.out.println("xi");
+        });
 
     }
 }

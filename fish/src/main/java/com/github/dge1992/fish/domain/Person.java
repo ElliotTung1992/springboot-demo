@@ -1,5 +1,6 @@
 package com.github.dge1992.fish.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -7,11 +8,15 @@ import java.math.BigDecimal;
  * @version 1.0
  * @date 2021-03-30 11:19
  */
-public class Person {
+public class Person implements Serializable {
+
+    private static final long serialVersionUID = -3977270282448869047L;
 
     private String name;
 
     private Integer age;
+
+    private String sex;
 
     private BigDecimal money;
 
@@ -49,12 +54,22 @@ public class Person {
         this.car = car;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", sex='" + sex + '\'' +
                 ", money=" + money +
+                ", car=" + car +
                 '}';
     }
 }

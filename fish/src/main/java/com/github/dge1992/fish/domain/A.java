@@ -1,5 +1,7 @@
 package com.github.dge1992.fish.domain;
 
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  * @version 1.0
  * @date 2021-10-14 11:42
  */
-public class A {
+public class A implements Serializable {
 
     private String name;
 

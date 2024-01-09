@@ -1,11 +1,14 @@
 package com.github.dge1992.fish.json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import lombok.Data;
 
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class GsonTest {
@@ -13,8 +16,8 @@ public class GsonTest {
     static Gson gson = new Gson();
 
     public static void main(String[] args) {
-        // primitivesExamples();
         objectExamples();
+        primitivesExamples();
         arrayExamples();
         collectionsExamples();
         mapsExamples();
@@ -69,9 +72,15 @@ public class GsonTest {
 
     private static void objectExamples() {
         // Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+        Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd HH:mm:ss")
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
+
         // 对象类型序列化
-        GsonObject gsonObject = new GsonObject("Elliot");
+        GsonObject gsonObject = new GsonObject();
         gsonObject.setAddress("Ningbo");
+        gsonObject.setName("Elliot");
+        gsonObject.setDate(new Date());
+        gsonObject.setBirthday(LocalDateTime.now());
 
         GsonJobObject gsonJobObject = new GsonJobObject();
         gsonJobObject.setJobName("jobName");
@@ -99,7 +108,7 @@ public class GsonTest {
         Gson gson = new Gson();
         System.out.println(gson.toJson(1));
         System.out.println(gson.toJson("abcd"));
-        System.out.println(gson.toJson(new Long(10)));
+        System.out.println(gson.toJson(10L));
         int[] arr = {1};
         System.out.println(gson.toJson(arr));
 
@@ -113,119 +122,50 @@ public class GsonTest {
         System.out.println(Arrays.toString(gson.fromJson("[\"abc\", \"hello\"]", String[].class)));
     }
 }
+class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
 
+    private DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    @Override
+    public LocalDateTime deserialize(JsonElement jsonElement, Type type,
+                                     JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+
+        return LocalDateTime.parse(jsonElement.getAsString(), formatter);
+    }
+
+    @Override
+    public JsonElement serialize(LocalDateTime localDateTime, Type type,
+                                 JsonSerializationContext jsonSerializationContext) {
+        return new JsonPrimitive(formatter.format(localDateTime));
+    }
+}
 /**
  * 基本类型有默认值
  * 包装类型无值不解析
  * transient 不参与序列化和反序列化
  */
-class GsonObject extends GsonParentObject{
+@Data
+class GsonObject {
     private int id;
     private Integer age;
     @SerializedName("loginName")// 指定字段名解析
     private String name;
     @Expose // 指定序列化和反序列化
     private String address;
+    private LocalDateTime birthday;
+    private Date date;
     private GsonJobObject gsonJobObject;
 
     GsonObject() {
 
     }
-
-    public GsonObject(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public GsonJobObject getGsonJobObject() {
-        return gsonJobObject;
-    }
-
-    public void setGsonJobObject(GsonJobObject gsonJobObject) {
-        this.gsonJobObject = gsonJobObject;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "GsonObject{" +
-                "id=" + id +
-                ", age=" + age +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", gsonJobObject=" + gsonJobObject +
-                '}';
-    }
 }
-
+@Data
 class GsonParentObject {
     private String address;
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 }
-
+@Data
 class GsonJobObject {
-
     private String jobName;
     private String jobDesc;
-
-    public String getJobName() {
-        return jobName;
-    }
-
-    public void setJobName(String jobName) {
-        this.jobName = jobName;
-    }
-
-    public String getJobDesc() {
-        return jobDesc;
-    }
-
-    public void setJobDesc(String jobDesc) {
-        this.jobDesc = jobDesc;
-    }
-
-    @Override
-    public String toString() {
-        return "GsonJobObject{" +
-                "jobName='" + jobName + '\'' +
-                ", jobDesc='" + jobDesc + '\'' +
-                '}';
-    }
 }

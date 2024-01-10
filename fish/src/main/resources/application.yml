@@ -1,6 +1,4 @@
 
-
-
 oa:
   leave:
     processCode: PROC-EBAF0CFE-F0E9-40E2-94C9-892711D9C086
@@ -9,7 +7,12 @@ oa:
       "开始时间",
       "开始时间"
 
-
 jasypt:
   encryptor:
     password: test
+
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss # 设置全局@JsonFormat的格式pattern
+

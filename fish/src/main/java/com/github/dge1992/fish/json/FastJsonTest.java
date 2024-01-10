@@ -35,6 +35,11 @@ public class FastJsonTest {
         fastjsonJobObjectList.add(fastjsonJobObject2);
         fastjsonObject.setFastjsonJobObjectList(fastjsonJobObjectList);
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "Elliot");
+        map.put("age", 23);
+        fastjsonObject.setMap(map);
+
         String jsonString = JSON.toJSONString(fastjsonObject);
         System.out.println(jsonString);
 
@@ -108,6 +113,7 @@ class FastjsonObject extends FastjsonParentObject {
     private LocalDateTime localDateTime;
     private Date date;
     private List<FastjsonJobObject> fastjsonJobObjectList;
+    private Map<String, Object> map;
 }
 @Data
 class FastjsonJobObject {

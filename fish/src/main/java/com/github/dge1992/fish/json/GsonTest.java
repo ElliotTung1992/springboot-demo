@@ -1,5 +1,6 @@
 package com.github.dge1992.fish.json;
 
+import com.github.dge1992.fish.constants.enums.GenderEnum;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -47,7 +48,6 @@ public class GsonTest {
         list.add(3);
 
         // 序列化
-
         String gsonString = gson.toJson(list);
         System.out.println(gsonString);
 
@@ -87,6 +87,13 @@ public class GsonTest {
         gsonJobObject.setJobDesc("jobDesc");
         gsonObject.setGsonJobObject(gsonJobObject);
 
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", "Elliot");
+        map.put("age", 23);
+        gsonObject.setMap(map);
+
+        gsonObject.setGenderEnum(GenderEnum.MALE);
+
         // 序列化
         String gsonStr = gson.toJson(gsonObject);
         System.out.println(gsonStr);
@@ -124,7 +131,7 @@ public class GsonTest {
 }
 class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
 
-    private DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final DateTimeFormatter formatter  = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public LocalDateTime deserialize(JsonElement jsonElement, Type type,
@@ -155,6 +162,8 @@ class GsonObject {
     private LocalDateTime birthday;
     private Date date;
     private GsonJobObject gsonJobObject;
+    private Map<String, Object> map;
+    private GenderEnum genderEnum;
 
     GsonObject() {
 

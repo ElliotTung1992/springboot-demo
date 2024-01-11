@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.dge1992.fish.constants.enums.GenderEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -92,6 +93,8 @@ public class JacksonTest {
         map.put("age", 24);
         jacksonObject.setMap(map);
 
+        jacksonObject.setGenderEnum(GenderEnum.MALE);
+
         // 序列化
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.findAndRegisterModules();
@@ -99,6 +102,7 @@ public class JacksonTest {
         System.out.println(stringJson);
 
         // 反序列化
+        stringJson = "{\"id\":0,\"age\":31,\"birthday\":\"2024-01-11 20:07:15\",\"date\":\"2024-01-11 12:07:15\",\"jacksonJobObjectList\":[{\"jobName\":\"jobname1\",\"jobDesc\":\"jobdesc1\"},{\"jobName\":\"jobname2\",\"jobDesc\":\"jobdesc2\"}],\"map\":{\"name\":\"Elliot\",\"age\":24},\"genderEnum\":1,\"loginName\":\"Elliot\"}";
         JacksonObject jsonObject = objectMapper.readValue(stringJson, JacksonObject.class);
         System.out.println(jsonObject);
 
@@ -128,6 +132,7 @@ class JacksonObject extends JacksonParentObject {
     private Date date;
     private List<JacksonJobObject> jacksonJobObjectList;
     private Map<String, Object> map;
+    private GenderEnum genderEnum;
 }
 @Data
 class JacksonJobObject {

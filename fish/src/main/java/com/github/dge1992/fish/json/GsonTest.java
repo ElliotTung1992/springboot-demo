@@ -1,12 +1,17 @@
 package com.github.dge1992.fish.json;
 
 import com.github.dge1992.fish.constants.enums.GenderEnum;
+import com.github.dge1992.fish.constants.enums.IEnum;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
 import lombok.Data;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -73,7 +78,9 @@ public class GsonTest {
     private static void objectExamples() {
         // Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd HH:mm:ss")
-                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter()).create();
+                .registerTypeAdapterFactory(new CustomTypeAdapterFactory<IEnum>())
+                .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                .create();
 
         // 对象类型序列化
         GsonObject gsonObject = new GsonObject();
@@ -99,6 +106,7 @@ public class GsonTest {
         System.out.println(gsonStr);
 
         // 反序列化
+        gsonStr = "{\"id\":0,\"loginName\":\"Elliot\",\"address\":\"Ningbo\",\"birthday\":\"2024-01-10 14:42:42\",\"date\":\"2024-01-10 14:42:42\",\"gsonJobObject\":{\"jobName\":\"jobName\",\"jobDesc\":\"jobDesc\"},\"map\":{\"name\":\"Elliot\",\"age\":23},\"genderEnum\":1}";
         GsonObject gsonObjectFromJson = gson.fromJson(gsonStr, GsonObject.class);
         System.out.println(gsonObjectFromJson);
 
@@ -144,6 +152,62 @@ class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeseria
     public JsonElement serialize(LocalDateTime localDateTime, Type type,
                                  JsonSerializationContext jsonSerializationContext) {
         return new JsonPrimitive(formatter.format(localDateTime));
+    }
+}
+class CustomTypeAdapterFactory<T> implements TypeAdapterFactory {
+
+    @Override
+    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
+        Class<? super T> rawType = typeToken.getRawType();
+        if(rawType.isEnum()){
+            Type[] genericInterfaces = rawType.getGenericInterfaces();
+            for (Type type : genericInterfaces) {
+                if(type == IEnum.class){
+                    return new EnumTypeAdapter<>(typeToken);
+                }
+            }
+        }
+        return null;
+    }
+}
+
+class EnumTypeAdapter<T> extends TypeAdapter<T> {
+
+    private final TypeToken<T> typeToken;
+
+    public EnumTypeAdapter(TypeToken<T> typeToken) {
+        this.typeToken = typeToken;
+    }
+
+    @Override
+    public void write(JsonWriter jsonWriter, T value) throws IOException {
+        // 序列化
+        if(value == null){
+            jsonWriter.nullValue();
+            return;
+        }
+        if(value instanceof IEnum){
+            jsonWriter.value(((IEnum)value).getValue());
+        }
+    }
+
+    @Override
+    public T read(JsonReader jsonReader) throws IOException {
+        // 反序列化
+        int code = jsonReader.nextInt();
+        try {
+            Method valuesMethod = typeToken.getRawType().getMethod("values", null);
+            IEnum[] enumArr = (IEnum[])valuesMethod.invoke(typeToken.getClass(), null);
+            for (IEnum iEnum : enumArr) {
+                if(iEnum.getCode() == code){
+                    return (T) iEnum;
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
 /**

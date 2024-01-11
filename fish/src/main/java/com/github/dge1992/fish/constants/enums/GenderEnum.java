@@ -5,8 +5,8 @@ public enum GenderEnum implements IEnum {
     MALE(1, "男"),
     FEMALE(2, "女");
 
-    private Integer code;
-    private String value;
+    private final Integer code;
+    private final String value;
 
     GenderEnum(Integer code, String value){
         this.code = code;
@@ -19,7 +19,7 @@ public enum GenderEnum implements IEnum {
     }
 
     @Override
-    public void setValue(String Value) {
-        this.value = Value;
+    public int getCode() {
+        return code;
     }
 }

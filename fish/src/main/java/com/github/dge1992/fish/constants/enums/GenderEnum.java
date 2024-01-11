@@ -1,5 +1,7 @@
 package com.github.dge1992.fish.constants.enums;
 
+import com.alibaba.fastjson2.annotation.JSONField;
+
 public enum GenderEnum implements IEnum {
 
     MALE(1, "男"),
@@ -13,6 +15,7 @@ public enum GenderEnum implements IEnum {
         this.value = value;
     }
 
+    @JSONField(value = true)
     @Override
     public String getValue() {
         return value;

@@ -3,6 +3,7 @@ package com.github.dge1992.fish.json;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
 import com.alibaba.fastjson2.annotation.JSONField;
+import com.github.dge1992.fish.constants.enums.GenderEnum;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,8 @@ public class FastJsonTest {
         fastjsonObject.setAge(31);
         fastjsonObject.setLocalDateTime(LocalDateTime.now());
         fastjsonObject.setDate(new Date());
+        fastjsonObject.setGenderEnum(GenderEnum.MALE);
+
         List<FastjsonJobObject> fastjsonJobObjectList = new ArrayList<>();
         FastjsonJobObject fastjsonJobObject = new FastjsonJobObject();
         fastjsonJobObject.setJobName("name1");
@@ -42,6 +45,8 @@ public class FastJsonTest {
 
         String jsonString = JSON.toJSONString(fastjsonObject);
         System.out.println(jsonString);
+
+        jsonString = "{\"age1\":31,\"date\":\"2024-01-11 19:28:33.177\",\"fastjsonJobObjectList\":[{\"jobDesc\":\"desc1\",\"jobName\":\"name1\"},{\"jobDesc\":\"desc2\",\"jobName\":\"name2\"}],\"genderEnum\":1,\"id\":0,\"localDateTime\":\"2024-01-11 19:28:33\",\"map\":{\"name\":\"Elliot\",\"age\":23},\"name\":\"Elliot\"}";
 
         FastjsonObject jsonObject = JSON.parseObject(jsonString, FastjsonObject.class);
         System.out.println(jsonObject);
@@ -109,11 +114,13 @@ class FastjsonObject extends FastjsonParentObject {
     private Integer age;
     private String name;
     private String address;
-    // @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime localDateTime;
     private Date date;
     private List<FastjsonJobObject> fastjsonJobObjectList;
     private Map<String, Object> map;
+    @JSONField(value = true)
+    private GenderEnum genderEnum;
 }
 @Data
 class FastjsonJobObject {

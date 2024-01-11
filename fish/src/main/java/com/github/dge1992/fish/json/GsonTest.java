@@ -78,7 +78,7 @@ public class GsonTest {
     private static void objectExamples() {
         // Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Gson gson = new GsonBuilder().setDateFormat("YYYY-MM-dd HH:mm:ss")
-                .registerTypeAdapterFactory(new CustomTypeAdapterFactory<IEnum>())
+                .registerTypeAdapterFactory(new CustomizeTypeAdapterFactory<IEnum>())
                 .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
                 .create();
 
@@ -154,7 +154,7 @@ class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeseria
         return new JsonPrimitive(formatter.format(localDateTime));
     }
 }
-class CustomTypeAdapterFactory<T> implements TypeAdapterFactory {
+class CustomizeTypeAdapterFactory<T> implements TypeAdapterFactory {
 
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {

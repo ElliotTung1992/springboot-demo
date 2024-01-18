@@ -1,10 +1,10 @@
-package com.github.dge1992.maven;
+package com.ellot1992.gateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MavenApplicationTests {
+class GatewayApplicationTests {
 
     @Test
     void contextLoads() {

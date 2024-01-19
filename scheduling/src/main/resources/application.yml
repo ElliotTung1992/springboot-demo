@@ -1,4 +1,6 @@
 spring:
+  schedule:
+    open: true
   datasource:
     quartz:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -6,6 +8,7 @@ spring:
       username: root
       password: dge_1992@163.com
   quartz:
+    open: false
     job-store-type: jdbc
     scheduler-name: clusteredScheduler
     wait-for-jobs-to-complete-on-shutdown: true

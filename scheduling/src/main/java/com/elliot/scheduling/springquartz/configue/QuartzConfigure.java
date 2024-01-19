@@ -2,9 +2,11 @@ package com.elliot.scheduling.springquartz.configue;
 
 import com.elliot.scheduling.springquartz.job.FirstJob;
 import org.quartz.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+@ConditionalOnProperty(prefix = "spring.quartz", name = "open", havingValue = "true")
 @Configuration
 public class QuartzConfigure {
 

@@ -43,11 +43,6 @@
             <artifactId>curator-recipes</artifactId>
             <version>2.8.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.bridge</groupId>
-            <artifactId>bridge-spring-boot-starter</artifactId>
-            <version>3.0.0</version>
-        </dependency>
     </dependencies>
 
     <build>

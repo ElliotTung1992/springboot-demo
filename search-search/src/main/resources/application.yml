@@ -1,0 +1,4 @@
+spring:
+  elasticsearch:
+      uris: vpn.szwutu.cn:9139
+

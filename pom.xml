@@ -194,12 +194,9 @@
         <module>restful-demo</module>
         <module>rabbitmq</module>
         <module>generator</module>
-        <module>jwt</module>
         <module>kafka</module>
-        <module>mybatis</module>
         <module>zookeeper</module>
         <module>rocketmq</module>
-        <module>maven</module>
     </modules>
 
 </project>

@@ -1,7 +1,0 @@
-server:
-  port: 8090
-
-spring:
-  redis:
-    host:
-    port: 6000

@@ -1,5 +1,7 @@
 package com.github.dge1992.fish.domain;
 
+import java.util.List;
+
 /**
  * @author dge
  * @version 1.0
@@ -13,6 +15,8 @@ public class Car {
     private String brand;
 
     private Long creatDate;
+
+    private List<String> tires;
 
     public String getBrand() {
         return this.brand;
@@ -30,11 +34,20 @@ public class Car {
         this.creatDate = creatDate;
     }
 
+    public List<String> getTires() {
+        return tires;
+    }
+
+    public void setTires(List<String> tires) {
+        this.tires = tires;
+    }
+
     @Override
     public String toString() {
         return "Car{" +
                 "brand='" + brand + '\'' +
                 ", creatDate=" + creatDate +
+                ", tires=" + tires +
                 '}';
     }
 }

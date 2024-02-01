@@ -5,8 +5,6 @@ import com.github.dge1992.fish.async.FutureService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
  * @author dge
  * @version 1.0

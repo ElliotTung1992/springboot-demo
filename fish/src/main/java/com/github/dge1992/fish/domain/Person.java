@@ -2,6 +2,7 @@ package com.github.dge1992.fish.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Map;
 
 /**
  * @author dge
@@ -21,6 +22,8 @@ public class Person implements Serializable {
     private BigDecimal money;
 
     private Car car;
+
+    private Map<String, String> map;
 
     public String getName() {
         return this.name;
@@ -62,6 +65,14 @@ public class Person implements Serializable {
         this.sex = sex;
     }
 
+    public Map<String, String> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, String> map) {
+        this.map = map;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -70,6 +81,14 @@ public class Person implements Serializable {
                 ", sex='" + sex + '\'' +
                 ", money=" + money +
                 ", car=" + car +
+                ", map=" + map +
                 '}';
+    }
+
+    public boolean isHappy(String name){
+        if("Bruce".equals(name)){
+            return true;
+        }
+        return false;
     }
 }

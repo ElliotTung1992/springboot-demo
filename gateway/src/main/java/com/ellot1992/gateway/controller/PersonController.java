@@ -3,6 +3,7 @@ package com.ellot1992.gateway.controller;
 import com.ellot1992.gateway.enums.GenderEnum;
 import com.ellot1992.gateway.request.PersonRequest;
 import com.ellot1992.gateway.response.PersonVO;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -32,4 +33,9 @@ public class PersonController {
         return personVO;
     }
 
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
+    @GetMapping("/test")
+    public void test(){
+        int i = 10 / 0;
+    }
 }

@@ -25,6 +25,13 @@ public class Person implements Serializable {
 
     private Map<String, String> map;
 
+    public Person() {
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return this.name;
     }
@@ -86,6 +93,13 @@ public class Person implements Serializable {
     }
 
     public boolean isHappy(String name){
+        if("Bruce".equals(name)){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isSad(String name){
         if("Bruce".equals(name)){
             return true;
         }

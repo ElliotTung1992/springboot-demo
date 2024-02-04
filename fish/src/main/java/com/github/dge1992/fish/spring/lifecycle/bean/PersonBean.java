@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
  * @version 1.0
  * @date 2022-03-21 12:57 下午
  */
-public class Person implements BeanNameAware, BeanFactoryAware, InitializingBean, DisposableBean {
+public class PersonBean implements BeanNameAware, BeanFactoryAware, InitializingBean, DisposableBean {
 
     @Value("dge")
     private String name;
@@ -17,7 +17,7 @@ public class Person implements BeanNameAware, BeanFactoryAware, InitializingBean
     @Value("11")
     private Integer age;
 
-    public Person() {
+    public PersonBean() {
         System.out.println("1.【Spring生命周期】执行Person的无参构造函数");
     }
 

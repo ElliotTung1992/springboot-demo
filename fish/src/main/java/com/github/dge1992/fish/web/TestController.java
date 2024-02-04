@@ -1,7 +1,7 @@
 package com.github.dge1992.fish.web;
 
 import com.github.dge1992.fish.spring.aop.DistributedLock;
-import com.github.dge1992.fish.spring.lifecycle.bean.Person;
+import com.github.dge1992.fish.spring.lifecycle.bean.PersonBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -28,18 +28,17 @@ public class TestController {
     private List<String> timeList;
 
     @Autowired
-    private Person person;
+    private PersonBean personBean;
 
-    @DistributedLock(lockKey = "")
+    // @DistributedLock(lockKey = "#{@personBean.setName(#name)}")
+    @DistributedLock(lockKey = "#{#name}")
     @GetMapping("/testSpring")
-    public void testSpring(){
-        System.out.println(agent);
-        System.out.println(person);
-        System.out.println(timeList);
+    public void testSpring(String name){
+        System.out.println("aa" + personBean.getName());
     }
 
     @PostMapping("/save")
-    public void savePerson(@RequestBody Person person){
-        System.out.println(person);
+    public void savePerson(@RequestBody PersonBean personBean){
+        System.out.println(personBean);
     }
 }

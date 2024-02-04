@@ -1,6 +1,6 @@
 package com.github.dge1992.fish.spring.lifecycle.config;
 
-import com.github.dge1992.fish.spring.lifecycle.bean.Person;
+import com.github.dge1992.fish.spring.lifecycle.bean.PersonBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
-    public Person person(){
-        return new Person();
+    public PersonBean personBean(){
+        return new PersonBean();
     }
 }

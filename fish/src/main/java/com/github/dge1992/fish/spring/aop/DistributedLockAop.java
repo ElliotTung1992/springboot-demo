@@ -1,6 +1,5 @@
 package com.github.dge1992.fish.spring.aop;
 
-import com.github.dge1992.fish.spring.spel.SPElTest;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -24,12 +23,7 @@ import java.lang.reflect.Method;
 public class DistributedLockAop {
 
     @Autowired
-    private BeanFactoryResolver beanFactoryResolver;
-
-    @Bean
-    public BeanFactoryResolver beanFactoryResolver(BeanFactory beanFactory) {
-        return new BeanFactoryResolver(beanFactory);
-    }
+    private BeanFactory beanFactory;
 
     @Around("@annotation(distributedLock)")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint, DistributedLock distributedLock){
@@ -41,7 +35,7 @@ public class DistributedLockAop {
         String lockKey = distributedLock.lockKey();
         ExpressionParser parser = new SpelExpressionParser();
         StandardEvaluationContext context = new StandardEvaluationContext();
-        context.setBeanResolver(beanFactoryResolver);
+        context.setBeanResolver(new BeanFactoryResolver(beanFactory));
 
 
         if(StringUtils.isNotBlank(lockKey)){

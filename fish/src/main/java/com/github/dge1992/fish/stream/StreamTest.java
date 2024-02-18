@@ -1,6 +1,6 @@
 package com.github.dge1992.fish.stream;
 
-import com.github.dge1992.fish.domain.Person;
+import com.github.dge1992.fish.domain.po.PersonPo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -57,19 +57,19 @@ public class StreamTest {
      * @date 2021-03-30 11:25
      */
     private static void distinguishPeekAndMap() {
-        List<Person> list = new ArrayList<>();
-        Person personOne = new Person();
-        personOne.setName("dge");
-        personOne.setAge(12);
+        List<PersonPo> list = new ArrayList<>();
+        PersonPo personPoOne = new PersonPo();
+        personPoOne.setName("dge");
+        personPoOne.setAge(12);
 
-        Person personTwo = new Person();
-        personTwo.setName("fnn");
-        personTwo.setAge(13);
+        PersonPo personPoTwo = new PersonPo();
+        personPoTwo.setName("fnn");
+        personPoTwo.setAge(13);
 
-        list.add(personOne);
-        list.add(personTwo);
+        list.add(personPoOne);
+        list.add(personPoTwo);
         // peek
-        List<Person> collect = list.stream().peek(e -> e.setAge(e.getAge() + 1)).collect(Collectors.toList());
+        List<PersonPo> collect = list.stream().peek(e -> e.setAge(e.getAge() + 1)).collect(Collectors.toList());
         System.out.println(collect);
 
         // map
@@ -77,7 +77,7 @@ public class StreamTest {
         System.out.println(collect1);
     }
 
-    private static void testTwo(List<Person> list){
-        Map<Integer, List<Person>> map = list.stream().collect(Collectors.groupingBy(Person::getAge));
+    private static void testTwo(List<PersonPo> list){
+        Map<Integer, List<PersonPo>> map = list.stream().collect(Collectors.groupingBy(PersonPo::getAge));
     }
 }

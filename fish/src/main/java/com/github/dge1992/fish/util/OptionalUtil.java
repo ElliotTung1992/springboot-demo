@@ -1,6 +1,6 @@
 package com.github.dge1992.fish.util;
 
-import com.github.dge1992.fish.domain.Person;
+import com.github.dge1992.fish.domain.po.PersonPo;
 
 import java.util.Optional;
 
@@ -23,28 +23,28 @@ public class OptionalUtil {
     }
 
     private static void ifPresent() {
-        Person person = new Person();
-        person.setName("dge");
-        Optional.ofNullable(person).ifPresent(p -> {
+        PersonPo personPo = new PersonPo();
+        personPo.setName("dge");
+        Optional.ofNullable(personPo).ifPresent(p -> {
             System.out.println(p.getName());
         });
-        Person p = Optional.ofNullable(person)
+        PersonPo p = Optional.ofNullable(personPo)
                 .filter(pe -> pe.getName().length() > 3).orElseGet(() -> {
-                    Person person1 = new Person();
-                    person1.setName("成吉思汗");
-                    return person1;
+                    PersonPo personPo1 = new PersonPo();
+                    personPo1.setName("成吉思汗");
+                    return personPo1;
                 });
         System.out.println(p);
     }
 
     private static void map() {
         //Person person = new Person();
-        Person person = null;
+        PersonPo personPo = null;
         //person.setName("dge");
-        String name = Optional.ofNullable(person).map(p -> p.getName()).orElse("fnn");
+        String name = Optional.ofNullable(personPo).map(p -> p.getName()).orElse("fnn");
         System.out.println(name);
 
-        String name2 = Optional.ofNullable(person).flatMap(p -> Optional.ofNullable(p.getName())).orElse("tf");
+        String name2 = Optional.ofNullable(personPo).flatMap(p -> Optional.ofNullable(p.getName())).orElse("tf");
         System.out.println(name2);
     }
 
@@ -52,13 +52,13 @@ public class OptionalUtil {
      * orElse操作
      */
     private static void orElse() {
-        Person person = null;
-        Person person2 = Optional.ofNullable(person).orElse(createPerson());
-        System.out.println(person2);
-        Optional.ofNullable(person)
+        PersonPo personPo = null;
+        PersonPo personPo2 = Optional.ofNullable(personPo).orElse(createPerson());
+        System.out.println(personPo2);
+        Optional.ofNullable(personPo)
                 .orElseGet(() -> createPerson());
 
-        Optional.ofNullable(person).orElseThrow(() -> new RuntimeException());
+        Optional.ofNullable(personPo).orElseThrow(() -> new RuntimeException());
     }
 
     /**
@@ -71,8 +71,8 @@ public class OptionalUtil {
         Optional.ofNullable(strNull);
     }
 
-    private static Person createPerson(){
+    private static PersonPo createPerson(){
         System.out.println("hello world");
-        return new Person();
+        return new PersonPo();
     }
 }

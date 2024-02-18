@@ -1,6 +1,6 @@
 package com.github.dge1992.fish.util;
 
-import com.github.dge1992.fish.domain.Person;
+import com.github.dge1992.fish.domain.po.PersonPo;
 import com.github.dge1992.fish.java.util.stream.BigDecimalCollector;
 
 import java.math.BigDecimal;
@@ -34,29 +34,29 @@ public class MapUtil {
     }
 
     private void caseOne() {
-        List<Person> personList = new ArrayList<>();
+        List<PersonPo> personPoList = new ArrayList<>();
 
-        Person person = new Person();
-        person.setName("dge");
-        person.setAge(12);
-        person.setMoney(new BigDecimal("1.02"));
+        PersonPo personPo = new PersonPo();
+        personPo.setName("dge");
+        personPo.setAge(12);
+        personPo.setMoney(new BigDecimal("1.02"));
 
-        Person person2 = new Person();
-        person2.setName("fnn");
-        person2.setAge(26);
-        person2.setMoney(new BigDecimal("2.54"));
+        PersonPo personPo2 = new PersonPo();
+        personPo2.setName("fnn");
+        personPo2.setAge(26);
+        personPo2.setMoney(new BigDecimal("2.54"));
 
-        Person person3 = new Person();
-        person3.setName("dge");
-        person3.setAge(39);
-        person3.setMoney(new BigDecimal("6.10"));
+        PersonPo personPo3 = new PersonPo();
+        personPo3.setName("dge");
+        personPo3.setAge(39);
+        personPo3.setMoney(new BigDecimal("6.10"));
 
-        personList.add(person);
-        personList.add(person2);
-        personList.add(person3);
+        personPoList.add(personPo);
+        personPoList.add(personPo2);
+        personPoList.add(personPo3);
 
-        Map<String, List<Person>> map = personList.stream()
-                .collect(Collectors.groupingBy(Person::getName));
+        Map<String, List<PersonPo>> map = personPoList.stream()
+                .collect(Collectors.groupingBy(PersonPo::getName));
 
         map.entrySet()
                 .forEach(e -> {
@@ -65,9 +65,9 @@ public class MapUtil {
                 });
 
         map.replaceAll((k, v) -> {
-            List<Person> list = new ArrayList<>();
-            Person p = new Person();
-            int sum = v.stream().mapToInt(Person::getAge)
+            List<PersonPo> list = new ArrayList<>();
+            PersonPo p = new PersonPo();
+            int sum = v.stream().mapToInt(PersonPo::getAge)
                     .sum();
             p.setAge(sum);
             list.add(p);
@@ -82,8 +82,8 @@ public class MapUtil {
 
         System.out.println("=================");
 
-        Map<String, Integer> collect = personList.stream()
-                .collect(Collectors.groupingBy(Person::getName, Collectors.summingInt(Person::getAge)));
+        Map<String, Integer> collect = personPoList.stream()
+                .collect(Collectors.groupingBy(PersonPo::getName, Collectors.summingInt(PersonPo::getAge)));
 
         collect.entrySet()
                 .forEach(e -> {
@@ -94,9 +94,9 @@ public class MapUtil {
         System.out.println("=================");
 
 
-        Map<String, BigDecimal> bigDecimalMap = personList.stream()
-                .collect(Collectors.groupingBy(Person::getName,
-                        Collectors.mapping(Person::getMoney, BigDecimalCollector.sum())));
+        Map<String, BigDecimal> bigDecimalMap = personPoList.stream()
+                .collect(Collectors.groupingBy(PersonPo::getName,
+                        Collectors.mapping(PersonPo::getMoney, BigDecimalCollector.sum())));
 
         bigDecimalMap.entrySet()
                 .forEach(e -> {

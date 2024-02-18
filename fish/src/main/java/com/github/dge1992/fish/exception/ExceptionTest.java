@@ -1,6 +1,6 @@
 package com.github.dge1992.fish.exception;
 
-import com.github.dge1992.fish.domain.Person;
+import com.github.dge1992.fish.domain.po.PersonPo;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -9,12 +9,12 @@ public class ExceptionTest {
     public static void main(String[] args) {
         try{
             // 业务代码处理
-            Person person = null;
-            String name = person.getName();
+            PersonPo personPo = null;
+            String name = personPo.getName();
             try{
                 // 业务代码处理
-                Person person2 = null;
-                String name2 = person2.getName();
+                PersonPo personPo2 = null;
+                String name2 = personPo2.getName();
             }catch(Exception e){
                 log.error("你的程序有异常啦",e);
             }

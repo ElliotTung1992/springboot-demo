@@ -1,4 +1,4 @@
-package com.github.dge1992.fish.web;
+package com.github.dge1992.fish.controller;
 
 import com.github.dge1992.fish.spring.aop.DistributedLock;
 import com.github.dge1992.fish.spring.lifecycle.bean.PersonBean;

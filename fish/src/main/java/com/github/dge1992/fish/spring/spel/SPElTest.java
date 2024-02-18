@@ -1,7 +1,7 @@
 package com.github.dge1992.fish.spring.spel;
 
 import com.github.dge1992.fish.domain.Car;
-import com.github.dge1992.fish.domain.Person;
+import com.github.dge1992.fish.domain.po.PersonPo;
 import org.springframework.expression.*;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
@@ -44,13 +44,13 @@ public class SPElTest {
     }
 
     private void demo() {
-        Person person = new Person("Bruce");
+        PersonPo personPo = new PersonPo("Bruce");
         Car car = new Car();
         //car.setBrand("Benz");
-        person.setCar(car);
+        personPo.setCar(car);
 
         StandardEvaluationContext context = new StandardEvaluationContext();
-        context.setVariable("person", person);
+        context.setVariable("person", personPo);
         ExpressionParser parser = new SpelExpressionParser();
 
         String value = parser.parseExpression("#person.name").getValue(context, String.class);
@@ -84,13 +84,13 @@ public class SPElTest {
     }
 
     private void eighteen() {
-        Person person = new Person("Bruce");
+        PersonPo personPo = new PersonPo("Bruce");
         Car car = new Car();
         car.setBrand("Benz");
-        person.setCar(car);
-        person.setName("Bruce");
+        personPo.setCar(car);
+        personPo.setName("Bruce");
 
-        StandardEvaluationContext context = new StandardEvaluationContext(person);
+        StandardEvaluationContext context = new StandardEvaluationContext(personPo);
         String brand = ep.parseExpression("#person?.name").getValue(String.class);
         System.out.println(brand);
     }
@@ -117,17 +117,17 @@ public class SPElTest {
 
     private void fourteen() throws NoSuchMethodException {
         StandardEvaluationContext context = new StandardEvaluationContext();
-        context.registerFunction("isSad", Person.class.getDeclaredMethod("isSad", new Class[] { String.class }));
+        context.registerFunction("isSad", PersonPo.class.getDeclaredMethod("isSad", new Class[] { String.class }));
         Boolean value = ep.parseExpression("#isSad('Bruce')").getValue(context, Boolean.class);
         System.out.println(value);
     }
 
     private void thirteen() {
-        Person person = new Person();
-        person.setName("Bruce");
-        StandardEvaluationContext context = new StandardEvaluationContext(person);
+        PersonPo personPo = new PersonPo();
+        personPo.setName("Bruce");
+        StandardEvaluationContext context = new StandardEvaluationContext(personPo);
         context.setVariable("name", "Bruce");
-        context.setVariable("person", person);
+        context.setVariable("person", personPo);
         String value = ep.parseExpression("#name").getValue(context, String.class);
         System.out.println(value);
         String value1 = ep.parseExpression("#person.name").getValue(context, String.class);
@@ -150,18 +150,18 @@ public class SPElTest {
     }
 
     private void twelve() {
-        Person person = new Person();
-        StandardEvaluationContext context = new StandardEvaluationContext(person);
+        PersonPo personPo = new PersonPo();
+        StandardEvaluationContext context = new StandardEvaluationContext(personPo);
         context.setVariable("newName", "Mike Tesla");
 
         Object value = ep.parseExpression("name = #newName").getValue(context);
         System.out.println(value);
-        System.out.println(person.getName());
+        System.out.println(personPo.getName());
     }
 
     private void eleven() {
-        Person person = ep.parseExpression("new com.github.dge1992.fish.domain.Person('Bruce')").getValue(Person.class);
-        System.out.println(person);
+        PersonPo personPo = ep.parseExpression("new com.github.dge1992.fish.domain.Person('Bruce')").getValue(PersonPo.class);
+        System.out.println(personPo);
     }
 
     // 类型
@@ -176,8 +176,8 @@ public class SPElTest {
         Boolean value = ep.parseExpression("true and false").getValue(Boolean.class);
         System.out.println(value);
 
-        Person person = new Person();
-        Boolean value1 = ep.parseExpression("isHappy('Bruce') and isHappy('Mike')").getValue(person, Boolean.class);
+        PersonPo personPo = new PersonPo();
+        Boolean value1 = ep.parseExpression("isHappy('Bruce') and isHappy('Mike')").getValue(personPo, Boolean.class);
         System.out.println(value1);
 
         Boolean value2 = ep.parseExpression("true or false").getValue(Boolean.class);
@@ -229,8 +229,8 @@ public class SPElTest {
         String value1 = ep.parseExpression("'abc'.substring(2,3)").getValue(String.class);
         System.out.println(value1);
 
-        Person person = new Person();
-        Boolean b = (Boolean) ep.parseExpression("isHappy('Mike')").getValue(person);
+        PersonPo personPo = new PersonPo();
+        Boolean b = (Boolean) ep.parseExpression("isHappy('Mike')").getValue(personPo);
         System.out.println(b);
     }
 
@@ -244,19 +244,19 @@ public class SPElTest {
     }
 
     private void four() {
-        Person person = new Person();
+        PersonPo personPo = new PersonPo();
         Map<String, String> map = new HashMap<>();
         map.put("name", "Bruce");
-        person.setMap(map);
+        personPo.setMap(map);
         ExpressionParser ep = new SpelExpressionParser();
-        String name = ep.parseExpression("map['name']").getValue(person, String.class);
+        String name = ep.parseExpression("map['name']").getValue(personPo, String.class);
         System.out.println(name);
     }
 
     private void three() {
-        Person person = new Person();
-        person.setName("Elliot");
-        person.setAge(11);
+        PersonPo personPo = new PersonPo();
+        personPo.setName("Elliot");
+        personPo.setAge(11);
         Car car = new Car();
         car.setCreatDate(1L);
         car.setBrand("Benz");
@@ -266,10 +266,10 @@ public class SPElTest {
         tires.add("3");
         tires.add("4");
         car.setTires(tires);
-        person.setCar(car);
+        personPo.setCar(car);
 
         ExpressionParser ep = new SpelExpressionParser();
-        String value = ep.parseExpression("car.tires[3]").getValue(person, String.class);
+        String value = ep.parseExpression("car.tires[3]").getValue(personPo, String.class);
         System.out.println(value);
     }
 
@@ -290,16 +290,16 @@ public class SPElTest {
         Object obj = ep.parseExpression("null").getValue();
         System.out.println(obj);
 
-        Person person = new Person();
-        person.setName("Elliot");
-        person.setAge(11);
+        PersonPo personPo = new PersonPo();
+        personPo.setName("Elliot");
+        personPo.setAge(11);
         Car car = new Car();
         car.setCreatDate(1L);
         car.setBrand("Benz");
-        person.setCar(car);
-        Long age = (Long) ep.parseExpression("Car.CreatDate + 20").getValue(person);
+        personPo.setCar(car);
+        Long age = (Long) ep.parseExpression("Car.CreatDate + 20").getValue(personPo);
         System.out.println(age);
-        String name = (String) ep.parseExpression("car.Brand").getValue(person);
+        String name = (String) ep.parseExpression("car.Brand").getValue(personPo);
         System.out.println(name);
     }
 
@@ -320,16 +320,16 @@ public class SPElTest {
         System.out.println(expression3.getValue(String.class));
 
 
-        Person person = new Person();
-        person.setName("Elliot");
-        person.setAge(11);
+        PersonPo personPo = new PersonPo();
+        personPo.setName("Elliot");
+        personPo.setAge(11);
         Expression expression4 = parser.parseExpression("name");
-        EvaluationContext context = new StandardEvaluationContext(person);
+        EvaluationContext context = new StandardEvaluationContext(personPo);
         String name = (String) expression4.getValue(context);
         System.out.println(name);
 
         Expression expression5 = parser.parseExpression("name");
-        System.out.println(expression5.getValue(person));
+        System.out.println(expression5.getValue(personPo));
 
         Expression expression6 = parser.parseExpression("name == 'Elliot'");
         System.out.println(expression6.getValue(context, Boolean.class));
@@ -340,6 +340,6 @@ class MyBeanResolver implements BeanResolver{
 
     @Override
     public Object resolve(EvaluationContext evaluationContext, String s) throws AccessException {
-        return new Person("Bruce");
+        return new PersonPo("Bruce");
     }
 }

@@ -1,6 +1,6 @@
 package com.github.dge1992.fish.serial;
 
-import com.github.dge1992.fish.domain.Person;
+import com.github.dge1992.fish.domain.po.PersonPo;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -11,31 +11,31 @@ import java.nio.file.Files;
 public class SerialTest {
 
     public static void main(String[] args) throws Exception {
-        Person person = new Person();
-        person.setName("Elliot");
-        person.setAge(31);
+        PersonPo personPo = new PersonPo();
+        personPo.setName("Elliot");
+        personPo.setAge(31);
 
-        System.out.println(person);
-        serialize(person);
+        System.out.println(personPo);
+        serialize(personPo);
 
-        person = deserialize();
-        System.out.println(person);
+        personPo = deserialize();
+        System.out.println(personPo);
     }
 
     // 反序列化
-    private static Person deserialize() throws Exception {
+    private static PersonPo deserialize() throws Exception {
         ObjectInputStream objectInputStream =
                 new ObjectInputStream(Files.newInputStream(
                         new File("/Users/ganendong/Documents/workspace/blog/Computer/person.txt").toPath()));
-        return (Person) objectInputStream.readObject();
+        return (PersonPo) objectInputStream.readObject();
     }
 
     // 序列化
-    private static void serialize(Person person) throws Exception {
+    private static void serialize(PersonPo personPo) throws Exception {
         ObjectOutputStream objectOutputStream =
                 new ObjectOutputStream(Files.newOutputStream(
                         new File("/Users/ganendong/Documents/workspace/blog/Computer/person.txt").toPath()));
-        objectOutputStream.writeObject(person);
+        objectOutputStream.writeObject(personPo);
         objectOutputStream.close();
     }
 }

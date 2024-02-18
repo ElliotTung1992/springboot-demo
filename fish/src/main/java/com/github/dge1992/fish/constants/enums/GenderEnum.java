@@ -32,7 +32,7 @@ public enum GenderEnum implements IEnum {
     @JsonCreator
     public static GenderEnum getEnum(Integer code) {
         for (GenderEnum genderEnum : GenderEnum.values()) {
-            if(genderEnum.code == code){
+            if(genderEnum.code.equals(code)){
                 return genderEnum;
             }
         }

@@ -22,7 +22,7 @@ public interface MapStructMapping {
     })
     PersonDTO personPo2PersonDTO(PersonPo personPo);
 
-    static GenderEnum getEnum(Integer code) {
+    default GenderEnum getEnum(Integer code) {
         for (GenderEnum genderEnum : GenderEnum.values()) {
             if(Objects.nonNull(code) && genderEnum.getCode() == code){
                 return genderEnum;

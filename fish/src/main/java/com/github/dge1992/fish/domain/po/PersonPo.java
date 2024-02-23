@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +29,8 @@ public class PersonPo implements Serializable {
     private BigDecimal money;
 
     private Car car;
+
+    private List<PersonPo> offSpringList;
 
     private Map<String, String> map;
 

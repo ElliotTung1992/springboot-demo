@@ -4,6 +4,8 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.github.dge1992.fish.constants.enums.GenderEnum;
+import com.github.dge1992.fish.domain.dto.PersonDTO;
+import com.github.dge1992.fish.domain.po.PersonPo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -12,11 +14,39 @@ import java.util.*;
 public class FastJsonTest {
 
     public static void main(String[] args) {
-        primitivesExamples();
+        /*primitivesExamples();
         mapsExamples();
         arrayExamples();
         collectionsExamples();
-        objectExamples();
+        objectExamples();*/
+        handleEmptyString();
+    }
+
+    private static void handleEmptyString(){
+        PersonDTO personDTO = null;
+        String jsonString = JSON.toJSONString(personDTO);
+        System.out.println(jsonString);
+        String jsonString1 = JSON.toJSONString(null);
+        System.out.println(jsonString1);
+        Integer i = null;
+        String jsonString2 = JSON.toJSONString(i);
+        System.out.println(jsonString2);
+        List<Integer> list = null;
+        String jsonString3 = JSON.toJSONString(list);
+        System.out.println(jsonString3);
+        Map<String, String> map = null;
+        String jsonString4 = JSON.toJSONString(map);
+        System.out.println(jsonString4);
+
+        PersonDTO personDTO2 = new PersonDTO();
+        String jsonString5 = JSON.toJSONString(personDTO2);
+        System.out.println(jsonString5);
+        List<Integer> list2 = new ArrayList<>();
+        String jsonString6 = JSON.toJSONString(list2);
+        System.out.println(jsonString6);
+        Map<String, String> map2 = new HashMap<>();
+        String jsonString7 = JSON.toJSONString(map2);
+        System.out.println(jsonString7);
     }
 
     private static void objectExamples() {

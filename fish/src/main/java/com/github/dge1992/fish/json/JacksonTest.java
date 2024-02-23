@@ -2,10 +2,14 @@ package com.github.dge1992.fish.json;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.dge1992.fish.constants.enums.GenderEnum;
+import com.github.dge1992.fish.domain.dto.PersonDTO;
+import com.github.dge1992.fish.domain.po.PersonPo;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -13,11 +17,47 @@ import java.util.*;
 
 public class JacksonTest {
 
+    private static ObjectMapper objectMapper = new ObjectMapper();
+
+    static {
+        // 序列化数据的时候只序列化不为空的属性
+        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    }
+
     public static void main(String[] args) throws Exception {
-        objectExamples();
+        /*objectExamples();
         mapsExamples();
         collectionsExamples();
-        arrayExamples();
+        arrayExamples();*/
+        handleEmptyString();
+    }
+
+    private static void handleEmptyString() throws JsonProcessingException {
+        PersonDTO personDTO = null;
+        String jsonString = objectMapper.writeValueAsString(personDTO);
+        System.out.println(jsonString);
+        String jsonString1 = objectMapper.writeValueAsString(null);
+        System.out.println(jsonString1);
+        Integer i = null;
+        String jsonString2 = objectMapper.writeValueAsString(i);
+        System.out.println(jsonString2);
+        List<Integer> list = null;
+        String jsonString3 = objectMapper.writeValueAsString(list);
+        System.out.println(jsonString3);
+        Map<String, String> map = null;
+        String jsonString4 = objectMapper.writeValueAsString(map);
+        System.out.println(jsonString4);
+
+
+        PersonPo personPo = new PersonPo();
+        String jsonString5 = objectMapper.writeValueAsString(personPo);
+        System.out.println(jsonString5);
+        List<Integer> list2 = new ArrayList<>();
+        String jsonString6 = objectMapper.writeValueAsString(list2);
+        System.out.println(jsonString6);
+        Map<String, String> map2 = new HashMap<>();
+        String jsonString7 = objectMapper.writeValueAsString(map2);
+        System.out.println(jsonString7);
     }
 
     private static void arrayExamples() throws Exception {

@@ -2,6 +2,7 @@ package com.github.dge1992.fish.json;
 
 import com.github.dge1992.fish.constants.enums.GenderEnum;
 import com.github.dge1992.fish.constants.enums.IEnum;
+import com.github.dge1992.fish.domain.dto.PersonDTO;
 import com.google.gson.*;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -22,11 +23,40 @@ public class GsonTest {
     static Gson gson = new Gson();
 
     public static void main(String[] args) {
-        objectExamples();
+        /*objectExamples();
         primitivesExamples();
         arrayExamples();
         collectionsExamples();
-        mapsExamples();
+        mapsExamples();*/
+        handleEmptyString();
+    }
+
+    private static void handleEmptyString() {
+        PersonDTO personDTO = null;
+        String jsonString = gson.toJson(personDTO);
+        System.out.println(jsonString);
+        String jsonString1 = gson.toJson(null);
+        System.out.println(jsonString1);
+        Integer i = null;
+        String jsonString2 = gson.toJson(i);
+        System.out.println(jsonString2);
+        List<Integer> list = null;
+        String jsonString3 = gson.toJson(list);
+        System.out.println(jsonString3);
+        Map<String, String> map = null;
+        String jsonString4 = gson.toJson(map);
+        System.out.println(jsonString4);
+
+
+        PersonDTO personDTO2 = new PersonDTO();
+        String jsonString5 = gson.toJson(personDTO2);
+        System.out.println(jsonString5);
+        List<Integer> list2 = new ArrayList<>();
+        String jsonString6 = gson.toJson(list2);
+        System.out.println(jsonString6);
+        Map<String, String> map2 = new HashMap<>();
+        String jsonString7 = gson.toJson(map2);
+        System.out.println(jsonString7);
     }
 
     private static void mapsExamples() {

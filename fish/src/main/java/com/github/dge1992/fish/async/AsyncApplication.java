@@ -1,5 +1,8 @@
 package com.github.dge1992.fish.async;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author dge
  * @version 1.0
@@ -23,5 +26,7 @@ public class AsyncApplication {
          *  异步下的情况: Tomcat的线程用于接收请求调度，由具体的异步线程池执行具体的业务
          *
          */
+
+        List<Integer> list = new ArrayList<>();
     }
 }

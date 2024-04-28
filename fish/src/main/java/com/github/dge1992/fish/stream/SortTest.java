@@ -1,6 +1,7 @@
 package com.github.dge1992.fish.stream;
 
 import com.github.dge1992.fish.domain.Car;
+import com.github.dge1992.fish.domain.po.PersonPo;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -15,6 +16,32 @@ import java.util.stream.Collectors;
 public class SortTest {
 
     public static void main(String[] args) {
+        SortTest sortTest = new SortTest();
+        sortTest.caseTwo();
+    }
+
+    private void caseTwo(){
+        List<PersonPo> personPoList = new ArrayList<>();
+        PersonPo personPo1 = new PersonPo();
+        personPo1.setAge(10);
+        personPoList.add(personPo1);
+        PersonPo person2 = new PersonPo();
+        person2.setAge(20);
+        personPoList.add(person2);
+        PersonPo person3 = new PersonPo();
+        person3.setAge(0);
+        personPoList.add(person3);
+
+        personPoList = personPoList.stream()
+                .sorted(Comparator.comparing(PersonPo::getAge))
+                .collect(Collectors.toList());
+
+        for (PersonPo personPo : personPoList) {
+            System.out.println(personPo.getAge());
+        }
+    }
+
+    private void caseOne(){
         List<Car> carList = new ArrayList<>();
         Car car1 = new Car();
         car1.setBrand("bnez");

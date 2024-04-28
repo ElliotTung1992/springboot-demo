@@ -13,7 +13,7 @@ class JasyptComponentTest extends FishApplicationTests {
 
     @Test
     void testEncrypt() {
-        jasyptComponent.testEncrypt();
+        jasyptComponent.testEncrypt("哈哈");
     }
 
     @Test

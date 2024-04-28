@@ -19,12 +19,13 @@ public class JasyptComponent {
     @Autowired
     private StringEncryptor encryptor;
 
-    public void testEncrypt(){
-        System.out.println(encryptor.encrypt(agent));
+    public void testEncrypt(String agent){
+        System.out.println("encrypt:" + encryptor.encrypt(agent));
     }
 
     public void testDecrypt(){
-        String str = "oq+J+VvRwhRY3mDfH1wo0WbYog6Cd/sm+EnMRwdlrDFGS/7gUlkh0KeYXvQcmoXW";
+        String str = "Zgl6Mj02c1BFjN7a2F+NRl73CuxEQLQWKt40a0rHAK7GgrIF4BVsPbhIWepqYK5a";
+        // String str = "FLkagpq8BuB3M4ZAFVvb4KKUiIa6utC/k2ibIjp8bbX/Ji63f1aHeiMueLR92b3J";
         System.out.println(encryptor.decrypt(str));
     }
 }

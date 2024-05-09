@@ -22,10 +22,13 @@ public class LoginController {
         String tokenID = UUID.randomUUID().toString().replaceAll("-", "");
         Cookie sessionCookie = new Cookie("token", tokenID);
         sessionCookie.setMaxAge(5 * 60);
+        // httpOnly: 浏览器将禁止JS对Cookie的访问和修改
+        sessionCookie.setHttpOnly(Boolean.TRUE);
         response.addCookie(sessionCookie);
 
         Cookie usernameCookie = new Cookie("username", "Bruce");
         usernameCookie.setMaxAge(5 * 60);
+        usernameCookie.setHttpOnly(Boolean.TRUE);
         response.addCookie(usernameCookie);
     }
 

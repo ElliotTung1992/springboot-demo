@@ -19,7 +19,7 @@ public class WordCountStreamUnboundedTest {
         // DataStreamSource<String> stringDataStreamSource = env.readTextFile("flink-demo/data/word_count.txt");
         // 读取数据
         DataStreamSource<String> stringDataStreamSource =
-                env.socketTextStream("127.0.0.1", 7777);
+                env.socketTextStream("10.211.55.4", 7777);
 
         // 处理数据
         stringDataStreamSource.flatMap((FlatMapFunction<String, Tuple2<String, Integer>>) (value, out) -> {

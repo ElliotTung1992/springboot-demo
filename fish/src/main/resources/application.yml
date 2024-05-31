@@ -15,4 +15,9 @@ jasypt:
 spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss # 设置全局@JsonFormat的格式pattern
+  redis:
+    host: 10.211.55.41
+    port: 6379
 
+server:
+  port: 9000

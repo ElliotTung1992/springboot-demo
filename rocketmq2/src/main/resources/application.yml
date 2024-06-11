@@ -1,3 +1,5 @@
+server:
+  port: 8081
 
 
 rocketmq:
@@ -13,4 +15,3 @@ rocketmq:
     compressMessageBodyThreshold: 4096
   consumer:
     group: CONSUMER_TEST_GROUP
-

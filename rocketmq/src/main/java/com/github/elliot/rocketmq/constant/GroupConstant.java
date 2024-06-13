@@ -11,6 +11,8 @@ public abstract class GroupConstant {
 
     public static final String CONSUMER_ORDERLY_TEST_GROUP = "CONSUMER_ORDERLY_TEST_GROUP";
 
+    public static final String CONSUMER_ONE_WAY_GROUP = "CONSUMER_ONE_WAY_GROUP";
+
     public static final String CONSUMER_TAG_TEST_GROUP = "CONSUMER_TAG_TEST_GROUP";
 
     public static final String CONSUMER_TAG_TWO_TEST_GROUP = "CONSUMER_TAG_TWO_TEST_GROUP";

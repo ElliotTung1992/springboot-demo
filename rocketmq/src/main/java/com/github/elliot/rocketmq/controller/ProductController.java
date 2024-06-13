@@ -3,7 +3,6 @@ package com.github.elliot.rocketmq.controller;
 import com.github.elliot.rocketmq.constant.TagConstant;
 import com.github.elliot.rocketmq.constant.TopicConstant;
 import com.github.elliot.rocketmq.domain.Message;
-import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -77,4 +76,10 @@ public class ProductController {
             }
         });
     }
+
+    @GetMapping("/sendOneWayMessage")
+    public void sendOneWayMessage(){
+        rocketMQTemplate.sendOneWay(TopicConstant.ONE_WAY_TOPIC, "A OneWay Message");
+    }
+
 }

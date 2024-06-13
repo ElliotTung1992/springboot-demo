@@ -7,6 +7,10 @@ public abstract class TopicConstant {
 
     public static final String TEST_TOPIC = "TEST_TOPIC";
 
+    public static final String TEST_DELAY_TOPIC = "TEST_DELAY_TOPIC";
+
+    public static final String TEST_ASYNC_TOPIC = "TEST_ASYNC_TOPIC";
+
     public static final String TEST_TOPIC_ORDERLY = "TEST_TOPIC_ORDERLY";
 
     public static final String TEST_TAG_TOPIC = "TEST_TAG_TOPIC";

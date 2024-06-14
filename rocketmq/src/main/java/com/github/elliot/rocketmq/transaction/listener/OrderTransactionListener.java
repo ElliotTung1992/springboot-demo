@@ -1,7 +1,7 @@
 package com.github.elliot.rocketmq.transaction.listener;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.elliot.rocketmq.transaction.domain.OrderDTO;
+import com.github.elliot.rocketmq.transaction.DTO.OrderDTO;
 import com.github.elliot.rocketmq.transaction.service.OrderService;
 import com.github.elliot.rocketmq.transaction.service.TransactionLogService;
 import org.apache.rocketmq.client.producer.LocalTransactionState;

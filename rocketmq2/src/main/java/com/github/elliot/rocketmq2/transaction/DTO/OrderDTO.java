@@ -1,4 +1,4 @@
-package com.github.elliot.rocketmq.transaction.domain;
+package com.github.elliot.rocketmq2.transaction.DTO;
 
 import lombok.Data;
 
@@ -10,4 +10,8 @@ public class OrderDTO {
     private String orderNo;
 
     private String commodityCode;
+
+    private Long userId;
+
+    private Double amount;
 }

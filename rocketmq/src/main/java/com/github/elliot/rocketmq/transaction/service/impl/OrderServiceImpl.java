@@ -3,7 +3,7 @@ package com.github.elliot.rocketmq.transaction.service.impl;
 import cn.hutool.core.lang.Snowflake;
 import com.alibaba.fastjson.JSON;
 import com.github.elliot.rocketmq.transaction.domain.Order;
-import com.github.elliot.rocketmq.transaction.domain.OrderDTO;
+import com.github.elliot.rocketmq.transaction.DTO.OrderDTO;
 import com.github.elliot.rocketmq.transaction.domain.TransactionLog;
 import com.github.elliot.rocketmq.transaction.mapper.OrderMapper;
 import com.github.elliot.rocketmq.transaction.mapper.TransactionLogMapper;

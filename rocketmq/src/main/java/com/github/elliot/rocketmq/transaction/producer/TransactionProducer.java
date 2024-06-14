@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class TransactionProducer {
 
-    private String producerGroup = "order_trans_group";
+    private static final String producerGroup = "order_trans_group";
 
     private TransactionMQProducer producer;
 
@@ -44,9 +44,10 @@ public class TransactionProducer {
             e.printStackTrace();
         }
     }
+
     //事务消息发送
     public TransactionSendResult send(String data, String topic) throws MQClientException {
-        Message message = new Message(topic,data.getBytes());
+        Message message = new Message(topic, data.getBytes());
         return this.producer.sendMessageInTransaction(message, null);
     }
 }

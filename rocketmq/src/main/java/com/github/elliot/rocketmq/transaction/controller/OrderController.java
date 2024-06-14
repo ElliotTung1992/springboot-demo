@@ -1,6 +1,6 @@
 package com.github.elliot.rocketmq.transaction.controller;
 
-import com.github.elliot.rocketmq.transaction.domain.OrderDTO;
+import com.github.elliot.rocketmq.transaction.DTO.OrderDTO;
 import com.github.elliot.rocketmq.transaction.service.OrderService;
 import lombok.extern.log4j.Log4j2;
 import org.apache.rocketmq.client.exception.MQClientException;

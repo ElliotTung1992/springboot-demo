@@ -33,7 +33,7 @@ public class OrderListener implements MessageListenerConcurrently {
             }
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         }catch (Exception e){
-            logger.error("处理消费者数据发生异常。{}", e.getMessage(), e);
+            logger.error("处理消费者数据发生异常 {}", e.getMessage(), e);
             return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         }
     }

@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
         //1.创建订单
         Order order = new Order();
         BeanUtils.copyProperties(orderDTO,order);
-        orderMapper.createOrder(order);
+        orderMapper.insert(order);
 
         //2.写入事务日志
         TransactionLog log = new TransactionLog();
@@ -59,6 +59,8 @@ public class OrderServiceImpl implements OrderService {
     public void createOrder(OrderDTO order) throws MQClientException {
         order.setId(snowflake.nextId());
         order.setOrderNo(snowflake.nextIdStr());
+        order.setUserId(123L);
+        order.setAmount(10.0);
         producer.send(JSON.toJSONString(order),"order");
     }
 }

@@ -10,4 +10,8 @@ public class OrderDTO {
     private String orderNo;
 
     private String commodityCode;
+
+    private Long userId;
+
+    private Double amount;
 }

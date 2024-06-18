@@ -18,6 +18,9 @@ public class ProductController {
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
 
+    /**
+     * 发送同步消息
+     */
     @GetMapping("/sendMessage")
     public void sendMessage(){
         SendResult sendResult = rocketMQTemplate
@@ -25,6 +28,9 @@ public class ProductController {
         System.out.println(sendResult);
     }
 
+    /**
+     * 发送标签消息
+     */
     @GetMapping("/sendMessageAndTag")
     public void sendMessageAndTag(){
         SendResult sendResult = rocketMQTemplate
@@ -32,6 +38,9 @@ public class ProductController {
         System.out.println(sendResult);
     }
 
+    /**
+     * 发送广播消息
+     */
     @GetMapping("/sendMessageByBroadCasting")
     public void sendMessageByBroadCasting(){
         SendResult sendResult = rocketMQTemplate
@@ -39,6 +48,9 @@ public class ProductController {
         System.out.println(sendResult);
     }
 
+    /**
+     * 同步批量发送消息
+     */
     @GetMapping("/sendBatchMessage")
     public void sendBatchMessage(){
         for (int i = 0; i < 30; i++) {
@@ -46,6 +58,9 @@ public class ProductController {
         }
     }
 
+    /**
+     * 发送顺序消息
+     */
     @GetMapping("/sendOrderlyMessage")
     public void sendOrderlyMessage(){
         for (int i = 0; i < 30; i++) {
@@ -54,6 +69,9 @@ public class ProductController {
         }
     }
 
+    /**
+     * 发送延时消息
+     */
     @GetMapping("/sendDelayMessage")
     public void sendDelayMessage(){
         Message message = new Message();
@@ -62,6 +80,9 @@ public class ProductController {
         rocketMQTemplate.syncSendDelayTimeSeconds(TopicConstant.TEST_DELAY_TOPIC, message, 10);
     }
 
+    /**
+     * 发送一步消息
+     */
     @GetMapping("/sendAsyncMessage")
     public void sendAsyncMessage(){
         rocketMQTemplate.asyncSend(TopicConstant.TEST_ASYNC_TOPIC, "A Async Message", new SendCallback() {
@@ -77,6 +98,9 @@ public class ProductController {
         });
     }
 
+    /**
+     * 发送单向消息
+     */
     @GetMapping("/sendOneWayMessage")
     public void sendOneWayMessage(){
         rocketMQTemplate.sendOneWay(TopicConstant.ONE_WAY_TOPIC, "A OneWay Message");

@@ -27,7 +27,8 @@ public class OrderListener implements MessageListenerConcurrently {
         logger.info("消费者线程监听到消息");
         try{
             for (MessageExt message:list) {
-                logger.info("开始处理订单数据，准备增加积分....");
+                int reconsumeTimes = message.getReconsumeTimes();
+                logger.info("重复消费次数:{}", reconsumeTimes);
                 OrderDTO order  = JSONObject.parseObject(message.getBody(), OrderDTO.class);
                 pointsService.increasePoints(order);
             }

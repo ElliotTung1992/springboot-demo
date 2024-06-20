@@ -1,4 +1,4 @@
-package com.github.elliot.rocketmq.transaction.DTO;
+package com.github.elliot.rocketmq.transaction.dto;
 
 import lombok.Data;
 

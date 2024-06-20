@@ -20,4 +20,7 @@ public abstract class GroupConstant {
     public static final String CONSUMER_TEST_BROADCASTING_GROUP_ELLIOT = "CONSUMER_TEST_BROADCASTING_GROUP_ELLIOT";
 
     public static final String CONSUMER_TEST_DELAY_GROUP = "CONSUMER_TEST_DELAY_GROUP";
+
+    public static final String TEST_TRANSACTION_CREATE_ORDER_CONSUMER_GROUP =
+            "TEST_TRANSACTION_CREATE_ORDER_CONSUMER_GROUP";
 }

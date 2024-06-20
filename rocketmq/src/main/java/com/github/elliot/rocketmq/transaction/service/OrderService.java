@@ -1,6 +1,6 @@
 package com.github.elliot.rocketmq.transaction.service;
 
-import com.github.elliot.rocketmq.transaction.DTO.OrderDTO;
+import com.github.elliot.rocketmq.transaction.dto.OrderDTO;
 import org.apache.rocketmq.client.exception.MQClientException;
 
 public interface OrderService {

@@ -2,15 +2,17 @@ package com.github.elliot.rocketmq.controller;
 
 import com.github.elliot.rocketmq.constant.TagConstant;
 import com.github.elliot.rocketmq.constant.TopicConstant;
-import com.github.elliot.rocketmq.domain.Message;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.message.MessageConst;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RestController
 public class ProductController {
@@ -23,9 +25,12 @@ public class ProductController {
      */
     @GetMapping("/sendMessage")
     public void sendMessage(){
-        SendResult sendResult = rocketMQTemplate
-                .syncSend(TopicConstant.TEST_TOPIC, "A Simple Message");
-        System.out.println(sendResult);
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+        Message<String> message = MessageBuilder.withPayload("A Simple Message")
+                .setHeader(MessageConst.PROPERTY_KEYS, uuid)
+                .build();
+        SendResult sendResult = rocketMQTemplate.syncSend(TopicConstant.TEST_CLUSTERING_TOPIC, message);
+        System.out.println(uuid + "|" + sendResult);
     }
 
     /**
@@ -74,10 +79,10 @@ public class ProductController {
      */
     @GetMapping("/sendDelayMessage")
     public void sendDelayMessage(){
-        Message message = new Message();
+        /*Message message = new Message();
         message.setMessageName("hello world");
         message.setCreateTime(LocalDateTime.now());
-        rocketMQTemplate.syncSendDelayTimeSeconds(TopicConstant.TEST_DELAY_TOPIC, message, 10);
+        rocketMQTemplate.syncSendDelayTimeSeconds(TopicConstant.TEST_DELAY_TOPIC, message, 10);*/
     }
 
     /**

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@RocketMQMessageListener(topic = TopicConstant.TEST_TOPIC,
+@RocketMQMessageListener(topic = TopicConstant.TEST_CLUSTERING_TOPIC,
         consumerGroup = GroupConstant.CONSUMER_TEST_GROUP,
         messageModel = MessageModel.CLUSTERING)
 public class TestTopicConsumerListener implements RocketMQListener<MessageExt>, RocketMQPushConsumerLifecycleListener {

@@ -9,6 +9,10 @@ public abstract class TopicConstant {
      */
     public static final String TEST_TOPIC = "TEST_TOPIC";
     /**
+     * 测试Topic
+     */
+    public static final String TEST_CLUSTERING_TOPIC = "TEST_CLUSTERING_TOPIC";
+    /**
      * 单向Topic
      */
     public static final String ONE_WAY_TOPIC = "ONE_WAY_TOPIC";

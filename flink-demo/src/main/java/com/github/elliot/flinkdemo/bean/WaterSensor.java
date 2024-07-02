@@ -42,4 +42,13 @@ public class WaterSensor implements Serializable {
     public void setVc(Integer vc) {
         this.vc = vc;
     }
+
+    @Override
+    public String toString() {
+        return "WaterSensor{" +
+                "id='" + id + '\'' +
+                ", st=" + st +
+                ", vc=" + vc +
+                '}';
+    }
 }

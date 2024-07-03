@@ -1,4 +1,4 @@
-package com.github.elliot.flinkdemo.transform;
+package com.github.elliot.flinkdemo.transformation;
 
 import com.github.elliot.flinkdemo.bean.WaterSensor;
 import org.apache.flink.api.common.functions.MapFunction;

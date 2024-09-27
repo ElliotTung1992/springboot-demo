@@ -1,60 +1,43 @@
 package com.github.dge1992.fish.ratelimiter;
 
-import java.util.Map;
+import java.util.Collection;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.concurrent.TimeUnit;
 
-public class RateLimiterSlidingLog {
+public class RateLimiterSlidingLog implements IRateLimiter {
 
-    private Integer QPS;
+    private Integer perSecondCount = 2;
 
-    private TreeMap<Long, Long> treeMap = new TreeMap<>();
+    private static TreeMap<Long, Integer> treeMap = new TreeMap<>();
 
-    private Long clearTime = 60 * 1000L;
+    private Long startTime;
 
-    public RateLimiterSlidingLog(Integer QPS) {
-        this.QPS = QPS;
+    public RateLimiterSlidingLog(Long startTime){
+        this.startTime = startTime;
     }
 
-    public boolean tryAcquire(){
-        long now = System.currentTimeMillis();
-        // 定期清理过期数据
-        if(!treeMap.isEmpty() && now - treeMap.firstKey() > clearTime){
-            Set<Long> keySet = treeMap.subMap(0L, now - 1000).keySet();
-            for (Long key : keySet) {
-                treeMap.remove(key);
+    @Override
+    public synchronized boolean acquire() {
+        long currentTime = System.currentTimeMillis();
+        if(!treeMap.isEmpty() && currentTime - treeMap.firstKey() > 5 * 1000L){
+            Set<Long> keySet = treeMap.subMap(0L, currentTime - 1000).keySet();
+            for (Long aLong : keySet) {
+                treeMap.remove(aLong);
             }
         }
-        // 计算区间次数
         int sum = 0;
-        Set<Map.Entry<Long, Long>> entries = treeMap.subMap(now - 1000, now).entrySet();
-        for (Map.Entry<Long, Long> entry : entries) {
-            sum += entry.getValue();
+        Collection<Integer> values = treeMap.subMap(currentTime - 1000, currentTime).values();
+        for (Integer value : values) {
+            sum += value;
         }
-        // 校验
-        if(sum + 1 > QPS){
+        if(sum >= perSecondCount){
             return false;
         }
-        // 记录
-        if(treeMap.containsKey(now)){
-            treeMap.compute(now, (k, v) -> v + 1);
-        }else {
-            treeMap.put(now, 1L);
+        if(treeMap.containsKey(currentTime)){
+            treeMap.compute(currentTime, (k,v) -> v + 1);
+        }else{
+            treeMap.put(currentTime, 1);
         }
         return true;
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        RateLimiterSlidingLog rateLimiterSlidingLog = new RateLimiterSlidingLog(3);
-        for (int i = 0; i < 20; i++) {
-            long now = System.currentTimeMillis();
-            TimeUnit.MILLISECONDS.sleep(250);
-            if(rateLimiterSlidingLog.tryAcquire()){
-                System.out.println(now + "正常运行");
-            }else{
-                System.out.println(now + "限流了");
-            }
-        }
     }
 }

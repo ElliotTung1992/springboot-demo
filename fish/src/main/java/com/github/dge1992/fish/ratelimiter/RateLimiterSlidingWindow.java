@@ -1,99 +1,56 @@
 package com.github.dge1992.fish.ratelimiter;
 
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
+import lombok.Data;
 
-/**
- * 滑动窗口算法
- */
-public class RateLimiterSlidingWindow {
+import java.util.ArrayList;
+import java.util.List;
 
-    /**
-     * 阀值
-     */
-    private Integer QPS;
-    /**
-     * 时间窗口大小
-     */
-    private Long windowSize;
-    /**
-     * 子窗口
-     */
-    private Integer windowCount;
-    /**
-     * 窗口列表
-     */
-    private WindowInfo[] windowInfoArray;
+public class RateLimiterSlidingWindow implements IRateLimiter {
 
-    RateLimiterSlidingWindow(Integer QPS, Long windowSize, Integer windowCount){
-        this.QPS = QPS;
-        this.windowSize = windowSize;
-        this.windowCount = windowCount;
-        long now = System.currentTimeMillis();
-        windowInfoArray = new WindowInfo[windowCount];
-        for (int i = 0; i < windowCount; i++) {
-            windowInfoArray[i] = new WindowInfo(now, new AtomicInteger(0));
+    private Integer QPS = 2;
+
+    private List<RateLimiter> list = new ArrayList<>(10);
+
+    private Long start;
+
+    public RateLimiterSlidingWindow(Long start){
+        this.start = start;
+        for (int i = 0; i <10; i++) {
+            RateLimiter rateLimiter = new RateLimiter();
+            rateLimiter.setTime(start);
+            rateLimiter.setCount(0);
+            list.add(rateLimiter);
         }
     }
 
-    private static class WindowInfo{
-
-        private Long currentTime;
-        private AtomicInteger num;
-
-        public WindowInfo(Long currentTime, AtomicInteger num) {
-            this.currentTime = currentTime;
-            this.num = num;
-        }
-
-        public Long getCurrentTime() {
-            return currentTime;
-        }
-
-        public void setCurrentTime(Long currentTime) {
-            this.currentTime = currentTime;
-        }
-
-        public AtomicInteger getNum() {
-            return num;
-        }
-
-        public void setNum(AtomicInteger num) {
-            this.num = num;
-        }
-    }
-
-    public synchronized boolean tryAcquire(){
-        // 当前时间
-        long now = System.currentTimeMillis();
-        // 计算当前实现下标
-        int index = (int)((now % windowSize) / (windowSize / windowCount));
+    @Override
+    public synchronized boolean acquire() {
+        long current = System.currentTimeMillis();
         int sum = 0;
-        for (int i = 0; i < windowCount; i++) {
-            WindowInfo windowInfo = windowInfoArray[i];
-            // 重置
-            if((now - windowInfo.getCurrentTime()) > windowSize){
-                windowInfo.setCurrentTime(now);
-                windowInfo.getNum().set(0);
+        for (int i = 0; i < list.size(); i++) {
+            RateLimiter rateLimiter = list.get(i);
+            Long time = rateLimiter.getTime();
+            if(current - time > 1000){
+                rateLimiter.setCount(0);
+                rateLimiter.setTime(current);
+            }else{
+                sum += rateLimiter.getCount();
             }
-            if(index == i && windowInfo.getNum().get() <= QPS){
-                windowInfo.getNum().incrementAndGet();
-            }
-            sum += windowInfo.getNum().get();
         }
-        return sum <= QPS;
+        if(sum >= QPS){
+            return false;
+        }
+        long millisecond = current % 1000;
+        int index = (int) ((10 * millisecond)/1000);
+        RateLimiter rateLimiter = list.get(index);
+        rateLimiter.setTime(current);
+        rateLimiter.setCount(rateLimiter.getCount() + 1);
+        return true;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        RateLimiterSlidingWindow rateLimiterSlidingWindow =
-                new RateLimiterSlidingWindow(2, 1000L, 10);
-        for (int i = 0; i < 20; i++) {
-            TimeUnit.MILLISECONDS.sleep(300L);
-            if(rateLimiterSlidingWindow.tryAcquire()){
-                System.out.println("成功");
-            }else {
-                System.out.println("失败");
-            }
-        }
+    @Data
+    class RateLimiter {
+        private Long time;
+        private Integer count;
     }
 }

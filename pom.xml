@@ -195,11 +195,8 @@
         <module>common</module>
         <module>multiple-data-sources</module>
         <module>restful-demo</module>
-        <module>rabbitmq</module>
         <module>generator</module>
-        <module>kafka</module>
         <module>zookeeper</module>
-        <module>rocketmq</module>
     </modules>
 
 </project>

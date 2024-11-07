@@ -13,6 +13,9 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
+/**
+ * 增量窗口
+ */
 public class WindowReduceDemo {
 
     public static void main(String[] args) throws Exception {

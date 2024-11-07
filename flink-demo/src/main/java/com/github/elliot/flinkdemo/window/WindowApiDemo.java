@@ -12,6 +12,18 @@ import org.apache.flink.streaming.api.windowing.assigners.SlidingProcessingTimeW
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 
+/**
+ * 窗口API熟悉
+ *
+ * 1. 窗口什么时候触发输出
+ *      时间进程 >= end - 1
+ * 2. 窗口是怎么划分的
+ *      start = 向下取整，取窗口长度的整数倍
+ *      end = start + 窗口长度
+ * 3. 窗口的生命周期
+ *      创建: 属于本窗口的第一条数据来的时候，现new的，放入一个单例的集合中
+ *      销毁: 时间进程 >= end - 1 + 允许迟到的时间
+ */
 public class WindowApiDemo {
 
     public static void main(String[] args) throws Exception {

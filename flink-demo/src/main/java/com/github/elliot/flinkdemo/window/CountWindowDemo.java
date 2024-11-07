@@ -1,23 +1,23 @@
 package com.github.elliot.flinkdemo.window;
 
 import com.github.elliot.flinkdemo.bean.WaterSensor;
-import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.LocalStreamEnvironment;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
+import org.apache.flink.streaming.api.windowing.windows.GlobalWindow;
 import org.apache.flink.util.Collector;
 
 /**
- * 增量窗口
+ * 计数窗口
+ * 1.滚动计数窗口
+ * 2.滑步计数窗口
  */
-public class WindowAggregateDemo {
+public class CountWindowDemo {
 
     public static void main(String[] args) throws Exception {
         LocalStreamEnvironment env = StreamExecutionEnvironment.createLocalEnvironment();
@@ -33,38 +33,22 @@ public class WindowAggregateDemo {
                         out.collect(waterSensor);
                     }
                 });
-        KeyedStream<WaterSensor, String> waterSensorStringKeyedStream =
-                streamOperator.keyBy(e -> e.getId());
-
-        WindowedStream<WaterSensor, String, TimeWindow> window
-                = waterSensorStringKeyedStream.window(TumblingProcessingTimeWindows.of(Time.seconds(10)));
-
-        SingleOutputStreamOperator<String> aggregate = window.aggregate(new AggregateFunction<WaterSensor, Integer, String>() {
+        KeyedStream<WaterSensor, String> waterSensorStringKeyedStream = streamOperator.keyBy(e -> e.getId());
+        WindowedStream<WaterSensor, String, GlobalWindow> waterSensorStringGlobalWindowWindowedStream =
+                waterSensorStringKeyedStream
+                        //.countWindow(5);
+                        .countWindow(5,2);
+        SingleOutputStreamOperator<String> process = waterSensorStringGlobalWindowWindowedStream.process(new ProcessWindowFunction<WaterSensor, String, String, GlobalWindow>() {
             @Override
-            public Integer createAccumulator() {
-                System.out.println("createAccumulator");
-                return 0;
-            }
-
-            @Override
-            public Integer add(WaterSensor value, Integer accumulator) {
-                System.out.println("add value:" + value + "accumulator" + accumulator);
-                return value.getVc() + accumulator;
-            }
-
-            @Override
-            public String getResult(Integer accumulator) {
-                return "合计:" + accumulator;
-            }
-
-            @Override
-            public Integer merge(Integer a, Integer b) {
-                return null;
+            public void process(String s, ProcessWindowFunction<WaterSensor, String, String,
+                    GlobalWindow>.Context context, Iterable<WaterSensor> elements, Collector<String> out) throws Exception {
+                long maxTimestamp = context.window().maxTimestamp();
+                String maxTimestampStr = DateFormatUtils.format(maxTimestamp, "yyyy-MM-dd HH:mm:ss.SSS");
+                long count = elements.spliterator().estimateSize();
+                out.collect("key:" + s + " 最大时间戳[" + maxTimestampStr + "]" + "的个数是:" + count + "数据集为:" + elements);
             }
         });
-
-        aggregate.print();
-
+        process.print();
         env.execute();
     }
 }

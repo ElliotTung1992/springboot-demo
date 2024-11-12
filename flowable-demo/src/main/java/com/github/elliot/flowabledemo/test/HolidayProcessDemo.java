@@ -46,6 +46,10 @@ public class HolidayProcessDemo {
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("holidayRequest", variables);
         // query candidateGroup task lists
         TaskService taskService = processEngine.getTaskService();
+        Task task1 = taskService.createTaskQuery()
+                .processInstanceId(processInstance.getProcessInstanceId())
+                .singleResult();
+        System.out.println("task1:" + task1);
         List<Task> tasks = taskService.createTaskQuery()
                 .taskCandidateGroup("managers")
                 .list();

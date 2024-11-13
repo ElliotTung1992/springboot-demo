@@ -17,11 +17,9 @@ import org.apache.flink.util.Collector;
 import java.time.Duration;
 
 /**
- * 处理乱序数据
- * 水位线案例：无序水位线
- * 水位线的传递 - 短板效应
+ * 水位线 - 允许迟到 - 延迟关窗
  */
-public class WaterMarkOutOfOrdernessDemo {
+public class WaterMarkAllowLatenessDemo {
 
     public static void main(String[] args) throws Exception {
 
@@ -30,8 +28,8 @@ public class WaterMarkOutOfOrdernessDemo {
         // 设置水位线生成间隔
         // env.getConfig().setAutoWatermarkInterval(200L);
 
-        // 设置并行度为2
-        env.setParallelism(2);
+        // 设置并行度为1
+        env.setParallelism(1);
 
         SingleOutputStreamOperator<WaterSensor> streamOperator = env.socketTextStream("10.211.55.4", 7777)
                 .flatMap(new FlatMapFunction<String, WaterSensor>() {
@@ -58,6 +56,8 @@ public class WaterMarkOutOfOrdernessDemo {
         SingleOutputStreamOperator<String> process = streamOperator.assignTimestampsAndWatermarks(waterSensorWatermarkStrategy)
                 .keyBy(WaterSensor::getId)
                 .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+                // 允许迟到 - 延迟关窗
+                .allowedLateness(Time.seconds(2))
                 .process(new ProcessWindowFunction<WaterSensor, String, String, TimeWindow>() {
                     @Override
                     public void process(String s, ProcessWindowFunction<WaterSensor, String, String,

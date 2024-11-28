@@ -1,4 +1,4 @@
-package com.github.elliot.flinkdemo.checkout;
+package com.github.elliot.flinkdemo.checkpoint;
 
 /**
  * checkpoint算法总结

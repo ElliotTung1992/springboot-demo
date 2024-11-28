@@ -110,6 +110,13 @@
         </dependency>
 
 
+        <!-- https://mvnrepository.com/artifact/org.apache.hadoop/hadoop-client -->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-client</artifactId>
+            <version>3.3.4</version>
+            <scope>provided</scope>
+        </dependency>
 
 
 

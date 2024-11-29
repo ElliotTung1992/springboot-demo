@@ -10,6 +10,8 @@ import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.CheckpointConfig;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
+import java.time.Duration;
+
 /**
  * 检查点配置
  */
@@ -26,18 +28,21 @@ public class CheckpointConfigDemo {
         env.enableCheckpointing(5000L, CheckpointingMode.EXACTLY_ONCE);
         CheckpointConfig checkpointConfig = env.getCheckpointConfig();
         // 设置checkpoint的数据存储位置
-        checkpointConfig.setCheckpointStorage("hdfs://10.211.55.4:9000/checkpoint");
+        checkpointConfig.setCheckpointStorage("hdfs://10.211.55.4:8020/checkpoint");
         // 设置checkpoint的超时时间
         checkpointConfig.setCheckpointTimeout(60 * 1000);
         // 设置checkout的最大并发数
-        checkpointConfig.setMaxConcurrentCheckpoints(2);
+        checkpointConfig.setMaxConcurrentCheckpoints(1);
         // 设置连续两次checkpoint之间的最小间隔时间
         checkpointConfig.setMinPauseBetweenCheckpoints(1 * 1000);
         // 当任务取消时设置checkpoint存储数据清理策略
-        checkpointConfig.setExternalizedCheckpointCleanup(CheckpointConfig.ExternalizedCheckpointCleanup.DELETE_ON_CANCELLATION);
+        checkpointConfig.setExternalizedCheckpointCleanup(CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);
         // 设置checkpoint连续失败的次数
         checkpointConfig.setTolerableCheckpointFailureNumber(10);
 
+        // 开启非堆成检查点 条件: CheckpointingMode必须是精准一次, MaxConcurrentCheckpoints必须是1
+        checkpointConfig.enableUnalignedCheckpoints();
+        checkpointConfig.setAlignedCheckpointTimeout(Duration.ofSeconds(10));
 
         DataStreamSource<String> stringDataStreamSource =
                 env.socketTextStream("10.211.55.4", 7777);

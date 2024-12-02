@@ -12,24 +12,15 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import java.time.Duration;
 
-import static org.apache.flink.streaming.api.environment.ExecutionCheckpointingOptions.ENABLE_CHECKPOINTS_AFTER_TASKS_FINISH;
-
 /**
  * 检查点配置
  */
-public class CheckpointConfigDemo {
+public class SavePointConfigDemo {
 
     public static void main(String[] args) throws Exception {
 
-        // 关闭最终检查点
-        Configuration configuration = new Configuration();
-        configuration.set(ENABLE_CHECKPOINTS_AFTER_TASKS_FINISH, false);
-
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(configuration);
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(new Configuration());
         env.setParallelism(1);
-
-        // 开启changelog
-        env.enableChangelogStateBackend(true);
 
         System.setProperty("HADOOP_USER_NAME", "hadoop");
 
@@ -68,6 +59,7 @@ public class CheckpointConfigDemo {
                 .returns(Types.TUPLE(Types.STRING, Types.INT))
                 .keyBy((KeySelector<Tuple2<String, Integer>, Object>) value -> value.f0)
                 .sum(1)
+                .uid("SavePointConfigDemo-sum").name("SavePointConfigDemo-sum-name")
                 .print();
 
         // 执行

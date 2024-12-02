@@ -95,6 +95,15 @@
             <version>1.17.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-statebackend-changelog -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-statebackend-changelog</artifactId>
+            <version>1.17.0</version>
+            <scope>runtime</scope>
+        </dependency>
+
+
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>

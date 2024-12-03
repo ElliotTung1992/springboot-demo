@@ -19,8 +19,8 @@ public class SavePointConfigDemo {
 
     public static void main(String[] args) throws Exception {
 
-        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironmentWithWebUI(new Configuration());
-        env.setParallelism(1);
+        Configuration configuration = new Configuration();
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment(configuration);
 
         System.setProperty("HADOOP_USER_NAME", "hadoop");
 
@@ -37,7 +37,7 @@ public class SavePointConfigDemo {
         // 设置连续两次checkpoint之间的最小间隔时间
         checkpointConfig.setMinPauseBetweenCheckpoints(1 * 1000);
         // 当任务取消时设置checkpoint存储数据清理策略
-        checkpointConfig.setExternalizedCheckpointCleanup(CheckpointConfig.ExternalizedCheckpointCleanup.DELETE_ON_CANCELLATION);
+        checkpointConfig.setExternalizedCheckpointCleanup(CheckpointConfig.ExternalizedCheckpointCleanup.RETAIN_ON_CANCELLATION);
         // 设置checkpoint连续失败的次数
         checkpointConfig.setTolerableCheckpointFailureNumber(10);
 
@@ -59,7 +59,7 @@ public class SavePointConfigDemo {
                 .returns(Types.TUPLE(Types.STRING, Types.INT))
                 .keyBy((KeySelector<Tuple2<String, Integer>, Object>) value -> value.f0)
                 .sum(1)
-                .uid("SavePointConfigDemo-sum").name("SavePointConfigDemo-sum-name")
+                .uid("SavePointConfigDemo-sum-uid").name("SavePointConfigDemo-sum-name")
                 .print();
 
         // 执行

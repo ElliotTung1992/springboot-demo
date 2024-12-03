@@ -66,6 +66,7 @@
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-files</artifactId>
             <version>1.17.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-connector-kafka -->
@@ -126,8 +127,6 @@
             <version>3.3.4</version>
             <scope>provided</scope>
         </dependency>
-
-
 
         <!--<dependency>
             <groupId>org.apache.flink</groupId>

@@ -1,7 +1,8 @@
 package com.github.dge1992.fish.concurrent;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
+/**
+ * SynchronizedTest2
+ */
 public class SynchronizedTest2 {
 
     private Integer start = 0;
@@ -24,6 +25,11 @@ public class SynchronizedTest2 {
         synchronized (key){
             start = start + 1;
             System.out.println(start);
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             return true;
         }
     }

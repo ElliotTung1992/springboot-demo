@@ -128,6 +128,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.flink/flink-sql-connector-hive-2.3.9 -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-sql-connector-hive-2.3.9_2.12</artifactId>
+            <version>1.19.1</version>
+        </dependency>
+
         <!--<dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-shaded-jackson</artifactId>

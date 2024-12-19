@@ -13,7 +13,7 @@ import static org.apache.flink.table.api.Expressions.$;
 import static org.apache.flink.table.api.Expressions.call;
 
 /**
- * 实现自定义标量函数
+ * 实现自定义标量函数 - 一对一
  */
 public class MyScalarFunction {
 

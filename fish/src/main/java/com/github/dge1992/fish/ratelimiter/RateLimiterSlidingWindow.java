@@ -5,6 +5,9 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 滑动窗口 - list
+ */
 public class RateLimiterSlidingWindow implements IRateLimiter {
 
     private Integer QPS = 2;

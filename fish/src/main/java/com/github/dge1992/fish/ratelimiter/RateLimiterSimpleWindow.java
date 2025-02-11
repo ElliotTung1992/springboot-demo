@@ -1,5 +1,8 @@
 package com.github.dge1992.fish.ratelimiter;
 
+/**
+ * 滚动窗口
+ */
 public class RateLimiterSimpleWindow implements IRateLimiter {
 
     private Integer QPS = 2;

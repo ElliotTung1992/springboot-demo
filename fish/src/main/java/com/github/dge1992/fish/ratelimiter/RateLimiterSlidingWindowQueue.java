@@ -3,6 +3,9 @@ package com.github.dge1992.fish.ratelimiter;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * 滑动窗口 - 队列实现
+ */
 public class RateLimiterSlidingWindowQueue implements IRateLimiter {
 
     Queue<Long> queue = new ArrayBlockingQueue(2);

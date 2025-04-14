@@ -4,10 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.*;
 
-public class ThreadPool {
+public class ThreadPoolTest {
 
     public static void main(String[] args) throws Exception {
-        ThreadPool threadPool = new ThreadPool();
+        ThreadPoolTest threadPool = new ThreadPoolTest();
         // threadPool.demoOne();
     }
 

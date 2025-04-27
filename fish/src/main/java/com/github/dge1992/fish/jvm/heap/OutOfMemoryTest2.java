@@ -1,26 +1,21 @@
 package com.github.dge1992.fish.jvm.heap;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.dge1992.fish.domain.po.PersonPo;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.UUID;
 
-/**
- * 内存溢出
- */
-public class OutOfMemoryTest {
+public class OutOfMemoryTest2 {
 
     public static void main(String[] args) {
-        List<Object> list = new ArrayList<>();
-        // ThreadLocal<List<PersonPo>> threadLocal = new ThreadLocal<>();
-        // ExecutorService executorService = Executors.newFixedThreadPool(100);
+        Cache<Object, List<PersonPo>> cache = Caffeine.newBuilder()
+                .maximumSize(Integer.MAX_VALUE)
+                //.softValues()
+                .build();
         while (true) {
-            /*executorService.submit(() -> {
-
-            });*/
-
             List<PersonPo> personPoList = new ArrayList<>();
             for (int i = 0; i < 1000000; i++) {
                 PersonPo personPo = new PersonPo();
@@ -29,7 +24,7 @@ public class OutOfMemoryTest {
                 personPo.setGender(1);
                 personPoList.add(personPo);
             }
-            list.addAll(personPoList);
+            cache.put(UUID.randomUUID(), personPoList);
         }
     }
 }

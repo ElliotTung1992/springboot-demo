@@ -13,7 +13,7 @@ public class OutOfMemoryTest2 {
     public static void main(String[] args) {
         Cache<Object, List<PersonPo>> cache = Caffeine.newBuilder()
                 .maximumSize(Integer.MAX_VALUE)
-                //.softValues()
+                .weakValues()
                 .build();
         while (true) {
             List<PersonPo> personPoList = new ArrayList<>();
@@ -25,6 +25,7 @@ public class OutOfMemoryTest2 {
                 personPoList.add(personPo);
             }
             cache.put(UUID.randomUUID(), personPoList);
+            System.out.println(cache.estimatedSize());
         }
     }
 }

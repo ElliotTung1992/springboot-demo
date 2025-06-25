@@ -1,6 +1,5 @@
 package com.github.dge.algorithm.breadthfirstsearch;
 
-import javafx.util.Pair;
 
 import java.util.*;
 
@@ -14,7 +13,7 @@ import java.util.*;
  */
 public class ShortestPathInBinaryMatrix {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         ShortestPathInBinaryMatrix shortestPathInBinaryMatrix = new ShortestPathInBinaryMatrix();
         //int[][]grid = {{0,1},{1,0}};
         //int[][]grid = {{0,0,0},{1,1,0},{1,1,0}};
@@ -61,9 +60,9 @@ public class ShortestPathInBinaryMatrix {
         return -1;
     }
 
-    /**
+    *//**
      * 无法解决套娃
-     */
+     *//*
     public int shortestPathBinaryMatrix2(int[][] grid) {
         // 校验起点和终点
         int start = grid[0][0];
@@ -143,5 +142,5 @@ public class ShortestPathInBinaryMatrix {
             }
         }
         return false;
-    }
+    }*/
 }

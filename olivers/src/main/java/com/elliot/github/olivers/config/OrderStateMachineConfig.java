@@ -82,17 +82,7 @@ public class OrderStateMachineConfig extends StateMachineConfigurerAdapter<Order
     }
 
     private Action<OrderStatusEnum, OrderEventEnum> payAction() {
-        return new Action<OrderStatusEnum, OrderEventEnum>() {
-            @Override
-            public void execute(StateContext<OrderStatusEnum, OrderEventEnum> stateContext) {
-                log.info("payAction");
-                OrderStatusParam orderStatusParam =
-                        (OrderStatusParam) stateContext.getExtendedState().getVariables().get("orderStatusParam");
-                Assert.notNull(orderStatusParam, "orderStatusParam is null");
-                Order order = orderStatusParam.getOrder();
-                Assert.notNull(order, "order is null");
-            }
-        };
+        return new Created2PaidAction();
     }
 
     @Bean

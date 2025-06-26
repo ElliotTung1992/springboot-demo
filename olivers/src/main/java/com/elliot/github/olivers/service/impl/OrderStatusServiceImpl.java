@@ -4,6 +4,8 @@ import com.elliot.github.olivers.domain.Order;
 import com.elliot.github.olivers.domain.OrderStatusParam;
 import com.elliot.github.olivers.enums.OrderEventEnum;
 import com.elliot.github.olivers.enums.OrderStatusEnum;
+import com.elliot.github.olivers.mapper.OrderMapper;
+import com.elliot.github.olivers.service.OrderService;
 import com.elliot.github.olivers.service.OrderStatusService;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class OrderStatusServiceImpl implements OrderStatusService {
 
     @Resource(name = "orderStateMachine")
     private StateMachine<OrderStatusEnum, OrderEventEnum> stateMachine;
+
+    @Resource
+    private OrderService orderService;
 
     @Autowired
     private DefaultStateMachinePersister persister;
@@ -36,6 +41,7 @@ public class OrderStatusServiceImpl implements OrderStatusService {
             stateMachine.start();
             persister.restore(stateMachine, param);
             stateMachine.getExtendedState().getVariables().put("orderStatusParam", param);
+            stateMachine.getExtendedState().getVariables().put("orderService", orderService);
             result = stateMachine.sendEvent(message);
             persister.persist(stateMachine, param);
         } catch (Exception e) {

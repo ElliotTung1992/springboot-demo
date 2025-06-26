@@ -18,4 +18,6 @@ public interface OrderService {
      * 查询订单
      */
     Order queryOrder();
+
+    void update();
 }

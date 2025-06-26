@@ -8,7 +8,9 @@ import com.elliot.github.olivers.service.OrderService;
 import com.elliot.github.olivers.service.OrderStatusService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -19,9 +21,11 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
+    @Lazy
     @Autowired
     private OrderStatusService orderStatusService;
 
+    @Transactional
     @Override
     public void creatOrder() {
 
@@ -43,6 +47,15 @@ public class OrderServiceImpl implements OrderService {
     public Order queryOrder() {
         Order order = orderMapper.selectById(1);
         return order;
+    }
+
+    @Transactional
+    @Override
+    public void update() {
+        Order order1 = orderMapper.selectById(1);
+        order1.setOrderStatus("5");
+        orderMapper.updateById(order1);
+        int i = 10 / 0;
     }
 
 

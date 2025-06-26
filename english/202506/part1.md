@@ -1,23 +1,46 @@
 
 
-你现在学习忙吗？
-
-当然忙。我现在既要应付几个截止日期，又要准备一个大型考试，
-所以我的日程安排得很满。尽管如此，我还是会努力做好每一件事，并制定明确的计划。
 
 
-Are you busy with your studies at the moment?
-Are you busy with your studies at the moment?
 
-Look, most definitely. I'm currently juggling several deadlines and preparing for a big exam,
-Look, most definitely. I’m currently juggling several deadlines and preparing for a big exam,
-So my schedule is packed. Still, I try to stay on top of everything with a clear plan.
-so my schedule is packed. Still, I try to stay on top of everything with a clear plan.
+你用过缝纫机做衣服吗？
+
+还没有，但我一直很好奇。
+我奶奶以前经常缝衣服，看起来既轻松又有创意。
+也许有一天我会参加一个短期培训班，好好尝试一下。
+谁知道呢，如果有一天我找不到工作，需要生存，这门技能就真的能派上用场了。
 
 
-Are you busy with your studies at the moment?
+Have you ever used a sowing machine to make clothes?
+Have you ever used a sewing machine to make clothes?
 
-Look, most definitely. I’m currently juggling several deadlines and preparing for a big exam,
+Not yet. but I've always been curious about it.
+Not yet, but I’ve always been curious about it.
+My grandma used to sew all the time, and it looked both relaxing and creative.
+My grandma used to sew all the time, and it looked both relaxing and creative.
+Maybe someday I'll take a short course and give it a proper try.
+Maybe someday I’ll take a short course and give it a proper try.
+who knows, If I ever can't find a job and need to survive, this skill could come in handy.
+Who knows, if I ever can’t find a job and need to survive, this skill could really come in handy.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

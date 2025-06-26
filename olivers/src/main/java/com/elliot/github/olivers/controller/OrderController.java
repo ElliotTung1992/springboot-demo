@@ -1,5 +1,6 @@
 package com.elliot.github.olivers.controller;
 
+import com.elliot.github.olivers.domain.Order;
 import com.elliot.github.olivers.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +14,8 @@ public class OrderController {
 
     @GetMapping("/queryOrder")
     public void queryOrder(){
-        System.out.println("queryOrder");
+        Order order = orderService.queryOrder();
+        System.out.println(order);
     }
 
     @PostMapping("/creatOrder")

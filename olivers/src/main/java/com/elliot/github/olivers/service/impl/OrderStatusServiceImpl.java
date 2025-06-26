@@ -5,6 +5,7 @@ import com.elliot.github.olivers.domain.OrderStatusParam;
 import com.elliot.github.olivers.enums.OrderEventEnum;
 import com.elliot.github.olivers.enums.OrderStatusEnum;
 import com.elliot.github.olivers.service.OrderStatusService;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderStatusServiceImpl implements OrderStatusService {
 
-    @Autowired
+    @Resource(name = "orderStateMachine")
     private StateMachine<OrderStatusEnum, OrderEventEnum> stateMachine;
 
     @Autowired

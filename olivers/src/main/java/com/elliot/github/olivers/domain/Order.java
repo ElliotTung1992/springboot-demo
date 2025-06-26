@@ -1,11 +1,12 @@
 package com.elliot.github.olivers.domain;
 
-import com.elliot.github.olivers.enums.OrderStatusEnum;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
+@TableName("mall_order")
 @Data
 public class Order {
 
@@ -19,7 +20,7 @@ public class Order {
     /**
      * 订单状态
      */
-    private OrderStatusEnum orderStatusEnum;
+    private String orderStatus;
 
     /**
      * 支付时间

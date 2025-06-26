@@ -1,9 +1,10 @@
 package com.elliot.github.olivers.mapper;
 
-import org.springframework.stereotype.Component;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.elliot.github.olivers.domain.Order;
+import org.apache.ibatis.annotations.Mapper;
 
-@Component
-public interface OrderMapper {
+@Mapper
+public interface OrderMapper extends BaseMapper<Order> {
 
-    void updateOrderStatus(Integer orderId);
 }

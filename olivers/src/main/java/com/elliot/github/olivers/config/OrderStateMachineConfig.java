@@ -4,9 +4,7 @@ import com.elliot.github.olivers.domain.Order;
 import com.elliot.github.olivers.domain.OrderStatusParam;
 import com.elliot.github.olivers.enums.OrderEventEnum;
 import com.elliot.github.olivers.enums.OrderStatusEnum;
-import com.elliot.github.olivers.mapper.OrderMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.StateContext;
@@ -30,9 +28,6 @@ import java.util.Objects;
 @Configuration
 @EnableStateMachine(name = "orderStateMachine")
 public class OrderStateMachineConfig extends StateMachineConfigurerAdapter<OrderStatusEnum, OrderEventEnum> {
-
-    @Autowired
-    private OrderMapper orderMapper;
 
     /**
      * 定义状态
@@ -96,7 +91,6 @@ public class OrderStateMachineConfig extends StateMachineConfigurerAdapter<Order
                 Assert.notNull(orderStatusParam, "orderStatusParam is null");
                 Order order = orderStatusParam.getOrder();
                 Assert.notNull(order, "order is null");
-                orderMapper.updateOrderStatus(order.getId());
             }
         };
     }
@@ -114,7 +108,7 @@ public class OrderStateMachineConfig extends StateMachineConfigurerAdapter<Order
             @Override
             public StateMachineContext<OrderStatusEnum, OrderEventEnum> read(OrderStatusParam orderStatusParam) throws Exception {
                 log.info("恢复订单状态机状态");
-                return new DefaultStateMachineContext<>(orderStatusParam.getOrder().getOrderStatusEnum(), null, null, null);
+                return new DefaultStateMachineContext<>(OrderStatusEnum.CREATED, null, null, null);
             }
         });
     }
